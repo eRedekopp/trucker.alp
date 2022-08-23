@@ -109,6 +109,26 @@
 			</ScaleRuler>
 			<CurrentLevel>1661276760203</CurrentLevel>
 			<ConnectionsId>1661276760199</ConnectionsId>
+			<Variables>
+				<Variable Class="CollectionVariable">
+					<Id>1661291747711</Id>
+					<Name><![CDATA[Cities]]></Name>
+					<X>250</X><Y>-40</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[GISPoint]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+						<CollectionInitializer Class="CodeValue">
+							<Code><![CDATA[{ CorpusChristi, Laredo, SanAntonio, Houston, Austin, Dallas, Amarillo, Odessa, ElPaso }]]></Code>
+						</CollectionInitializer>
+					</Properties>
+
+				</Variable>
+			</Variables>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1661276760199</Id>
@@ -198,6 +218,315 @@
 					<QuantityColumn>
 					</QuantityColumn>
 				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1661293565327</Id>
+					<Name><![CDATA[CorpusChristi1]]></Name>
+					<X>-100</X><Y>40</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<PresentationId>1661293565332</PresentationId>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[trucker]]></PackageName>
+						<ClassName><![CDATA[Trucker]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[trucker]]></PackageName>
+							<ClassName><![CDATA[Trucker]]></ClassName>
+							<ItemName><![CDATA[1661287355914]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+					</Parameters>
+					<ReplicationFlag>false</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>SPECIFIED_NUMBER</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1661293568914</Id>
+					<Name><![CDATA[Laredo1]]></Name>
+					<X>-100</X><Y>60</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<PresentationId>1661293568919</PresentationId>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[trucker]]></PackageName>
+						<ClassName><![CDATA[Trucker]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[trucker]]></PackageName>
+							<ClassName><![CDATA[Trucker]]></ClassName>
+							<ItemName><![CDATA[1661287355914]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+					</Parameters>
+					<ReplicationFlag>false</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>SPECIFIED_NUMBER</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1661293572432</Id>
+					<Name><![CDATA[Austin1]]></Name>
+					<X>-100</X><Y>80</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<PresentationId>1661293572437</PresentationId>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[trucker]]></PackageName>
+						<ClassName><![CDATA[Trucker]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[trucker]]></PackageName>
+							<ClassName><![CDATA[Trucker]]></ClassName>
+							<ItemName><![CDATA[1661287355914]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+					</Parameters>
+					<ReplicationFlag>false</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>SPECIFIED_NUMBER</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1661294123220</Id>
+					<Name><![CDATA[Odessa1]]></Name>
+					<X>-100</X><Y>100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<PresentationId>1661294123225</PresentationId>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[trucker]]></PackageName>
+						<ClassName><![CDATA[Trucker]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[trucker]]></PackageName>
+							<ClassName><![CDATA[Trucker]]></ClassName>
+							<ItemName><![CDATA[1661287355914]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+					</Parameters>
+					<ReplicationFlag>false</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>SPECIFIED_NUMBER</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1661295107185</Id>
+					<Name><![CDATA[ElPaso1]]></Name>
+					<X>-100</X><Y>120</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[trucker]]></PackageName>
+						<ClassName><![CDATA[Trucker]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[trucker]]></PackageName>
+							<ClassName><![CDATA[Trucker]]></ClassName>
+							<ItemName><![CDATA[1661287355914]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+					</Parameters>
+					<ReplicationFlag>false</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>SPECIFIED_NUMBER</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
 			</EmbeddedObjects>
 
 			<Presentation>
@@ -228,9 +557,9 @@
 					<Height>600</Height>
 					<GISShapes>
 					</GISShapes>
-					<Latitude>31.53485510189072</Latitude>
-					<Longitude>-96.9518545702963</Longitude>
-					<Scale>9300000</Scale>
+					<Latitude>31.11928540344882</Latitude>
+					<Longitude>-96.95020729288055</Longitude>
+					<Scale>10000000</Scale>
 					<BorderColor>-4144960</BorderColor>
 					<FillColor>-1</FillColor>
 					<ShowTiles>true</ShowTiles>
@@ -252,17 +581,66 @@
 					<AbsolutePrecisionGeneralization>1000</AbsolutePrecisionGeneralization>
 
 			<Presentation>
-						<GISNetwork>
-							<Id>1661286878724</Id>
-							<Name><![CDATA[network]]></Name>
-							<X>0</X><Y>0</Y>
-							<Label><X>10</X><Y>0</Y></Label>
-							<PublicFlag>true</PublicFlag>
-							<PresentationFlag>true</PresentationFlag>
-							<ShowLabel>false</ShowLabel>
-							<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-
-			<Presentation>
+				<GISPoint>
+					<Id>1661286573387</Id>
+					<Name><![CDATA[Amarillo]]></Name>
+					<X>295</X><Y>177</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-5952982</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineWidth>1</LineWidth>
+					<LineStyle>SOLID</LineStyle>
+					<ReadOnly>false</ReadOnly>
+					<Latitude>35.20447912724498</Latitude>	
+					<Longitude>-101.82356770922748</Longitude>
+					<Radius>3</Radius>
+					<FillColor>2144175423</FillColor>
+				</GISPoint>
+				<GISPoint>
+					<Id>1661286538061</Id>
+					<Name><![CDATA[Dallas]]></Name>
+					<X>508</X><Y>55</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-5952982</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineWidth>1</LineWidth>
+					<LineStyle>SOLID</LineStyle>
+					<ReadOnly>false</ReadOnly>
+					<Latitude>32.79225267806154</Latitude>	
+					<Longitude>-96.78657773623569</Longitude>
+					<Radius>3</Radius>
+					<FillColor>2144175423</FillColor>
+				</GISPoint>
+				<GISPoint>
+					<Id>1661286590773</Id>
+					<Name><![CDATA[Austin]]></Name>
+					<X>368</X><Y>419</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-5952982</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineWidth>1</LineWidth>
+					<LineStyle>SOLID</LineStyle>
+					<ReadOnly>false</ReadOnly>
+					<Latitude>30.28941027456335</Latitude>	
+					<Longitude>-97.7477641083949</Longitude>
+					<Radius>3</Radius>
+					<FillColor>2144175423</FillColor>
+				</GISPoint>
 				<GISPoint>
 					<Id>1661286554502</Id>
 					<Name><![CDATA[CorpusChristi]]></Name>
@@ -283,29 +661,6 @@
 					<Radius>3</Radius>
 					<FillColor>2144175423</FillColor>
 				</GISPoint>
-				<GISRoute SourceId="1661286554502" TargetId="1661286631068">
-
-					<Id>1661286877228</Id>
-					<Name><![CDATA[gisRoute]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>27.799031993757215</X><Y>-97.39469764892686</Y></Point>
-						<Point><X>27.52912316751403</X><Y>-99.47877812623544</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
 				<GISPoint>
 					<Id>1661286631068</Id>
 					<Name><![CDATA[Laredo]]></Name>
@@ -346,52 +701,6 @@
 					<Radius>3</Radius>
 					<FillColor>2144175423</FillColor>
 				</GISPoint>
-				<GISRoute SourceId="1661286631068" TargetId="1661286524483">
-
-					<Id>1661286883030</Id>
-					<Name><![CDATA[gisRoute1]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>27.52912316751403</X><Y>-99.47877812623544</Y></Point>
-						<Point><X>29.446142939412148</X><Y>-98.48876439929835</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286554502" TargetId="1661286524483">
-
-					<Id>1661286892631</Id>
-					<Name><![CDATA[gisRoute2]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>27.799031993757215</X><Y>-97.39469764892686</Y></Point>
-						<Point><X>29.446142939412148</X><Y>-98.48876439929835</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
 				<GISPoint>
 					<Id>1661286530585</Id>
 					<Name><![CDATA[Houston]]></Name>
@@ -412,79 +721,10 @@
 					<Radius>3</Radius>
 					<FillColor>2144175423</FillColor>
 				</GISPoint>
-				<GISRoute SourceId="1661286554502" TargetId="1661286530585">
-
-					<Id>1661286904240</Id>
-					<Name><![CDATA[gisRoute3]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>27.799031993757215</X><Y>-97.39469764892686</Y></Point>
-						<Point><X>29.770769523188275</X><Y>-95.36991915859</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286524483" TargetId="1661286530585">
-
-					<Id>1661286915276</Id>
-					<Name><![CDATA[gisRoute4]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>29.446142939412148</X><Y>-98.48876439929835</Y></Point>
-						<Point><X>29.770769523188275</X><Y>-95.36991915859</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286631068" TargetId="1661286530585">
-
-					<Id>1661286924544</Id>
-					<Name><![CDATA[gisRoute5]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>27.52912316751403</X><Y>-99.47877812623544</Y></Point>
-						<Point><X>29.770769523188275</X><Y>-95.36991915859</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
 				<GISPoint>
-					<Id>1661286590773</Id>
-					<Name><![CDATA[Austin]]></Name>
-					<X>368</X><Y>419</Y>
+					<Id>1661294070591</Id>
+					<Name><![CDATA[Odessa]]></Name>
+					<X>302</X><Y>267</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -496,107 +736,15 @@
 					<LineWidth>1</LineWidth>
 					<LineStyle>SOLID</LineStyle>
 					<ReadOnly>false</ReadOnly>
-					<Latitude>30.28941027456335</Latitude>	
-					<Longitude>-97.7477641083949</Longitude>
+					<Latitude>31.891723862236862</Latitude>	
+					<Longitude>-102.38622276524197</Longitude>
 					<Radius>3</Radius>
 					<FillColor>2144175423</FillColor>
 				</GISPoint>
-				<GISRoute SourceId="1661286590773" TargetId="1661286631068">
-
-					<Id>1661286932082</Id>
-					<Name><![CDATA[gisRoute6]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>30.28941027456335</X><Y>-97.7477641083949</Y></Point>
-						<Point><X>27.52912316751403</X><Y>-99.47877812623544</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286524483" TargetId="1661286590773">
-
-					<Id>1661286945740</Id>
-					<Name><![CDATA[gisRoute7]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>29.446142939412148</X><Y>-98.48876439929835</Y></Point>
-						<Point><X>30.28941027456335</X><Y>-97.7477641083949</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286554502" TargetId="1661286590773">
-
-					<Id>1661286950329</Id>
-					<Name><![CDATA[gisRoute8]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>27.799031993757215</X><Y>-97.39469764892686</Y></Point>
-						<Point><X>30.28941027456335</X><Y>-97.7477641083949</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286590773" TargetId="1661286530585">
-
-					<Id>1661286963201</Id>
-					<Name><![CDATA[gisRoute9]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>30.28941027456335</X><Y>-97.7477641083949</Y></Point>
-						<Point><X>29.770769523188275</X><Y>-95.36991915859</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
 				<GISPoint>
-					<Id>1661286538061</Id>
-					<Name><![CDATA[Dallas]]></Name>
-					<X>508</X><Y>55</Y>
+					<Id>1661294081078</Id>
+					<Name><![CDATA[ElPaso]]></Name>
+					<X>155</X><Y>271</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -608,287 +756,11 @@
 					<LineWidth>1</LineWidth>
 					<LineStyle>SOLID</LineStyle>
 					<ReadOnly>false</ReadOnly>
-					<Latitude>32.79225267806154</Latitude>	
-					<Longitude>-96.78657773623569</Longitude>
+					<Latitude>31.79843550451204</Latitude>	
+					<Longitude>-106.42205243411634</Longitude>
 					<Radius>3</Radius>
 					<FillColor>2144175423</FillColor>
 				</GISPoint>
-				<GISRoute SourceId="1661286530585" TargetId="1661286538061">
-
-					<Id>1661286979603</Id>
-					<Name><![CDATA[gisRoute10]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>29.770769523188275</X><Y>-95.36991915859</Y></Point>
-						<Point><X>32.79225267806154</X><Y>-96.78657773623569</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286538061" TargetId="1661286590773">
-
-					<Id>1661286986206</Id>
-					<Name><![CDATA[gisRoute11]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>32.79225267806154</X><Y>-96.78657773623569</Y></Point>
-						<Point><X>30.28941027456335</X><Y>-97.7477641083949</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286538061" TargetId="1661286554502">
-
-					<Id>1661286993535</Id>
-					<Name><![CDATA[gisRoute12]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>32.79225267806154</X><Y>-96.78657773623569</Y></Point>
-						<Point><X>27.799031993757215</X><Y>-97.39469764892686</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286538061" TargetId="1661286631068">
-
-					<Id>1661287008880</Id>
-					<Name><![CDATA[gisRoute13]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>32.79225267806154</X><Y>-96.78657773623569</Y></Point>
-						<Point><X>27.52912316751403</X><Y>-99.47877812623544</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286538061" TargetId="1661286524483">
-
-					<Id>1661287046539</Id>
-					<Name><![CDATA[gisRoute14]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>32.79225267806154</X><Y>-96.78657773623569</Y></Point>
-						<Point><X>29.446142939412148</X><Y>-98.48876439929835</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISPoint>
-					<Id>1661286573387</Id>
-					<Name><![CDATA[Amarillo]]></Name>
-					<X>295</X><Y>177</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>SOLID</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Latitude>35.20447912724498</Latitude>	
-					<Longitude>-101.82356770922748</Longitude>
-					<Radius>3</Radius>
-					<FillColor>2144175423</FillColor>
-				</GISPoint>
-				<GISRoute SourceId="1661286573387" TargetId="1661286538061">
-
-					<Id>1661287058755</Id>
-					<Name><![CDATA[gisRoute15]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>35.20447912724498</X><Y>-101.82356770922748</Y></Point>
-						<Point><X>32.79225267806154</X><Y>-96.78657773623569</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286573387" TargetId="1661286590773">
-
-					<Id>1661287067197</Id>
-					<Name><![CDATA[gisRoute16]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>35.20447912724498</X><Y>-101.82356770922748</Y></Point>
-						<Point><X>30.28941027456335</X><Y>-97.7477641083949</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286573387" TargetId="1661286530585">
-
-					<Id>1661287075100</Id>
-					<Name><![CDATA[gisRoute17]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>35.20447912724498</X><Y>-101.82356770922748</Y></Point>
-						<Point><X>29.770769523188275</X><Y>-95.36991915859</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286573387" TargetId="1661286524483">
-
-					<Id>1661287081823</Id>
-					<Name><![CDATA[gisRoute18]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>35.20447912724498</X><Y>-101.82356770922748</Y></Point>
-						<Point><X>29.446142939412148</X><Y>-98.48876439929835</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286573387" TargetId="1661286554502">
-
-					<Id>1661287089226</Id>
-					<Name><![CDATA[gisRoute19]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>35.20447912724498</X><Y>-101.82356770922748</Y></Point>
-						<Point><X>27.799031993757215</X><Y>-97.39469764892686</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-				<GISRoute SourceId="1661286573387" TargetId="1661286631068">
-
-					<Id>1661287096933</Id>
-					<Name><![CDATA[gisRoute20]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>DASHED</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Points>
-						<Point><X>35.20447912724498</X><Y>-101.82356770922748</Y></Point>
-						<Point><X>27.52912316751403</X><Y>-99.47877812623544</Y></Point>
-					</Points>
-					<Bidirectional>true</Bidirectional>
-
-				</GISRoute>
-			</Presentation>
-
-						</GISNetwork>
 			</Presentation>
 
 				</GISMap>
@@ -913,6 +785,82 @@
 					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
 					<Latitude>32.79225267806154</Latitude>
 					<Longitude>-96.78657773623569</Longitude>
+				</EmbeddedObjectPresentation>
+				<EmbeddedObjectPresentation>
+					<Id>1661293565332</Id>
+					<Name><![CDATA[CorpusChristi1_presentation]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
+					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+					<Latitude>27.799031993757215</Latitude>
+					<Longitude>-97.39469764892686</Longitude>
+				</EmbeddedObjectPresentation>
+				<EmbeddedObjectPresentation>
+					<Id>1661293568919</Id>
+					<Name><![CDATA[Laredo1_presentation]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
+					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+					<Latitude>27.52912316751403</Latitude>
+					<Longitude>-99.47877812623544</Longitude>
+				</EmbeddedObjectPresentation>
+				<EmbeddedObjectPresentation>
+					<Id>1661293572437</Id>
+					<Name><![CDATA[Austin1_presentation]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
+					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+					<Latitude>30.28941027456335</Latitude>
+					<Longitude>-97.7477641083949</Longitude>
+				</EmbeddedObjectPresentation>
+				<EmbeddedObjectPresentation>
+					<Id>1661294123225</Id>
+					<Name><![CDATA[Odessa1_presentation]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
+					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+					<Latitude>31.891723862236862</Latitude>
+					<Longitude>-102.38622276524197</Longitude>
 				</EmbeddedObjectPresentation>
 			</Presentation>
 
@@ -945,8 +893,8 @@
 				<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
 				<RotateAnimationVertically>false</RotateAnimationVertically>
 				<VelocityCode Class="CodeUnitValue">
-					<Code><![CDATA[10]]></Code>
-					<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
+					<Code><![CDATA[100]]></Code>
+					<Unit Class="SpeedUnits"><![CDATA[KPH]]></Unit>
 				</VelocityCode>
 				<PhysicalLength Class="CodeUnitValue">
 					<Code><![CDATA[1]]></Code>
@@ -1036,7 +984,8 @@
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="100" Height="30">
-						<EntryAction><![CDATA[this.moveTo(List.of("Houston", "Austin").get(new Random().nextInt(2)));]]></EntryAction>
+						<EntryAction><![CDATA[this.moveTo(randomWhere(main.Cities, t -> true))
+]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
@@ -1186,6 +1135,9 @@
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
+					<ScaleXCode><![CDATA[0.5
+]]></ScaleXCode>
+					<ScaleYCode><![CDATA[0.5]]></ScaleYCode>
 
 			<Presentation>
 				<Group>
