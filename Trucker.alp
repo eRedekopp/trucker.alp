@@ -11,6 +11,20 @@
 	<EngineVersion>6</EngineVersion>
 	<JavaPackageName><![CDATA[trucker]]></JavaPackageName>
 	<ModelTimeUnit><![CDATA[Hour]]></ModelTimeUnit>
+	<OptionLists>
+		<OptionList>
+			<Id>1661365128805</Id>
+			<Name><![CDATA[TruckerMessage]]></Name>
+			<Option>
+				<Id>1661365140202</Id>
+				<Name><![CDATA[Hungry]]></Name>
+			</Option>
+			<Option>
+				<Id>1661365129047</Id>
+				<Name><![CDATA[Ate]]></Name>
+			</Option>
+		</OptionList>
+	</OptionLists>
 	<ActiveObjectClasses>
 		<!--   =========   Active Object Class   ========  -->
 		<ActiveObjectClass>
@@ -116,14 +130,35 @@
 					<X>250</X><Y>-40</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
+						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
+						<ElementClass><![CDATA[GISPoint
+]]></ElementClass>
+						<ValueElementClass><![CDATA[String]]></ValueElementClass>
+						<CollectionInitializer Class="CodeValue">
+							<Code><![CDATA[{ SanAntonio, Houston, Dallas }
+]]></Code>
+						</CollectionInitializer>
+					</Properties>
+
+				</Variable>
+				<Variable Class="CollectionVariable">
+					<Id>1661295991288</Id>
+					<Name><![CDATA[Stops]]></Name>
+					<X>330</X><Y>-40</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" AccessType="public" StaticVariable="false">
 						<CollectionClass><![CDATA[ArrayList]]></CollectionClass>
-						<ElementClass><![CDATA[GISPoint]]></ElementClass>
+						<ElementClass><![CDATA[GISPoint
+]]></ElementClass>
 						<ValueElementClass><![CDATA[String]]></ValueElementClass>
 						<CollectionInitializer Class="CodeValue">
-							<Code><![CDATA[{ CorpusChristi, Laredo, SanAntonio, Houston, Austin, Dallas, Amarillo, Odessa, ElPaso }]]></Code>
+							<Code><![CDATA[{ stop1, stop2, stop3 }]]></Code>
 						</CollectionInitializer>
 					</Properties>
 
@@ -226,7 +261,6 @@
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<PresentationId>1661293565332</PresentationId>
 					<ActiveObjectClass>
 						<PackageName><![CDATA[trucker]]></PackageName>
 						<ClassName><![CDATA[Trucker]]></ClassName>
@@ -288,7 +322,6 @@
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<PresentationId>1661293568919</PresentationId>
 					<ActiveObjectClass>
 						<PackageName><![CDATA[trucker]]></PackageName>
 						<ClassName><![CDATA[Trucker]]></ClassName>
@@ -350,7 +383,6 @@
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<PresentationId>1661293572437</PresentationId>
 					<ActiveObjectClass>
 						<PackageName><![CDATA[trucker]]></PackageName>
 						<ClassName><![CDATA[Trucker]]></ClassName>
@@ -412,7 +444,6 @@
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<PresentationId>1661294123225</PresentationId>
 					<ActiveObjectClass>
 						<PackageName><![CDATA[trucker]]></PackageName>
 						<ClassName><![CDATA[Trucker]]></ClassName>
@@ -527,6 +558,67 @@
 					<QuantityColumn>
 					</QuantityColumn>
 				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1661295541955</Id>
+					<Name><![CDATA[SanAntonio1]]></Name>
+					<X>-100</X><Y>140</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[trucker]]></PackageName>
+						<ClassName><![CDATA[Trucker]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[trucker]]></PackageName>
+							<ClassName><![CDATA[Trucker]]></ClassName>
+							<ItemName><![CDATA[1661287355914]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+					</Parameters>
+					<ReplicationFlag>false</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>SPECIFIED_NUMBER</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
 			</EmbeddedObjects>
 
 			<Presentation>
@@ -582,26 +674,6 @@
 
 			<Presentation>
 				<GISPoint>
-					<Id>1661286573387</Id>
-					<Name><![CDATA[Amarillo]]></Name>
-					<X>295</X><Y>177</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>SOLID</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Latitude>35.20447912724498</Latitude>	
-					<Longitude>-101.82356770922748</Longitude>
-					<Radius>3</Radius>
-					<FillColor>2144175423</FillColor>
-				</GISPoint>
-				<GISPoint>
 					<Id>1661286538061</Id>
 					<Name><![CDATA[Dallas]]></Name>
 					<X>508</X><Y>55</Y>
@@ -618,66 +690,6 @@
 					<ReadOnly>false</ReadOnly>
 					<Latitude>32.79225267806154</Latitude>	
 					<Longitude>-96.78657773623569</Longitude>
-					<Radius>3</Radius>
-					<FillColor>2144175423</FillColor>
-				</GISPoint>
-				<GISPoint>
-					<Id>1661286590773</Id>
-					<Name><![CDATA[Austin]]></Name>
-					<X>368</X><Y>419</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>SOLID</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Latitude>30.28941027456335</Latitude>	
-					<Longitude>-97.7477641083949</Longitude>
-					<Radius>3</Radius>
-					<FillColor>2144175423</FillColor>
-				</GISPoint>
-				<GISPoint>
-					<Id>1661286554502</Id>
-					<Name><![CDATA[CorpusChristi]]></Name>
-					<X>465</X><Y>372</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>SOLID</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Latitude>27.799031993757215</Latitude>	
-					<Longitude>-97.39469764892686</Longitude>
-					<Radius>3</Radius>
-					<FillColor>2144175423</FillColor>
-				</GISPoint>
-				<GISPoint>
-					<Id>1661286631068</Id>
-					<Name><![CDATA[Laredo]]></Name>
-					<X>381</X><Y>458</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LineColor>-5952982</LineColor>
-					<LineMaterial>null</LineMaterial>
-					<LineWidth>1</LineWidth>
-					<LineStyle>SOLID</LineStyle>
-					<ReadOnly>false</ReadOnly>
-					<Latitude>27.52912316751403</Latitude>	
-					<Longitude>-99.47877812623544</Longitude>
 					<Radius>3</Radius>
 					<FillColor>2144175423</FillColor>
 				</GISPoint>
@@ -722,9 +734,9 @@
 					<FillColor>2144175423</FillColor>
 				</GISPoint>
 				<GISPoint>
-					<Id>1661294070591</Id>
-					<Name><![CDATA[Odessa]]></Name>
-					<X>302</X><Y>267</Y>
+					<Id>1661295775457</Id>
+					<Name><![CDATA[stop1]]></Name>
+					<X>492.8</X><Y>280.8</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -736,15 +748,15 @@
 					<LineWidth>1</LineWidth>
 					<LineStyle>SOLID</LineStyle>
 					<ReadOnly>false</ReadOnly>
-					<Latitude>31.891723862236862</Latitude>	
-					<Longitude>-102.38622276524197</Longitude>
+					<Latitude>31.569480949933634</Latitude>	
+					<Longitude>-97.1478805827846</Longitude>
 					<Radius>3</Radius>
 					<FillColor>2144175423</FillColor>
 				</GISPoint>
 				<GISPoint>
-					<Id>1661294081078</Id>
-					<Name><![CDATA[ElPaso]]></Name>
-					<X>155</X><Y>271</Y>
+					<Id>1661295780373</Id>
+					<Name><![CDATA[stop3]]></Name>
+					<X>519.2</X><Y>358</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -756,8 +768,28 @@
 					<LineWidth>1</LineWidth>
 					<LineStyle>SOLID</LineStyle>
 					<ReadOnly>false</ReadOnly>
-					<Latitude>31.79843550451204</Latitude>	
-					<Longitude>-106.42205243411634</Longitude>
+					<Latitude>29.746363472161455</Latitude>	
+					<Longitude>-96.42307851980308</Longitude>
+					<Radius>3</Radius>
+					<FillColor>2144175423</FillColor>
+				</GISPoint>
+				<GISPoint>
+					<Id>1661295786789</Id>
+					<Name><![CDATA[stop2]]></Name>
+					<X>529.6</X><Y>278.8</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LineColor>-5952982</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineWidth>1</LineWidth>
+					<LineStyle>SOLID</LineStyle>
+					<ReadOnly>false</ReadOnly>
+					<Latitude>31.616252214180097</Latitude>	
+					<Longitude>-96.13755043438611</Longitude>
 					<Radius>3</Radius>
 					<FillColor>2144175423</FillColor>
 				</GISPoint>
@@ -785,82 +817,6 @@
 					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
 					<Latitude>32.79225267806154</Latitude>
 					<Longitude>-96.78657773623569</Longitude>
-				</EmbeddedObjectPresentation>
-				<EmbeddedObjectPresentation>
-					<Id>1661293565332</Id>
-					<Name><![CDATA[CorpusChristi1_presentation]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
-					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
-					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
-					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>27.799031993757215</Latitude>
-					<Longitude>-97.39469764892686</Longitude>
-				</EmbeddedObjectPresentation>
-				<EmbeddedObjectPresentation>
-					<Id>1661293568919</Id>
-					<Name><![CDATA[Laredo1_presentation]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
-					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
-					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
-					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>27.52912316751403</Latitude>
-					<Longitude>-99.47877812623544</Longitude>
-				</EmbeddedObjectPresentation>
-				<EmbeddedObjectPresentation>
-					<Id>1661293572437</Id>
-					<Name><![CDATA[Austin1_presentation]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
-					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
-					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
-					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>30.28941027456335</Latitude>
-					<Longitude>-97.7477641083949</Longitude>
-				</EmbeddedObjectPresentation>
-				<EmbeddedObjectPresentation>
-					<Id>1661294123225</Id>
-					<Name><![CDATA[Odessa1_presentation]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
-					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
-					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
-					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>31.891723862236862</Latitude>
-					<Longitude>-102.38622276524197</Longitude>
 				</EmbeddedObjectPresentation>
 			</Presentation>
 
@@ -962,10 +918,27 @@
 			</ScaleRuler>
 			<CurrentLevel>1661287355915</CurrentLevel>
 			<ConnectionsId>1661287355911</ConnectionsId>
+			<Variables>
+				<Variable Class="PlainVariable">
+					<Id>1661364485789</Id>
+					<Name><![CDATA[destination]]></Name>
+					<X>50</X><Y>120</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[GISPoint]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[null]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+			</Variables>
 			<StatechartElements>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661287737305</Id>
-					<Name><![CDATA[Stationary]]></Name>
+					<Name><![CDATA[AtConsigner]]></Name>
 					<X>280</X><Y>90</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -977,29 +950,78 @@
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661287743322</Id>
-					<Name><![CDATA[Driving]]></Name>
-					<X>280</X><Y>210</Y>
+					<Name><![CDATA[DrivingToConsigner]]></Name>
+					<X>260</X><Y>190</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="160" Height="30">
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
+				<StatechartElement Class="State" ParentState="ROOT_NODE">
+					<Id>1661364568661</Id>
+					<Name><![CDATA[DrivingToRestStop]]></Name>
+					<X>100</X><Y>300</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="160" Height="30">
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
+				<StatechartElement Class="State" ParentState="ROOT_NODE">
+					<Id>1661364596509</Id>
+					<Name><![CDATA[Resting]]></Name>
+					<X>350</X><Y>300</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="100" Height="30">
-						<EntryAction><![CDATA[this.moveTo(randomWhere(main.Cities, t -> true))
-]]></EntryAction>
+						<ExitAction><![CDATA[traceln("Sending ate");
+send(Ate, this);
+]]></ExitAction>
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
+				<StatechartElement Class="State" ParentState="ROOT_NODE">
+					<Id>1661364833142</Id>
+					<Name><![CDATA[Full]]></Name>
+					<X>530</X><Y>80</Y>
+					<Label><X>20</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="100" Height="30">
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
+				<StatechartElement Class="State" ParentState="ROOT_NODE">
+					<Id>1661364843766</Id>
+					<Name><![CDATA[Hungry]]></Name>
+					<X>530</X><Y>170</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="100" Height="30">
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661287757965</Id>
 					<Name><![CDATA[Arrived]]></Name>
-					<X>350</X><Y>210</Y>
+					<X>330</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>-90</Y></Point>
+						<Point><X>0</X><Y>-70</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661287743322" Target="1661287737305" Trigger="arrival">
@@ -1029,12 +1051,18 @@
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>90</Y></Point>
+						<Point><X>0</X><Y>70</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661287737305" Target="1661287743322" Trigger="timeout">
+						<Action><![CDATA[destination = randomWhere(
+    main.Cities, 
+    t -> destination == null || !t.getName().equals(destination.getName())
+);
+traceln("Go to " + destination.getName());
+this.moveTo(destination);]]></Action>
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[1]]></Code>
+							<Code><![CDATA[0]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
 						</Timeout>
 						<Condition><![CDATA[true]]></Condition>
@@ -1064,7 +1092,251 @@
 					<Properties Target="1661287737305">
 					</Properties>	
 				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1661364610244</Id>
+					<Name><![CDATA[transition1]]></Name>
+					<X>300</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-70</X><Y>80</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1661287743322" Target="1661364568661" Trigger="message">
+						<Action><![CDATA[this.moveTo(getNearestStop(
+	this.getLatitude(),
+	this.getLongitude()
+));
+]]></Action>
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[TruckerMessage]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA[TruckerMessage.Hungry
+]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1661364618138</Id>
+					<Name><![CDATA[transition2]]></Name>
+					<X>260</X><Y>310</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>90</X><Y>0</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1661364568661" Target="1661364596509" Trigger="arrival">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1661364630544</Id>
+					<Name><![CDATA[transition3]]></Name>
+					<X>400</X><Y>300</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-30</X><Y>-80</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1661364596509" Target="1661287743322" Trigger="timeout">
+						<Action><![CDATA[this.moveTo(destination);
+]]></Action>
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1661364862465</Id>
+					<Name><![CDATA[transition4]]></Name>
+					<X>570</X><Y>110</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>60</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1661364833142" Target="1661364843766" Trigger="timeout">
+						<Action><![CDATA[traceln("sending hungry");
+send(TruckerMessage.Hungry, this);
+]]></Action>
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[6]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1661364896501</Id>
+					<Name><![CDATA[transition5]]></Name>
+					<X>590</X><Y>170</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>-60</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1661364843766" Target="1661364833142" Trigger="message">
+						<Action><![CDATA[traceln("Ate")
+]]></Action>
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[TruckerMessage]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA[Ate
+
+]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
+					<Id>1661364946979</Id>
+					<Name><![CDATA[Hunger]]></Name>
+					<X>580</X><Y>50</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>30</Y></Point>
+					</Points>
+					<Properties Target="1661364833142">
+					</Properties>	
+				</StatechartElement>
 			</StatechartElements>
+			<Functions>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1661296636456</Id>
+					<Name><![CDATA[getDistanceToNearestStop]]></Name>
+					<X>50</X><Y>150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[myX]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[myY]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Body><![CDATA[GISPoint nearest = getNearestStop(myX, myY);
+return main.map.getDistanceByRoute(
+    nearest.getLatitude(), nearest.getLongitude(), 
+    myX, myY
+);
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[GISPoint]]></ReturnType>
+					<Id>1661297403269</Id>
+					<Name><![CDATA[getNearestStop]]></Name>
+					<X>50</X><Y>180</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[myLat]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[myLon]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Body><![CDATA[return main.Stops.stream()
+.min(
+    (s1, s2) -> {
+        double s1Dist = main.map.getDistanceByRoute(
+            s1.getLatitude(), s1.getLongitude(),
+            myLat, myLon
+        );
+        double s2Dist = main.map.getDistanceByRoute(
+            s2.getLatitude(), s2.getLongitude(),
+            myLat, myLon
+        );
+        double diff = s1Dist - s2Dist;
+        if (diff < 0) return -1;
+        else if (diff == 0) return 0;
+        else return 1;
+    }
+).get();
+]]></Body>
+				</Function>
+			</Functions>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1661287355911</Id>
@@ -1083,6 +1355,11 @@
 						<PackageName><![CDATA[trucker]]></PackageName>
 						<ClassName><![CDATA[Trucker]]></ClassName>
 						<ItemName><![CDATA[Drive]]></ItemName>
+					</StatechartReference>
+					<StatechartReference>
+						<PackageName><![CDATA[trucker]]></PackageName>
+						<ClassName><![CDATA[Trucker]]></ClassName>
+						<ItemName><![CDATA[Hunger]]></ItemName>
 					</StatechartReference>
 					<LineStyle>SOLID</LineStyle>
 					<LineWidth>1</LineWidth>
