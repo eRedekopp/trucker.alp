@@ -191,7 +191,7 @@
 					</GenericParameterSubstitute>
 					<Parameters>
 						<Parameter>
-							<Name><![CDATA[milesPerGallon]]></Name>
+							<Name><![CDATA[averageMPG]]></Name>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[fuelCapacity]]></Name>
@@ -769,7 +769,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<Variable Class="PlainVariable">
 					<Id>1661364485789</Id>
 					<Name><![CDATA[destination]]></Name>
-					<X>-500</X><Y>350</Y>
+					<X>-540</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -861,9 +861,25 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1661543199135</Id>
+					<Name><![CDATA[fuelEconomyForTrip]]></Name>
+					<X>-540</X><Y>390</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[averageMPG
+]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1661477789704</Id>
-					<Name><![CDATA[milesPerGallon]]></Name>
+					<Name><![CDATA[averageMPG]]></Name>
 					<Unit>Mile/Gallon</Unit> 
 					<X>350</X><Y>-80</Y>
 					<Label><X>10</X><Y>0</Y></Label>
@@ -875,7 +891,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[5.6
+							<Code><![CDATA[7.2
 ]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
@@ -1011,7 +1027,7 @@ hoursDrivenBwFuelAndLastStop += hoursDriven;
 timeStopped = time();
 timeStarted = time();
 ]]></ExitAction>
-						<FillColor>-4144960</FillColor>
+						<FillColor>-6632142</FillColor>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="Driving" ParentStateId="1661475381131">
@@ -1060,7 +1076,7 @@ timeStarted = time();
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="220" Height="300">
-						<FillColor>-3308225</FillColor>
+						<FillColor>-40121</FillColor>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="Stationary" ParentStateId="1661527050692">
@@ -1087,7 +1103,7 @@ timeStarted = time();
 						<ExitAction><![CDATA[hoursDrivenBwFuelAndLastStop = 0.0;
 timeAte = time();
 ]]></ExitAction>
-						<FillColor>-6632142</FillColor>
+						<FillColor>-4144960</FillColor>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
@@ -1167,10 +1183,11 @@ timeAte = time();
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661287737305" Target="1661475381131" Trigger="timeout">
 						<Action><![CDATA[destination = getNewDestination();
+fuelEconomyForTrip = makeRandomFuelEconomy();
 traceln("Starting trip to " + destination.Name + ", " + destination.State);
 ]]></Action>
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[randomizeDetentionTime()
+							<Code><![CDATA[makeRandomDetentionTime()
 ]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
 						</Timeout>
@@ -1589,7 +1606,7 @@ return main.truckStops.stream().filter(
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661467739682</Id>
-					<Name><![CDATA[randomizeDetentionTime]]></Name>
+					<Name><![CDATA[makeRandomDetentionTime]]></Name>
 					<X>-500</X><Y>30</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1679,7 +1696,7 @@ return time;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return fuelCapacity - (getTimeDrivenSinceFueled() * milesPerHour / milesPerGallon);
+					<Body><![CDATA[return fuelCapacity - (getTimeDrivenSinceFueled() * milesPerHour / fuelEconomyForTrip);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1723,6 +1740,20 @@ return time;
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[return getTimeSince(timeStarted) + hoursDrivenBwFuelAndLastStop;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1661543268076</Id>
+					<Name><![CDATA[makeRandomFuelEconomy]]></Name>
+					<X>-500</X><Y>180</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return normal(4, 10, averageMPG, 3);
+
 ]]></Body>
 				</Function>
 			</Functions>
