@@ -818,7 +818,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<Variable Class="PlainVariable">
 					<Id>1661364485789</Id>
 					<Name><![CDATA[destination]]></Name>
-					<X>-540</X><Y>360</Y>
+					<X>-520</X><Y>350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -850,7 +850,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<Variable Class="PlainVariable">
 					<Id>1661532769631</Id>
 					<Name><![CDATA[timeStopped]]></Name>
-					<X>-350</X><Y>380</Y>
+					<X>-350</X><Y>370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -866,7 +866,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<Variable Class="PlainVariable">
 					<Id>1661532853733</Id>
 					<Name><![CDATA[timeAte]]></Name>
-					<X>-350</X><Y>410</Y>
+					<X>-350</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -881,7 +881,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<Variable Class="PlainVariable">
 					<Id>1661532958925</Id>
 					<Name><![CDATA[hoursDrivenBwRestAndLastStop]]></Name>
-					<X>-350</X><Y>440</Y>
+					<X>-350</X><Y>410</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -897,7 +897,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<Variable Class="PlainVariable">
 					<Id>1661534418257</Id>
 					<Name><![CDATA[gallonsConsumedBwFuelAndLastStop]]></Name>
-					<X>-350</X><Y>470</Y>
+					<X>-350</X><Y>430</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -913,7 +913,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<Variable Class="PlainVariable">
 					<Id>1661543199135</Id>
 					<Name><![CDATA[fuelEconomyForTrip]]></Name>
-					<X>-540</X><Y>390</Y>
+					<X>-520</X><Y>370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1058,7 +1058,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661475381131</Id>
 					<Name><![CDATA[Driving]]></Name>
-					<X>110</X><Y>110</Y>
+					<X>60</X><Y>130</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1081,7 +1081,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475523420</Id>
 					<Name><![CDATA[ToReceiver]]></Name>
-					<X>140</X><Y>160</Y>
+					<X>90</X><Y>180</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1095,7 +1095,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475707578</Id>
 					<Name><![CDATA[ToTruckStop]]></Name>
-					<X>140</X><Y>300</Y>
+					<X>90</X><Y>320</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1107,7 +1107,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="Branch" ParentState="ROOT_NODE">
 					<Id>1661481820640</Id>
 					<Name><![CDATA[branch]]></Name>
-					<X>360</X><Y>310</Y>
+					<X>310</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1118,7 +1118,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661527050692</Id>
 					<Name><![CDATA[Stationary]]></Name>
-					<X>398</X><Y>110</Y>
+					<X>348</X><Y>130</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1130,7 +1130,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="Stationary" ParentStateId="1661527050692">
 					<Id>1661287737305</Id>
 					<Name><![CDATA[AtReceiver]]></Name>
-					<X>430</X><Y>140</Y>
+					<X>380</X><Y>160</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1142,7 +1142,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="Stationary" ParentStateId="1661527050692">
 					<Id>1661534693053</Id>
 					<Name><![CDATA[AtTruckStop]]></Name>
-					<X>410</X><Y>200</Y>
+					<X>360</X><Y>220</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1154,7 +1154,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661364596509</Id>
 					<Name><![CDATA[Resting]]></Name>
-					<X>460</X><Y>220</Y>
+					<X>410</X><Y>240</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1170,13 +1170,13 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661481790810</Id>
 					<Name><![CDATA[Eating]]></Name>
-					<X>460</X><Y>360</Y>
+					<X>410</X><Y>380</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="100" Height="30">
-						<EntryAction><![CDATA[traceln("eating");
+						<EntryAction><![CDATA[traceln("Eating.");
 
 ]]></EntryAction>
 						<ExitAction><![CDATA[timeAte = time();
@@ -1187,13 +1187,13 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661544283644</Id>
 					<Name><![CDATA[Refuelling]]></Name>
-					<X>460</X><Y>290</Y>
+					<X>410</X><Y>310</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="100" Height="30">
-						<EntryAction><![CDATA[traceln("refuelling")
+						<EntryAction><![CDATA[traceln("Refuelling.")
 ]]></EntryAction>
 						<ExitAction><![CDATA[gallonsConsumedBwFuelAndLastStop = 0.0;
 ]]></ExitAction>
@@ -1203,7 +1203,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661287757965</Id>
 					<Name><![CDATA[Arrived]]></Name>
-					<X>270</X><Y>170</Y>
+					<X>220</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1235,7 +1235,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661287897814</Id>
 					<Name><![CDATA[transition]]></Name>
-					<X>430</X><Y>150</Y>
+					<X>380</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1270,7 +1270,7 @@ traceln("Starting trip to " + destination.Name + ", " + destination.State);
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
 					<Id>1661288050552</Id>
 					<Name><![CDATA[Drive]]></Name>
-					<X>502</X><Y>40</Y>
+					<X>452</X><Y>60</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1285,7 +1285,7 @@ traceln("Starting trip to " + destination.Name + ", " + destination.State);
 				<StatechartElement Class="InitialStatePointer" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475510021</Id>
 					<Name><![CDATA[initialState]]></Name>
-					<X>200</X><Y>130</Y>
+					<X>150</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1300,7 +1300,7 @@ traceln("Starting trip to " + destination.Name + ", " + destination.State);
 				<StatechartElement Class="Transition" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475748799</Id>
 					<Name><![CDATA[transition7]]></Name>
-					<X>200</X><Y>220</Y>
+					<X>150</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1344,7 +1344,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ToReceiver" ParentStateId="1661475523420">
 					<Id>1661475853242</Id>
 					<Name><![CDATA[transition8]]></Name>
-					<X>270</X><Y>190</Y>
+					<X>220</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1382,7 +1382,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661476104066</Id>
 					<Name><![CDATA[transition1]]></Name>
-					<X>260</X><Y>310</Y>
+					<X>210</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1412,7 +1412,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481833925</Id>
 					<Name><![CDATA[transition2]]></Name>
-					<X>372</X><Y>310</Y>
+					<X>322</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1442,7 +1442,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481842016</Id>
 					<Name><![CDATA[transition6]]></Name>
-					<X>372</X><Y>310</Y>
+					<X>322</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1474,7 +1474,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481927658</Id>
 					<Name><![CDATA[transition9]]></Name>
-					<X>460</X><Y>390</Y>
+					<X>410</X><Y>410</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1516,7 +1516,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661544333875</Id>
 					<Name><![CDATA[transition4]]></Name>
-					<X>372</X><Y>310</Y>
+					<X>322</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1547,7 +1547,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661544452819</Id>
 					<Name><![CDATA[transition3]]></Name>
-					<X>510</X><Y>250</Y>
+					<X>460</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1578,7 +1578,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661544495988</Id>
 					<Name><![CDATA[transition5]]></Name>
-					<X>510</X><Y>320</Y>
+					<X>460</X><Y>340</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1613,7 +1613,7 @@ traceln(
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661296636456</Id>
 					<Name><![CDATA[getDistanceToNearestStop]]></Name>
-					<X>-500</X><Y>60</Y>
+					<X>-500</X><Y>40</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1630,7 +1630,7 @@ return main.map.getDistanceByRoute(
 					<ReturnType><![CDATA[TruckStop]]></ReturnType>
 					<Id>1661297403269</Id>
 					<Name><![CDATA[getNearestStop]]></Name>
-					<X>-500</X><Y>90</Y>
+					<X>-500</X><Y>100</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1671,7 +1671,7 @@ else
 ]]></ReturnType>
 					<Id>1661463275556</Id>
 					<Name><![CDATA[getNearbyStops]]></Name>
-					<X>-500</X><Y>120</Y>
+					<X>-500</X><Y>60</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1698,7 +1698,10 @@ return main.truckStops.stream().filter(
 	    	|| 
 	    	(myLon > theirLon - fudgeDegrees && theirLon > destLon - fudgeDegrees);
 	}
-).collect(Collectors.toList());
+).sorted(
+	(s1, s2) -> 
+		compareStopsByDistanceFromPoint(s1, s2, myLat, myLon)
+).limit(5).collect(Collectors.toList());
 
 ]]></Body>
 				</Function>
@@ -1707,7 +1710,7 @@ return main.truckStops.stream().filter(
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661467739682</Id>
 					<Name><![CDATA[makeRandomDetentionTime]]></Name>
-					<X>-500</X><Y>30</Y>
+					<X>-500</X><Y>120</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1723,7 +1726,7 @@ return time;
 					<ReturnType><![CDATA[boolean]]></ReturnType>
 					<Id>1661475886268</Id>
 					<Name><![CDATA[shouldStop]]></Name>
-					<X>-250</X><Y>120</Y>
+					<X>-250</X><Y>140</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1738,7 +1741,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661481609473</Id>
 					<Name><![CDATA[getDrivingHoursRemaining]]></Name>
-					<X>-750</X><Y>100</Y>
+					<X>-750</X><Y>90</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1751,7 +1754,7 @@ return time;
 					<ReturnType><![CDATA[boolean]]></ReturnType>
 					<Id>1661533111563</Id>
 					<Name><![CDATA[shouldStopForFuel]]></Name>
-					<X>-250</X><Y>30</Y>
+					<X>-250</X><Y>80</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1765,7 +1768,7 @@ return time;
 					<ReturnType><![CDATA[boolean]]></ReturnType>
 					<Id>1661533217687</Id>
 					<Name><![CDATA[shouldStopForFood]]></Name>
-					<X>-250</X><Y>60</Y>
+					<X>-250</X><Y>100</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1778,7 +1781,7 @@ return time;
 					<ReturnType><![CDATA[boolean]]></ReturnType>
 					<Id>1661533224653</Id>
 					<Name><![CDATA[shouldStopForRest]]></Name>
-					<X>-250</X><Y>90</Y>
+					<X>-250</X><Y>120</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1791,7 +1794,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661533487035</Id>
 					<Name><![CDATA[getGallonsInTank]]></Name>
-					<X>-750</X><Y>40</Y>
+					<X>-750</X><Y>50</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1804,7 +1807,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534014081</Id>
 					<Name><![CDATA[getTimeSince]]></Name>
-					<X>-750</X><Y>160</Y>
+					<X>-750</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1834,7 +1837,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534329675</Id>
 					<Name><![CDATA[getGallonsConsumedSinceStart]]></Name>
-					<X>-750</X><Y>130</Y>
+					<X>-750</X><Y>110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1847,7 +1850,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661543268076</Id>
 					<Name><![CDATA[makeRandomFuelEconomy]]></Name>
-					<X>-500</X><Y>150</Y>
+					<X>-500</X><Y>140</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1855,6 +1858,61 @@ return time;
 					<Body><![CDATA[return normal(4, 10, averageMPG, 3);
 
 ]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[List<TruckStop>
+
+]]></ReturnType>
+					<Id>1661552687420</Id>
+					<Name><![CDATA[getTwoNearestStops]]></Name>
+					<X>-500</X><Y>80</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return getNearbyStops().stream().sorted().limit(2).collect(Collectors.toList());
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Id>1661553481649</Id>
+					<Name><![CDATA[compareStopsByDistanceFromPoint]]></Name>
+					<X>-500</X><Y>20</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[s1]]></Name>
+						<Type><![CDATA[TruckStop]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[s2]]></Name>
+						<Type><![CDATA[TruckStop]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[pointLat]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[pointLon]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Body><![CDATA[double s1Dist = main.map.getDistance(
+	s1.getLatitude(), s1.getLongitude(),
+	pointLat, pointLon
+);
+double s2Dist = main.map.getDistance(
+    s2.getLatitude(), s2.getLongitude(),
+    pointLat, pointLon
+);
+double diff = s1Dist - s2Dist;
+if (diff < 0) return -1;
+else if (diff == 0) return 0;
+else return 1;
+        ]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
