@@ -252,7 +252,7 @@ else
 							<Name><![CDATA[milesPerHour]]></Name>
 						</Parameter>
 						<Parameter>
-							<Name><![CDATA[hoursUntilHunger]]></Name>
+							<Name><![CDATA[hoursUntilHungry]]></Name>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>true</ReplicationFlag>
@@ -896,7 +896,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1661534418257</Id>
-					<Name><![CDATA[hoursDrivenBwFuelAndLastStop]]></Name>
+					<Name><![CDATA[gallonsConsumedBwFuelAndLastStop]]></Name>
 					<X>-350</X><Y>470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1031,7 +1031,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1661533892621</Id>
-					<Name><![CDATA[hoursUntilHunger]]></Name>
+					<Name><![CDATA[hoursUntilHungry]]></Name>
 					<X>350</X><Y>-20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1070,9 +1070,8 @@ traceln("Starting: " + getDrivingHoursRemaining() + " hours remaining. " + getGa
 ]]></EntryAction>
 						<ExitAction><![CDATA[traceln("Stopping: " + getDrivingHoursRemaining() + " hours remaining. " + getGallonsInTank() + " gallons in tank. Ate " + getTimeSince(timeAte) + " hours ago.");
 
-double hoursDriven = getTimeSince(timeStarted);
-hoursDrivenBwRestAndLastStop += hoursDriven;
-hoursDrivenBwFuelAndLastStop += hoursDriven;
+hoursDrivenBwRestAndLastStop += getTimeSince(timeStarted);
+gallonsConsumedBwFuelAndLastStop += getGallonsConsumedSinceStart();
 timeStopped = time();
 timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incorrect
 ]]></ExitAction>
@@ -1196,7 +1195,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 					<Properties Width="100" Height="30">
 						<EntryAction><![CDATA[traceln("refuelling")
 ]]></EntryAction>
-						<ExitAction><![CDATA[hoursDrivenBwFuelAndLastStop = 0.0;
+						<ExitAction><![CDATA[gallonsConsumedBwFuelAndLastStop = 0.0;
 ]]></ExitAction>
 						<FillColor/>
 					</Properties>
@@ -1771,7 +1770,7 @@ return time;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getTimeSince(timeAte) > hoursUntilHunger;
+					<Body><![CDATA[return getTimeSince(timeAte) > hoursUntilHungry;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1797,8 +1796,8 @@ return time;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return fuelCapacityGals - (getTimeDrivenSinceFueled() * milesPerHour / fuelEconomyForTrip);
-// TODO this returns an incorrect value if we change fuelEconomyForTrip between refuels]]></Body>
+					<Body><![CDATA[return fuelCapacityGals - gallonsConsumedBwFuelAndLastStop - getGallonsConsumedSinceStart();
+]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -1834,13 +1833,13 @@ return time;
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534329675</Id>
-					<Name><![CDATA[getTimeDrivenSinceFueled]]></Name>
+					<Name><![CDATA[getGallonsConsumedSinceStart]]></Name>
 					<X>-750</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getTimeSince(timeStarted) + hoursDrivenBwFuelAndLastStop;
+					<Body><![CDATA[return getTimeSince(timeStarted) * milesPerHour / fuelEconomyForTrip;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
