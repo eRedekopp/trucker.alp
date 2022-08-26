@@ -194,6 +194,12 @@
 						</GenericParameterSubstituteReference>
 					</GenericParameterSubstitute>
 					<Parameters>
+						<Parameter>
+							<Name><![CDATA[milesPerGallon]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[fuelCapacity]]></Name>
+						</Parameter>
 					</Parameters>
 					<ReplicationFlag>true</ReplicationFlag>
 					<Replication Class="CodeValue">
@@ -731,7 +737,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<Variable Class="PlainVariable">
 					<Id>1661364485789</Id>
 					<Name><![CDATA[destination]]></Name>
-					<X>-60</X><Y>120</Y>
+					<X>50</X><Y>100</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -744,7 +750,181 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1661478774627</Id>
+					<Name><![CDATA[milesPerHour]]></Name>
+					<Unit>Mile/time</Unit> 
+					<X>690</X><Y>640</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0
+]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="StockVariable">
+					<Id>1661477635296</Id>
+					<Name><![CDATA[Fuel]]></Name>
+					<Unit>Gallon</Unit> 
+					<X>350</X><Y>750</Y>
+					<Label><X>-15</X><Y>-5</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Array="false">
+					<EquationStyle>custom</EquationStyle>
+					<Width>80</Width>
+					<Height>80</Height>
+						<Expression><![CDATA[-1 * fuelConsumption
+]]></Expression>
+						<InitialValue><![CDATA[fuelCapacity
+]]></InitialValue>
+						<Color/>
+					</Properties>
+				</Variable>
+				<Variable Class="Flow">
+					<Id>1661477665325</Id>
+					<Name><![CDATA[fuelConsumption]]></Name>
+					<Unit>Gallon/Hour</Unit> 
+					<X>390</X><Y>750</Y>
+					<Label><X>-40</X><Y>-30</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties External="false" Constant="false" Array="false">
+						<Formula><![CDATA[milesPerHour / milesPerGallon
+
+]]></Formula>
+						<Color/>
+						<ValveIndex>1</ValveIndex>
+						<Points>
+							<Point><X>0</X><Y>0</Y></Point>
+							<Point><X>100</X><Y>0</Y></Point>
+							<Point><X>200</X><Y>0</Y></Point>
+						</Points>
+					</Properties>
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1661477789704</Id>
+					<Name><![CDATA[milesPerGallon]]></Name>
+					<Unit>Mile/Gallon</Unit> 
+					<X>690</X><Y>670</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[5.6
+]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1661477789702</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1661479074636</Id>
+					<Name><![CDATA[fuelCapacity]]></Name>
+					<Unit>Gallon</Unit> 
+					<X>260</X><Y>630</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[150.0
+
+]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1661479074634</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 			</Variables>
+			<Dependences>
+				<Link SourceId="1661479074636" TargetId="1661477635296" Polarity="null">
+					<Height>20.0</Height>
+					<PolarityPosition>0.95</PolarityPosition>
+					<Direction><X>90</X><Y>120</Y></Direction>
+					<Id>1661479663832</Id>
+					<Name><![CDATA[fuelCapacity - Fuel]]></Name>
+					<X>260</X><Y>630</Y>
+					<Label><X>40</X><Y>-50</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Color/>
+					<LineWidth>1</LineWidth>
+					<Delay>false</Delay>
+				</Link>
+				<Link SourceId="1661477789704" TargetId="1661477665325" Polarity="null">
+					<Height>28.17</Height>
+					<PolarityPosition>0.95</PolarityPosition>
+					<Direction><X>-200</X><Y>80</Y></Direction>
+					<Id>1661479691103</Id>
+					<Name><![CDATA[milesPerGallon - fuelConsumption]]></Name>
+					<X>690</X><Y>670</Y>
+					<Label><X>40</X><Y>-50</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Color/>
+					<LineWidth>1</LineWidth>
+					<Delay>false</Delay>
+				</Link>
+				<Link SourceId="1661478774627" TargetId="1661477665325" Polarity="null">
+					<Height>20.0</Height>
+					<PolarityPosition>0.95</PolarityPosition>
+					<Direction><X>-200</X><Y>110</Y></Direction>
+					<Id>1661479707695</Id>
+					<Name><![CDATA[milesPerHour - fuelConsumption]]></Name>
+					<X>690</X><Y>640</Y>
+					<Label><X>40</X><Y>-50</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Color/>
+					<LineWidth>1</LineWidth>
+					<Delay>false</Delay>
+				</Link>
+				<Link SourceId="1661477665325" TargetId="1661477635296" Polarity="null">
+					<Height>20.0</Height>
+					<PolarityPosition>0.95</PolarityPosition>
+					<Direction><X>-140</X><Y>0</Y></Direction>
+					<Id>1661481210919</Id>
+					<Name><![CDATA[fuelConsumption - Fuel]]></Name>
+					<X>490</X><Y>750</Y>
+					<Label><X>40</X><Y>-50</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Color/>
+					<LineWidth>1</LineWidth>
+					<Delay>false</Delay>
+				</Link>
+			</Dependences>
 			<StatechartElements>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661287737305</Id>
@@ -806,6 +986,12 @@ send(Ate, this);
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="200" Height="300">
+						<EntryAction><![CDATA[milesPerHour = 50.0;
+
+]]></EntryAction>
+						<ExitAction><![CDATA[milesPerHour = 0.0;
+
+]]></ExitAction>
 						<FillColor>-4144960</FillColor>
 					</Properties>
 				</StatechartElement>
@@ -939,6 +1125,7 @@ this.moveTo(destination.Latitude, destination.Longitude);]]></Action>
 	+ "km away"
 );
 this.moveTo(destination);
+this.Fuel = fuelCapacity;
 ]]></Action>
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1
@@ -1172,7 +1359,7 @@ traceln(
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661296636456</Id>
 					<Name><![CDATA[getDistanceToNearestStop]]></Name>
-					<X>-60</X><Y>150</Y>
+					<X>-250</X><Y>80</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1189,7 +1376,7 @@ return main.map.getDistanceByRoute(
 					<ReturnType><![CDATA[TruckStop]]></ReturnType>
 					<Id>1661297403269</Id>
 					<Name><![CDATA[getNearestStop]]></Name>
-					<X>-60</X><Y>180</Y>
+					<X>-250</X><Y>110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1229,7 +1416,7 @@ else
 					<ReturnType><![CDATA[City]]></ReturnType>
 					<Id>1661450179120</Id>
 					<Name><![CDATA[getNewDestination]]></Name>
-					<X>-60</X><Y>240</Y>
+					<X>-250</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1245,7 +1432,7 @@ else
 ]]></ReturnType>
 					<Id>1661463275556</Id>
 					<Name><![CDATA[getNearbyStops]]></Name>
-					<X>-60</X><Y>210</Y>
+					<X>-250</X><Y>140</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1281,7 +1468,7 @@ return main.truckStops.stream().filter(
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661467739682</Id>
 					<Name><![CDATA[getDetentionTime]]></Name>
-					<X>-60</X><Y>270</Y>
+					<X>-250</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1297,12 +1484,12 @@ return time;
 					<ReturnType><![CDATA[boolean]]></ReturnType>
 					<Id>1661475886268</Id>
 					<Name><![CDATA[shouldStop]]></Name>
-					<X>-60</X><Y>300</Y>
+					<X>-250</X><Y>230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return this.inState(Hungry);
+					<Body><![CDATA[return this.inState(Hungry) || this.Fuel < 30;
 ]]></Body>
 				</Function>
 			</Functions>
