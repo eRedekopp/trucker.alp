@@ -123,6 +123,33 @@
 			</ScaleRuler>
 			<CurrentLevel>1661276760203</CurrentLevel>
 			<ConnectionsId>1661276760199</ConnectionsId>
+			<Variables>
+				<Variable Class="Parameter">
+					<Id>1661477256157</Id>
+					<Name><![CDATA[numOfDrivers]]></Name>
+					<X>-150</X><Y>50</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[int]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[1
+]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1661477256155</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+			</Variables>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1661276760199</Id>
@@ -148,8 +175,8 @@
 			<EmbeddedObjects>
 				<EmbeddedObject>
 					<Id>1661287374808</Id>
-					<Name><![CDATA[trucker]]></Name>
-					<X>-100</X><Y>20</Y>
+					<Name><![CDATA[truckers]]></Name>
+					<X>400</X><Y>-50</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -168,15 +195,17 @@
 					</GenericParameterSubstitute>
 					<Parameters>
 					</Parameters>
-					<ReplicationFlag>false</ReplicationFlag>
+					<ReplicationFlag>true</ReplicationFlag>
 					<Replication Class="CodeValue">
-						<Code><![CDATA[100]]></Code>
+						<Code><![CDATA[numOfDrivers
+]]></Code>
 					</Replication>
 					<CollectionType>ARRAY_LIST_BASED</CollectionType>
 					<InEnvironment>true</InEnvironment>	
 					<InitialSpeedCode Class="CodeUnitValue">
-						<Code><![CDATA[100]]></Code>
-						<Unit Class="SpeedUnits"><![CDATA[KPH]]></Unit>
+						<Code><![CDATA[50
+]]></Code>
+						<Unit Class="SpeedUnits"><![CDATA[MPH]]></Unit>
 					</InitialSpeedCode>
 					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
 					<XCode Class="CodeValue">
@@ -215,7 +244,7 @@
 				<EmbeddedObject>
 					<Id>1661381544228</Id>
 					<Name><![CDATA[truckStops]]></Name>
-					<X>-80</X><Y>-60</Y>
+					<X>200</X><Y>-50</Y>
 					<Label><X>-40</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -326,7 +355,7 @@
 				<EmbeddedObject>
 					<Id>1661383895451</Id>
 					<Name><![CDATA[cities]]></Name>
-					<X>-80</X><Y>-120</Y>
+					<X>300</X><Y>-50</Y>
 					<Label><X>-15</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -547,8 +576,8 @@
 					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
 					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
 					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>31.11928540344882</Latitude>
-					<Longitude>-96.95020729288055</Longitude>
+					<Latitude>32.923155090217065</Latitude>
+					<Longitude>-103.81386319232678</Longitude>
 				</EmbeddedObjectPresentation>
 				<EmbeddedObjectPresentation>
 					<Id>1661383896463</Id>
@@ -566,15 +595,15 @@
 					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
 					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
 					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>27.48105346142247</Latitude>
-					<Longitude>-98.15821073118313</Longitude>
+					<Latitude>33.107326195968035</Latitude>
+					<Longitude>-106.66914404649644</Longitude>
 				</EmbeddedObjectPresentation>
 			</Presentation>
 
 				</Level>
 				<EmbeddedObjectPresentation>
 					<Id>1661287374821</Id>
-					<Name><![CDATA[trucker_presentation]]></Name>
+					<Name><![CDATA[truckers_presentation]]></Name>
 					<X>0</X><Y>0</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
@@ -602,6 +631,9 @@
 			<Import><![CDATA[import java.util.Optional;
 import java.util.stream.Collectors;
 ]]></Import>
+			<StartupCode><![CDATA[City initCity = getNewDestination();
+jumpTo(initCity.Latitude, initCity.Longitude);
+]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1661287355914</Id>
@@ -1079,7 +1111,7 @@ traceln(
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661475523420" Target="1661475523420" Trigger="timeout">
-						<Action><![CDATA[if (shouldStop()) {
+						<Action><![CDATA[if (!getNearbyStops().isEmpty() && shouldStop()) {
 	send(
 	    TruckerMessage.GoToTruckStop,
 	    this
@@ -3144,7 +3176,7 @@ return time;
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<MaximumMemory>512</MaximumMemory>
-			<RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType>
+			<RandomNumberGenerationType>randomSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
 			<SeedValue>1</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
@@ -3176,6 +3208,9 @@ return time;
 			</Presentation>
 
 			<Parameters>			
+				<Parameter>
+					<ParameterName><![CDATA[numOfDrivers]]></ParameterName>
+				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
