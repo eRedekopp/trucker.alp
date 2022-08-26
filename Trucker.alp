@@ -194,7 +194,7 @@
 							<Name><![CDATA[averageMPG]]></Name>
 						</Parameter>
 						<Parameter>
-							<Name><![CDATA[fuelCapacity]]></Name>
+							<Name><![CDATA[fuelCapacityGals]]></Name>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[drivingHoursPerDay]]></Name>
@@ -203,7 +203,7 @@
 							<Name><![CDATA[milesPerHour]]></Name>
 						</Parameter>
 						<Parameter>
-							<Name><![CDATA[timeUntilHunger]]></Name>
+							<Name><![CDATA[hoursUntilHunger]]></Name>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>true</ReplicationFlag>
@@ -905,7 +905,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1661479074636</Id>
-					<Name><![CDATA[fuelCapacity]]></Name>
+					<Name><![CDATA[fuelCapacityGals]]></Name>
 					<Unit>Gallon</Unit> 
 					<X>350</X><Y>-100</Y>
 					<Label><X>10</X><Y>0</Y></Label>
@@ -982,7 +982,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1661533892621</Id>
-					<Name><![CDATA[timeUntilHunger]]></Name>
+					<Name><![CDATA[hoursUntilHunger]]></Name>
 					<X>350</X><Y>-20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1009,7 +1009,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661475381131</Id>
 					<Name><![CDATA[Driving]]></Name>
-					<X>110</X><Y>140</Y>
+					<X>120</X><Y>130</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1025,7 +1025,7 @@ double hoursDriven = getTimeSince(timeStarted);
 hoursDrivenBwRestAndLastStop += hoursDriven;
 hoursDrivenBwFuelAndLastStop += hoursDriven;
 timeStopped = time();
-timeStarted = time();
+timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incorrect
 ]]></ExitAction>
 						<FillColor>-6632142</FillColor>
 					</Properties>
@@ -1033,7 +1033,7 @@ timeStarted = time();
 				<StatechartElement Class="State" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475523420</Id>
 					<Name><![CDATA[ToReceiver]]></Name>
-					<X>140</X><Y>190</Y>
+					<X>150</X><Y>180</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1047,7 +1047,7 @@ timeStarted = time();
 				<StatechartElement Class="State" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475707578</Id>
 					<Name><![CDATA[ToTruckStop]]></Name>
-					<X>140</X><Y>320</Y>
+					<X>150</X><Y>320</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1059,7 +1059,7 @@ timeStarted = time();
 				<StatechartElement Class="Branch" ParentState="ROOT_NODE">
 					<Id>1661481820640</Id>
 					<Name><![CDATA[branch]]></Name>
-					<X>360</X><Y>340</Y>
+					<X>370</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1070,7 +1070,7 @@ timeStarted = time();
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661527050692</Id>
 					<Name><![CDATA[Stationary]]></Name>
-					<X>398</X><Y>140</Y>
+					<X>408</X><Y>130</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1082,7 +1082,7 @@ timeStarted = time();
 				<StatechartElement Class="State" ParentState="Stationary" ParentStateId="1661527050692">
 					<Id>1661287737305</Id>
 					<Name><![CDATA[AtReceiver]]></Name>
-					<X>430</X><Y>170</Y>
+					<X>440</X><Y>160</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1094,22 +1094,19 @@ timeStarted = time();
 				<StatechartElement Class="State" ParentState="Stationary" ParentStateId="1661527050692">
 					<Id>1661534693053</Id>
 					<Name><![CDATA[AtTruckStop]]></Name>
-					<X>410</X><Y>230</Y>
+					<X>420</X><Y>220</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="190" Height="200">
-						<ExitAction><![CDATA[hoursDrivenBwFuelAndLastStop = 0.0;
-timeAte = time();
-]]></ExitAction>
 						<FillColor>-4144960</FillColor>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661364596509</Id>
 					<Name><![CDATA[Resting]]></Name>
-					<X>460</X><Y>270</Y>
+					<X>470</X><Y>240</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1124,22 +1121,41 @@ timeAte = time();
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661481790810</Id>
-					<Name><![CDATA[Refueling]]></Name>
-					<X>460</X><Y>380</Y>
+					<Name><![CDATA[Eating]]></Name>
+					<X>470</X><Y>380</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="100" Height="30">
-						<EntryAction><![CDATA[traceln("refuel only");
+						<EntryAction><![CDATA[traceln("eating");
+
 ]]></EntryAction>
+						<ExitAction><![CDATA[timeAte = time();
+]]></ExitAction>
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
+				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
+					<Id>1661544283644</Id>
+					<Name><![CDATA[Refuelling]]></Name>
+					<X>470</X><Y>310</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="100" Height="30">
+						<EntryAction><![CDATA[traceln("refuelling")
+]]></EntryAction>
+						<ExitAction><![CDATA[hoursDrivenBwFuelAndLastStop = 0.0;
+]]></ExitAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661287757965</Id>
 					<Name><![CDATA[Arrived]]></Name>
-					<X>270</X><Y>200</Y>
+					<X>280</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1171,7 +1187,7 @@ timeAte = time();
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661287897814</Id>
 					<Name><![CDATA[transition]]></Name>
-					<X>430</X><Y>180</Y>
+					<X>440</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1206,7 +1222,7 @@ traceln("Starting trip to " + destination.Name + ", " + destination.State);
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
 					<Id>1661288050552</Id>
 					<Name><![CDATA[Drive]]></Name>
-					<X>502</X><Y>70</Y>
+					<X>512</X><Y>60</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1218,52 +1234,10 @@ traceln("Starting trip to " + destination.Name + ", " + destination.State);
 					<Properties Target="1661287737305">
 					</Properties>	
 				</StatechartElement>
-				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
-					<Id>1661364630544</Id>
-					<Name><![CDATA[transition3]]></Name>
-					<X>460</X><Y>280</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<Points>
-						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-150</X><Y>0</Y></Point>
-					</Points>
-					<IconOffset>20.0</IconOffset>
-					<Properties Source="1661364596509" Target="1661475381131" Trigger="timeout">
-						<Action><![CDATA[traceln(
-	"Continuing on to destination "
-	+ destination.Name
-	+ " "
-	+ main.map.getDistanceByRoute(
-		destination.Latitude, destination.Longitude, 
-		this.getLatitude(), this.getLongitude()
-	) / 1000
-	+ "km away"
-);
-]]></Action>
-						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[10
-]]></Code>
-							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
-						</Timeout>
-						<Condition><![CDATA[true]]></Condition>
-						<Rate Class="CodeUnitValue">
-							<Code><![CDATA[1]]></Code>
-							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
-						</Rate>
-						<MessageType><![CDATA[Object]]></MessageType>
-						<DefaultTransition>true</DefaultTransition>
-						<FilterType><![CDATA[unconditionally]]></FilterType>
-						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
-						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
-					</Properties>	
-				</StatechartElement>
 				<StatechartElement Class="InitialStatePointer" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475510021</Id>
 					<Name><![CDATA[initialState]]></Name>
-					<X>200</X><Y>160</Y>
+					<X>210</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1278,14 +1252,14 @@ traceln("Starting trip to " + destination.Name + ", " + destination.State);
 				<StatechartElement Class="Transition" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475748799</Id>
 					<Name><![CDATA[transition7]]></Name>
-					<X>200</X><Y>250</Y>
+					<X>210</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>70</Y></Point>
+						<Point><X>0</X><Y>80</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661475523420" Target="1661475707578" Trigger="message">
@@ -1322,7 +1296,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ToReceiver" ParentStateId="1661475523420">
 					<Id>1661475853242</Id>
 					<Name><![CDATA[transition8]]></Name>
-					<X>270</X><Y>220</Y>
+					<X>280</X><Y>210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1360,7 +1334,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661476104066</Id>
 					<Name><![CDATA[transition1]]></Name>
-					<X>260</X><Y>340</Y>
+					<X>270</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1369,7 +1343,7 @@ traceln(
 						<Point><X>0</X><Y>0</Y></Point>
 						<Point><X>88</X><Y>0</Y></Point>
 					</Points>
-					<IconOffset>20.0</IconOffset>
+					<IconOffset>40.0</IconOffset>
 					<Properties Source="1661475707578" Target="1661481820640" Trigger="arrival">
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
@@ -1390,14 +1364,14 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481833925</Id>
 					<Name><![CDATA[transition2]]></Name>
-					<X>372</X><Y>340</Y>
+					<X>382</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>88</X><Y>50</Y></Point>
+						<Point><X>88</X><Y>60</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661481820640" Target="1661481790810" Trigger="timeout">
@@ -1420,14 +1394,14 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481842016</Id>
 					<Name><![CDATA[transition6]]></Name>
-					<X>372</X><Y>340</Y>
+					<X>382</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>98</X><Y>-40</Y></Point>
+						<Point><X>88</X><Y>-70</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661481820640" Target="1661364596509" Trigger="timeout">
@@ -1452,16 +1426,16 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481927658</Id>
 					<Name><![CDATA[transition9]]></Name>
-					<X>460</X><Y>400</Y>
+					<X>470</X><Y>410</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
-						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-150</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>-10</Y></Point>
+						<Point><X>-150</X><Y>-10</Y></Point>
 					</Points>
-					<IconOffset>20.0</IconOffset>
+					<IconOffset>30.0</IconOffset>
 					<Properties Source="1661481790810" Target="1661475381131" Trigger="timeout">
 						<Action><![CDATA[traceln(
 	"Continuing on to destination "
@@ -1474,6 +1448,99 @@ traceln(
 	+ "km away"
 );
 ]]></Action>
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[0.5
+]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1661544333875</Id>
+					<Name><![CDATA[transition4]]></Name>
+					<X>382</X><Y>330</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>88</X><Y>0</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1661481820640" Target="1661544283644" Trigger="timeout">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[getGallonsInTank() < 30
+]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>false</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="AtTruckStop" ParentStateId="1661534693053">
+					<Id>1661544452819</Id>
+					<Name><![CDATA[transition3]]></Name>
+					<X>520</X><Y>270</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>40</Y></Point>
+					</Points>
+					<IconOffset>10.0</IconOffset>
+					<Properties Source="1661364596509" Target="1661544283644" Trigger="timeout">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[8
+]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="AtTruckStop" ParentStateId="1661534693053">
+					<Id>1661544495988</Id>
+					<Name><![CDATA[transition5]]></Name>
+					<X>520</X><Y>340</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>40</Y></Point>
+					</Points>
+					<IconOffset>10.0</IconOffset>
+					<Properties Source="1661544283644" Target="1661481790810" Trigger="timeout">
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[0.5
 ]]></Code>
@@ -1670,7 +1737,7 @@ return time;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getTimeSince(timeAte) > timeUntilHunger;
+					<Body><![CDATA[return getTimeSince(timeAte) > hoursUntilHunger;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1696,7 +1763,7 @@ return time;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return fuelCapacity - (getTimeDrivenSinceFueled() * milesPerHour / fuelEconomyForTrip);
+					<Body><![CDATA[return fuelCapacityGals - (getTimeDrivenSinceFueled() * milesPerHour / fuelEconomyForTrip);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
