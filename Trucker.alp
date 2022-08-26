@@ -27,6 +27,17 @@
 			<Id>1661276760204</Id>
 			<Name><![CDATA[Main]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
+			<Import><![CDATA[
+import org.apache.commons.math3.distribution.EnumeratedDistribution;
+import org.apache.commons.math3.util.Pair;
+import java.util.stream.Collectors;
+]]></Import>
+			<StartupCode><![CDATA[cityDistribution = new EnumeratedDistribution<City>(
+	cities.stream().map(
+		c -> new Pair<>(c, (c.Population * 1.0))
+	).collect(Collectors.toList())
+);
+]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1661276760202</Id>
@@ -36,7 +47,7 @@
 				</GenericParameterValue>
 				<GenericParameterLabel><![CDATA[Generic parameter:]]></GenericParameterLabel>
 			</GenericParameter>
-			<FlowChartsUsage>ENTITY</FlowChartsUsage>
+			<FlowChartsUsage>CAR</FlowChartsUsage>
 			<SamplesToKeep>100</SamplesToKeep>
 			<LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
 			<ElementsLimitValue>100</ElementsLimitValue>
@@ -120,6 +131,24 @@
 			<CurrentLevel>1661276760203</CurrentLevel>
 			<ConnectionsId>1661276760199</ConnectionsId>
 			<Variables>
+				<Variable Class="PlainVariable">
+					<Id>1661547540401</Id>
+					<Name><![CDATA[cityDistribution]]></Name>
+					<X>300</X><Y>-120</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[EnumeratedDistribution<City>
+
+]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[null;
+]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1661477256157</Id>
 					<Name><![CDATA[numOfDrivers]]></Name>
@@ -146,6 +175,26 @@
 					</Properties>                 
 				</Variable>
 			</Variables>
+			<Functions>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[City]]></ReturnType>
+					<Id>1661550109127</Id>
+					<Name><![CDATA[getNewDestination]]></Name>
+					<X>300</X><Y>-150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[
+if (cityDistribution != null)
+	return cityDistribution.sample();
+else 
+	return randomWhere(cities, x -> true);
+
+]]></Body>
+				</Function>
+			</Functions>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1661276760199</Id>
@@ -668,7 +717,7 @@
 			<Import><![CDATA[import java.util.Optional;
 import java.util.stream.Collectors;
 ]]></Import>
-			<StartupCode><![CDATA[City initCity = getNewDestination();
+			<StartupCode><![CDATA[City initCity = main.getNewDestination();
 jumpTo(initCity.Latitude, initCity.Longitude);
 
 ]]></StartupCode>
@@ -1009,7 +1058,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661475381131</Id>
 					<Name><![CDATA[Driving]]></Name>
-					<X>120</X><Y>130</Y>
+					<X>110</X><Y>110</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1033,7 +1082,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475523420</Id>
 					<Name><![CDATA[ToReceiver]]></Name>
-					<X>150</X><Y>180</Y>
+					<X>140</X><Y>160</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1047,7 +1096,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475707578</Id>
 					<Name><![CDATA[ToTruckStop]]></Name>
-					<X>150</X><Y>320</Y>
+					<X>140</X><Y>300</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1059,7 +1108,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="Branch" ParentState="ROOT_NODE">
 					<Id>1661481820640</Id>
 					<Name><![CDATA[branch]]></Name>
-					<X>370</X><Y>330</Y>
+					<X>360</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1070,7 +1119,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661527050692</Id>
 					<Name><![CDATA[Stationary]]></Name>
-					<X>408</X><Y>130</Y>
+					<X>398</X><Y>110</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1082,7 +1131,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="Stationary" ParentStateId="1661527050692">
 					<Id>1661287737305</Id>
 					<Name><![CDATA[AtReceiver]]></Name>
-					<X>440</X><Y>160</Y>
+					<X>430</X><Y>140</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1094,7 +1143,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="Stationary" ParentStateId="1661527050692">
 					<Id>1661534693053</Id>
 					<Name><![CDATA[AtTruckStop]]></Name>
-					<X>420</X><Y>220</Y>
+					<X>410</X><Y>200</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1106,7 +1155,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661364596509</Id>
 					<Name><![CDATA[Resting]]></Name>
-					<X>470</X><Y>240</Y>
+					<X>460</X><Y>220</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1122,7 +1171,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661481790810</Id>
 					<Name><![CDATA[Eating]]></Name>
-					<X>470</X><Y>380</Y>
+					<X>460</X><Y>360</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1139,7 +1188,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661544283644</Id>
 					<Name><![CDATA[Refuelling]]></Name>
-					<X>470</X><Y>310</Y>
+					<X>460</X><Y>290</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1155,7 +1204,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661287757965</Id>
 					<Name><![CDATA[Arrived]]></Name>
-					<X>280</X><Y>190</Y>
+					<X>270</X><Y>170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1187,7 +1236,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661287897814</Id>
 					<Name><![CDATA[transition]]></Name>
-					<X>440</X><Y>170</Y>
+					<X>430</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1198,7 +1247,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661287737305" Target="1661475381131" Trigger="timeout">
-						<Action><![CDATA[destination = getNewDestination();
+						<Action><![CDATA[destination = main.getNewDestination();
 fuelEconomyForTrip = makeRandomFuelEconomy();
 traceln("Starting trip to " + destination.Name + ", " + destination.State);
 ]]></Action>
@@ -1222,7 +1271,7 @@ traceln("Starting trip to " + destination.Name + ", " + destination.State);
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
 					<Id>1661288050552</Id>
 					<Name><![CDATA[Drive]]></Name>
-					<X>512</X><Y>60</Y>
+					<X>502</X><Y>40</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1237,7 +1286,7 @@ traceln("Starting trip to " + destination.Name + ", " + destination.State);
 				<StatechartElement Class="InitialStatePointer" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475510021</Id>
 					<Name><![CDATA[initialState]]></Name>
-					<X>210</X><Y>150</Y>
+					<X>200</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1252,7 +1301,7 @@ traceln("Starting trip to " + destination.Name + ", " + destination.State);
 				<StatechartElement Class="Transition" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475748799</Id>
 					<Name><![CDATA[transition7]]></Name>
-					<X>210</X><Y>240</Y>
+					<X>200</X><Y>220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1296,7 +1345,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ToReceiver" ParentStateId="1661475523420">
 					<Id>1661475853242</Id>
 					<Name><![CDATA[transition8]]></Name>
-					<X>280</X><Y>210</Y>
+					<X>270</X><Y>190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1334,7 +1383,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661476104066</Id>
 					<Name><![CDATA[transition1]]></Name>
-					<X>270</X><Y>330</Y>
+					<X>260</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1364,7 +1413,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481833925</Id>
 					<Name><![CDATA[transition2]]></Name>
-					<X>382</X><Y>330</Y>
+					<X>372</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1394,7 +1443,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481842016</Id>
 					<Name><![CDATA[transition6]]></Name>
-					<X>382</X><Y>330</Y>
+					<X>372</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1426,7 +1475,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481927658</Id>
 					<Name><![CDATA[transition9]]></Name>
-					<X>470</X><Y>410</Y>
+					<X>460</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1468,7 +1517,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661544333875</Id>
 					<Name><![CDATA[transition4]]></Name>
-					<X>382</X><Y>330</Y>
+					<X>372</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1499,7 +1548,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661544452819</Id>
 					<Name><![CDATA[transition3]]></Name>
-					<X>520</X><Y>270</Y>
+					<X>510</X><Y>250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1530,7 +1579,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661544495988</Id>
 					<Name><![CDATA[transition5]]></Name>
-					<X>520</X><Y>340</Y>
+					<X>510</X><Y>320</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1616,21 +1665,6 @@ if (stop.isPresent())
 else
 	return null;
 ]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[City]]></ReturnType>
-					<Id>1661450179120</Id>
-					<Name><![CDATA[getNewDestination]]></Name>
-					<X>-500</X><Y>150</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return randomWhere(
-    main.cities, 
-    t -> destination == null || !t.Name.equals(destination.Name)
-);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -1764,7 +1798,7 @@ return time;
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[return fuelCapacityGals - (getTimeDrivenSinceFueled() * milesPerHour / fuelEconomyForTrip);
-]]></Body>
+// TODO this returns an incorrect value if we change fuelEconomyForTrip between refuels]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -1814,7 +1848,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661543268076</Id>
 					<Name><![CDATA[makeRandomFuelEconomy]]></Name>
-					<X>-500</X><Y>180</Y>
+					<X>-500</X><Y>150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2993,7 +3027,7 @@ return time;
 				<Variable Class="Parameter">
 					<Id>1661383830988</Id>
 					<Name><![CDATA[Population]]></Name>
-					<X>50</X><Y>50</Y>
+					<X>50</X><Y>60</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3666,6 +3700,15 @@ return time;
 				<ExternalTableName><![CDATA["Truck_Stop_Parking"]]></ExternalTableName>
 				<AutoImport>false</AutoImport>
 			</TableImportSettings>
+			<TableImportSettings>
+				<TableReference>
+					<PackageName><![CDATA[trucker]]></PackageName>
+					<ClassName><![CDATA[usa_major_cities1]]></ClassName>
+				</TableReference>
+				<ConnectionIndex>0</ConnectionIndex>
+				<ExternalTableName><![CDATA["USA_Major_Cities"]]></ExternalTableName>
+				<AutoImport>false</AutoImport>
+			</TableImportSettings>
 		</ImportSettings>
 		<ExportSettings>
 		</ExportSettings>
@@ -3766,6 +3809,10 @@ return time;
 			<Path><![CDATA[USA_Major_Cities.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
+		<Resource>
+			<Path><![CDATA[/home/eric/Applications/anylogic/commons-math3-3.6.1.jar]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
 	</ModelResources>
     <RequiredLibraryReference>
 		<LibraryName><![CDATA[com.anylogic.libraries.modules.markup_descriptors]]></LibraryName>
@@ -3797,5 +3844,19 @@ return time;
 		<VersionMinor>3</VersionMinor>
 		<VersionBuild>0</VersionBuild>
     </RequiredLibraryReference>
+    <RequiredLibraryReference>
+		<LibraryName><![CDATA[com.anylogic.libraries.road]]></LibraryName>
+		<VersionMajor>8</VersionMajor>
+		<VersionMinor>0</VersionMinor>
+		<VersionBuild>5</VersionBuild>
+    </RequiredLibraryReference>
+	<ClassPathEntry>
+		<ResourceReference>
+			<PackageName><![CDATA[trucker]]></PackageName>
+			<ClassName><![CDATA[/home/eric/Applications/anylogic/commons-math3-3.6.1.jar]]></ClassName>
+		</ResourceReference>
+		<Imported>false</Imported>
+		<Folder>false</Folder>
+	</ClassPathEntry>
 </Model>
 </AnyLogicWorkspace>
