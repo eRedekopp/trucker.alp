@@ -447,6 +447,32 @@
 							<PackageName><![CDATA[trucker]]></PackageName>
 							<ClassName><![CDATA[usa_major_cities]]></ClassName>
 						</TableReference>
+						<Condition>
+							<ColumnReference>
+								<PackageName><![CDATA[trucker]]></PackageName>
+								<ClassName><![CDATA[usa_major_cities]]></ClassName>
+								<ItemName><![CDATA[st]]></ItemName>
+							</ColumnReference>
+							<Value Class="CodeValue">
+								<Code><![CDATA["AK"
+
+]]></Code>
+							</Value>
+							<Operator>NOT_EQUAL</Operator>
+						</Condition>
+						<Condition>
+							<ColumnReference>
+								<PackageName><![CDATA[trucker]]></PackageName>
+								<ClassName><![CDATA[usa_major_cities]]></ClassName>
+								<ItemName><![CDATA[st]]></ItemName>
+							</ColumnReference>
+							<Value Class="CodeValue">
+								<Code><![CDATA["HI"
+
+]]></Code>
+							</Value>
+							<Operator>NOT_EQUAL</Operator>
+						</Condition>
 					</InitializationDatabaseTableQuery>
 					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
 					<QuantityColumn>
@@ -585,8 +611,8 @@
 					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
 					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
 					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>32.923155090217065</Latitude>
-					<Longitude>-103.81386319232678</Longitude>
+					<Latitude>33.15330882450677</Latitude>
+					<Longitude>-97.63657288282518</Longitude>
 				</EmbeddedObjectPresentation>
 				<EmbeddedObjectPresentation>
 					<Id>1661383896463</Id>
@@ -604,8 +630,8 @@
 					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
 					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
 					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>33.107326195968035</Latitude>
-					<Longitude>-106.66914404649644</Longitude>
+					<Latitude>33.27963677118487</Latitude>
+					<Longitude>-100.42321717800039</Longitude>
 				</EmbeddedObjectPresentation>
 			</Presentation>
 
@@ -626,8 +652,8 @@
 					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
 					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
 					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>32.79225267806154</Latitude>
-					<Longitude>-96.78657773623569</Longitude>
+					<Latitude>30.98578462747855</Latitude>
+					<Longitude>-98.5711282700917</Longitude>
 				</EmbeddedObjectPresentation>
 			</Presentation>
 
@@ -642,6 +668,7 @@ import java.util.stream.Collectors;
 ]]></Import>
 			<StartupCode><![CDATA[City initCity = getNewDestination();
 jumpTo(initCity.Latitude, initCity.Longitude);
+
 ]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
@@ -971,37 +998,9 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 			</Dependences>
 			<StatechartElements>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
-					<Id>1661287737305</Id>
-					<Name><![CDATA[AtReceiver]]></Name>
-					<X>830</X><Y>330</Y>
-					<Label><X>10</X><Y>10</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties Width="150" Height="50">
-						<FillColor/>
-					</Properties>
-				</StatechartElement>
-				<StatechartElement Class="State" ParentState="ROOT_NODE">
-					<Id>1661364596509</Id>
-					<Name><![CDATA[Resting]]></Name>
-					<X>830</X><Y>430</Y>
-					<Label><X>10</X><Y>10</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties Width="100" Height="30">
-						<EntryAction><![CDATA[traceln("sleeping");
-]]></EntryAction>
-						<ExitAction><![CDATA[
-]]></ExitAction>
-						<FillColor/>
-					</Properties>
-				</StatechartElement>
-				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661364833142</Id>
 					<Name><![CDATA[Full]]></Name>
-					<X>300</X><Y>330</Y>
+					<X>100</X><Y>360</Y>
 					<Label><X>20</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1013,7 +1012,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661364843766</Id>
 					<Name><![CDATA[Hungry]]></Name>
-					<X>300</X><Y>420</Y>
+					<X>100</X><Y>450</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1025,7 +1024,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661475381131</Id>
 					<Name><![CDATA[Driving]]></Name>
-					<X>520</X><Y>270</Y>
+					<X>350</X><Y>250</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1043,7 +1042,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<StatechartElement Class="State" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475523420</Id>
 					<Name><![CDATA[ToReceiver]]></Name>
-					<X>550</X><Y>350</Y>
+					<X>380</X><Y>300</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1055,7 +1054,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<StatechartElement Class="State" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475707578</Id>
 					<Name><![CDATA[ToTruckStop]]></Name>
-					<X>550</X><Y>490</Y>
+					<X>380</X><Y>430</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1064,22 +1063,10 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
-				<StatechartElement Class="State" ParentState="ROOT_NODE">
-					<Id>1661481790810</Id>
-					<Name><![CDATA[Refueling]]></Name>
-					<X>830</X><Y>540</Y>
-					<Label><X>10</X><Y>10</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties Width="100" Height="30">
-						<FillColor/>
-					</Properties>
-				</StatechartElement>
 				<StatechartElement Class="Branch" ParentState="ROOT_NODE">
 					<Id>1661481820640</Id>
 					<Name><![CDATA[branch]]></Name>
-					<X>770</X><Y>510</Y>
+					<X>600</X><Y>450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1088,19 +1075,71 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 						<Action><![CDATA[traceln("Stopping: " + getDrivingHoursRemaining() + " hours remaining. " + this.Fuel + " gallons in tank. Hungry? " + inState(Hungry))]]></Action>
 					</Properties>	
 				</StatechartElement>
+				<StatechartElement Class="State" ParentState="ROOT_NODE">
+					<Id>1661527050692</Id>
+					<Name><![CDATA[Stationary]]></Name>
+					<X>638</X><Y>250</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="220" Height="300">
+						<FillColor>-3308225</FillColor>
+					</Properties>
+				</StatechartElement>
+				<StatechartElement Class="State" ParentState="Stationary" ParentStateId="1661527050692">
+					<Id>1661481790810</Id>
+					<Name><![CDATA[Refueling]]></Name>
+					<X>678</X><Y>490</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="100" Height="30">
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
+				<StatechartElement Class="State" ParentState="Stationary" ParentStateId="1661527050692">
+					<Id>1661364596509</Id>
+					<Name><![CDATA[Resting]]></Name>
+					<X>678</X><Y>380</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="100" Height="30">
+						<EntryAction><![CDATA[traceln("sleeping");
+]]></EntryAction>
+						<ExitAction><![CDATA[
+]]></ExitAction>
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
+				<StatechartElement Class="State" ParentState="Stationary" ParentStateId="1661527050692">
+					<Id>1661287737305</Id>
+					<Name><![CDATA[AtReceiver]]></Name>
+					<X>678</X><Y>280</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="150" Height="50">
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661287757965</Id>
 					<Name><![CDATA[Arrived]]></Name>
-					<X>680</X><Y>370</Y>
+					<X>510</X><Y>310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>150</X><Y>0</Y></Point>
+						<Point><X>168</X><Y>0</Y></Point>
 					</Points>
-					<IconOffset>20.0</IconOffset>
+					<IconOffset>30.0</IconOffset>
 					<Properties Source="1661475523420" Target="1661287737305" Trigger="arrival">
 						<Action><![CDATA[traceln("Arrived at destination " + destination.Name);
 ]]></Action>
@@ -1123,14 +1162,14 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661287897814</Id>
 					<Name><![CDATA[transition]]></Name>
-					<X>830</X><Y>340</Y>
+					<X>678</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-110</X><Y>0</Y></Point>
+						<Point><X>-128</X><Y>0</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661287737305" Target="1661475381131" Trigger="timeout">
@@ -1157,14 +1196,14 @@ this.moveTo(destination.Latitude, destination.Longitude);]]></Action>
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
 					<Id>1661288050552</Id>
 					<Name><![CDATA[Drive]]></Name>
-					<X>880</X><Y>290</Y>
+					<X>728</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>40</Y></Point>
+						<Point><X>0</X><Y>100</Y></Point>
 					</Points>
 					<Properties Target="1661287737305">
 					</Properties>	
@@ -1172,14 +1211,14 @@ this.moveTo(destination.Latitude, destination.Longitude);]]></Action>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661364630544</Id>
 					<Name><![CDATA[transition3]]></Name>
-					<X>830</X><Y>440</Y>
+					<X>678</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-110</X><Y>0</Y></Point>
+						<Point><X>-128</X><Y>0</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661364596509" Target="1661475381131" Trigger="timeout">
@@ -1199,7 +1238,7 @@ this.timeStarted = time();
 send(Ate, this);
 ]]></Action>
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[1
+							<Code><![CDATA[10
 ]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
 						</Timeout>
@@ -1218,7 +1257,7 @@ send(Ate, this);
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661364862465</Id>
 					<Name><![CDATA[transition4]]></Name>
-					<X>340</X><Y>360</Y>
+					<X>140</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1252,7 +1291,7 @@ send(Ate, this);
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661364896501</Id>
 					<Name><![CDATA[transition5]]></Name>
-					<X>360</X><Y>420</Y>
+					<X>160</X><Y>450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1284,7 +1323,7 @@ send(Ate, this);
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
 					<Id>1661364946979</Id>
 					<Name><![CDATA[Hunger]]></Name>
-					<X>350</X><Y>300</Y>
+					<X>150</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1299,7 +1338,7 @@ send(Ate, this);
 				<StatechartElement Class="InitialStatePointer" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475510021</Id>
 					<Name><![CDATA[initialState]]></Name>
-					<X>610</X><Y>320</Y>
+					<X>440</X><Y>270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1314,14 +1353,14 @@ send(Ate, this);
 				<StatechartElement Class="Transition" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475748799</Id>
 					<Name><![CDATA[transition7]]></Name>
-					<X>580</X><Y>410</Y>
+					<X>410</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>80</Y></Point>
+						<Point><X>0</X><Y>70</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661475523420" Target="1661475707578" Trigger="message">
@@ -1358,7 +1397,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ToReceiver" ParentStateId="1661475523420">
 					<Id>1661475853242</Id>
 					<Name><![CDATA[transition8]]></Name>
-					<X>680</X><Y>380</Y>
+					<X>510</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1396,7 +1435,7 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661476104066</Id>
 					<Name><![CDATA[transition1]]></Name>
-					<X>670</X><Y>510</Y>
+					<X>500</X><Y>450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1426,14 +1465,14 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481833925</Id>
 					<Name><![CDATA[transition2]]></Name>
-					<X>782</X><Y>510</Y>
+					<X>612</X><Y>450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>58</X><Y>30</Y></Point>
+						<Point><X>66</X><Y>50</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661481820640" Target="1661481790810" Trigger="timeout">
@@ -1458,14 +1497,14 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481842016</Id>
 					<Name><![CDATA[transition6]]></Name>
-					<X>782</X><Y>510</Y>
+					<X>612</X><Y>450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>58</X><Y>-50</Y></Point>
+						<Point><X>76</X><Y>-40</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661481820640" Target="1661364596509" Trigger="timeout">
@@ -1491,14 +1530,14 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481927658</Id>
 					<Name><![CDATA[transition9]]></Name>
-					<X>830</X><Y>550</Y>
+					<X>678</X><Y>510</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-110</X><Y>0</Y></Point>
+						<Point><X>-128</X><Y>0</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661481790810" Target="1661475381131" Trigger="timeout">
@@ -2216,6 +2255,20 @@ return time;
 
 				</Group>
 			</Presentation>
+
+				</Level>
+				<Level>
+					<Id>1661527443476</Id>
+					<Name><![CDATA[level1]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
+
 
 				</Level>
 			</Presentation>
