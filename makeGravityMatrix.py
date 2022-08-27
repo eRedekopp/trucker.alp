@@ -16,7 +16,7 @@ from geopy.distance import geodesic # `pip install geopy` to get this
 
 
 input_filename = "USA_Major_Cities.csv"
-output_filename = "matrix.csv"
+output_filename = "City_Prob_Multipliers.csv"
 cities = []
 
 # Open the file and load the data into format {lat: w, lon: x, pop: y, id: z} for each
@@ -41,12 +41,16 @@ for city1 in cities:
         matrix[city1["id"]][city2["id"]] = multiplier
 
 # Save it all to a file
-fieldnames = ["city"] + [city["id"] for city in cities]
+fieldnames = ["pairID", "value"]
 with open(output_filename, 'w', encoding="utf-8") as outfile:
     writer = csv.DictWriter(outfile, fieldnames=fieldnames)
     writer.writeheader()
+    numCities = len(cities)
     for city1 in cities:
-        row = {city2["id"]: matrix[city1["id"]][city2["id"]] for city2 in cities}
-        row.update({"city": city1["id"]})
-        writer.writerow(row)
+        for city2 in cities:
+            row = {
+                "pairID": (int(city1["id"]) - 1) * numCities + int(city2["id"]),
+                "value": matrix[city1["id"]][city2["id"]]
+            }
+            writer.writerow(row)
 

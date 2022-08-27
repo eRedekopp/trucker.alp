@@ -62,7 +62,8 @@ import java.util.stream.Collectors;
 				<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
 				<RotateAnimationVertically>false</RotateAnimationVertically>
 				<VelocityCode Class="CodeUnitValue">
-					<Code><![CDATA[10]]></Code>
+					<Code><![CDATA[10
+]]></Code>
 					<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
 				</VelocityCode>
 				<PhysicalLength Class="CodeUnitValue">
@@ -961,7 +962,7 @@ return cityDistribution.sample();
 					<TileURLProvider>ANYLOGIC</TileURLProvider>
 					<CustomTileURL>false</CustomTileURL>
 					<TileURL><![CDATA[https://a.tile.openstreetmap.org/[zoom]/[x]/[y].png]]></TileURL>				
-					<RouteProviderType>FILE_BASED</RouteProviderType>
+					<RouteProviderType>WEB_SERVICE</RouteProviderType>
 					<RouteNotFound>CREATE_STRAIGHT_LINE</RouteNotFound>
 					<OnlineRouteProvider>ANYLOGIC</OnlineRouteProvider>
 					<TransportType>CAR</TransportType>
@@ -985,7 +986,7 @@ return cityDistribution.sample();
 					<X>0</X><Y>0</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>false</PresentationFlag>
+					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
@@ -1852,7 +1853,8 @@ traceln(
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[double myLat = this.getLatitude();
+					<Body><![CDATA[/*
+double myLat = this.getLatitude();
 double myLon = this.getLongitude();
 double destLat = this.getTargetLat();
 double destLon = this.getTargetLon();
@@ -1871,8 +1873,16 @@ return possibleStops.stream()
 )
 .findFirst()
 .orElseThrow(RuntimeException::new);
+*/
 	
-/*
+double myLat = this.getLatitude();
+double myLon = this.getLongitude();
+double destLat = this.getTargetLat();
+double destLon = this.getTargetLon();
+double distBwMeAndDest = main.map.getDistanceByRoute(
+	myLat, myLon, destLat, destLon 
+);
+	
 // Only consider stops in the square with corners at
 // our location and the destination
 Optional<TruckStop> stop = getNearbyStops().stream()
@@ -1882,7 +1892,7 @@ Optional<TruckStop> stop = getNearbyStops().stream()
             s.getLatitude(), s.getLongitude(),
             destLat, destLon
         );
-        return stopDistToDest < myDistToDest;
+        return stopDistToDest < distBwMeAndDest;
 	}
 ).min(
     (s1, s2) -> {
@@ -1904,7 +1914,7 @@ if (stop.isPresent())
 	return stop.get();
 else
 	return null;
-*/
+
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1918,15 +1928,16 @@ else
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[
+					<Body><![CDATA[/*
 return agentsInRange(
 	main.truckStops,
 	150,
 	LengthUnits.MILE
 );
+*/
 
 
-/*
+
 double myLat = this.getLatitude();
 double myLon = this.getLongitude();
 double destLat = this.getTargetLat();
@@ -1953,7 +1964,7 @@ return main.truckStops.stream().filter(
 	(s1, s2) -> 
 		compareStopsByDistanceFromPoint(s1, s2, myLat, myLon)
 ).limit(5).collect(Collectors.toList());
-*/
+
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -4230,7 +4241,7 @@ else
 				<Password><![CDATA[]]></Password>
 			</ExternalConnection>
 			<ExternalConnection>
-				<Id>1661632067013</Id>
+				<Id>1661638279207</Id>
 				<Name><![CDATA[database]]></Name>
 				<X>0</X><Y>0</Y>
 				<Label><X>10</X><Y>0</Y></Label>
@@ -4518,6 +4529,10 @@ else
 		</Resource>
 		<Resource>
 			<Path><![CDATA[lu234519ccr2ca.tmp]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[lu248676cgic4c.tmp]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
