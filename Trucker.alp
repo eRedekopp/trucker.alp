@@ -32,11 +32,12 @@ import org.apache.commons.math3.distribution.EnumeratedDistribution;
 import org.apache.commons.math3.util.Pair;
 import java.util.stream.Collectors;
 ]]></Import>
-			<StartupCode><![CDATA[cityDistribution = new EnumeratedDistribution<City>(
-	cities.stream().map(
-		c -> new Pair<>(c, (c.Population * 1.0))
-	).collect(Collectors.toList())
-);
+			<StartupCode><![CDATA[EnumeratedDistribution<City> cityDistribution = 
+	new EnumeratedDistribution<City>(
+		cities.stream().map(
+			c -> new Pair<>(c, (double) c.Population)
+		).collect(Collectors.toList())
+	);
 ]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
@@ -132,19 +133,18 @@ import java.util.stream.Collectors;
 			<ConnectionsId>1661276760199</ConnectionsId>
 			<Variables>
 				<Variable Class="PlainVariable">
-					<Id>1661547540401</Id>
+					<Id>1661634354533</Id>
 					<Name><![CDATA[cityDistribution]]></Name>
-					<X>300</X><Y>-120</Y>
+					<X>300</X><Y>-220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[EnumeratedDistribution<City>
-
 ]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[null;
+							<Code><![CDATA[null
 ]]></Code>
 						</InitialValue>
 					</Properties>
@@ -152,7 +152,7 @@ import java.util.stream.Collectors;
 				<Variable Class="Parameter">
 					<Id>1661477256157</Id>
 					<Name><![CDATA[numOfDrivers]]></Name>
-					<X>-250</X><Y>-200</Y>
+					<X>50</X><Y>-270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -178,7 +178,7 @@ import java.util.stream.Collectors;
 					<Id>1661619317050</Id>
 					<Name><![CDATA[averageMPG]]></Name>
 					<Unit>Mile/Gallon</Unit> 
-					<X>-250</X><Y>-160</Y>
+					<X>50</X><Y>-230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -204,7 +204,7 @@ import java.util.stream.Collectors;
 					<Id>1661619317053</Id>
 					<Name><![CDATA[fuelCapacityGals]]></Name>
 					<Unit>Gallon</Unit> 
-					<X>-250</X><Y>-180</Y>
+					<X>50</X><Y>-250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -229,7 +229,7 @@ import java.util.stream.Collectors;
 				<Variable Class="Parameter">
 					<Id>1661619317056</Id>
 					<Name><![CDATA[drivingHoursPerDay]]></Name>
-					<X>-250</X><Y>-140</Y>
+					<X>50</X><Y>-210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -239,7 +239,7 @@ import java.util.stream.Collectors;
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[16.0
+							<Code><![CDATA[11.0
 ]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
@@ -254,7 +254,7 @@ import java.util.stream.Collectors;
 				<Variable Class="Parameter">
 					<Id>1661619317059</Id>
 					<Name><![CDATA[averageMilesPerHour]]></Name>
-					<X>-250</X><Y>-120</Y>
+					<X>50</X><Y>-190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -279,7 +279,7 @@ import java.util.stream.Collectors;
 				<Variable Class="Parameter">
 					<Id>1661619317062</Id>
 					<Name><![CDATA[hoursUntilHungry]]></Name>
-					<X>-250</X><Y>-100</Y>
+					<X>50</X><Y>-170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -304,7 +304,7 @@ import java.util.stream.Collectors;
 				<Variable Class="Parameter">
 					<Id>1661630445506</Id>
 					<Name><![CDATA[idealTimeBwMeals]]></Name>
-					<X>-250</X><Y>-80</Y>
+					<X>50</X><Y>-150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -327,47 +327,195 @@ import java.util.stream.Collectors;
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
-			</Variables>
-			<Functions>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[City]]></ReturnType>
-					<Id>1661550109127</Id>
-					<Name><![CDATA[getNewDestination]]></Name>
-					<X>300</X><Y>-150</Y>
+				<Variable Class="Parameter">
+					<Id>1661635877807</Id>
+					<Name><![CDATA[requiredRestHours]]></Name>
+					<X>50</X><Y>-130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[
-if (cityDistribution != null)
-	return cityDistribution.sample();
-else 
-	return randomWhere(cities, x -> true);
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[10.0
+]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1661635877805</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1661636301912</Id>
+					<Name><![CDATA[maxTimeBwMeals]]></Name>
+					<X>50</X><Y>-110</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[8.0
+]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1661636301910</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1661636311077</Id>
+					<Name><![CDATA[maxDriveTimeOverrun]]></Name>
+					<X>50</X><Y>-90</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[1.5
+]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1661636311075</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+			</Variables>
+			<Functions>
+				<Function AccessType="private" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1661632205410</Id>
+					<Name><![CDATA[getLikelihoodMultiplierForCities]]></Name>
+					<X>300</X><Y>-180</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[c1]]></Name>
+						<Type><![CDATA[City]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[c2]]></Name>
+						<Type><![CDATA[City]]></Type>
+					</Parameter>
+					<Body><![CDATA[int numCities = cities.size();
+int tableIndex = (c1.CityID - 1) * cities.size() + c2.CityID;
+return cityPairProbLookup(tableIndex);
 
+
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[City]]></ReturnType>
+					<Id>1661632736295</Id>
+					<Name><![CDATA[getRandomCityUnconditional]]></Name>
+					<X>300</X><Y>-120</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return randomWhere(cities, x -> true);
+
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[City]]></ReturnType>
+					<Id>1661633949980</Id>
+					<Name><![CDATA[getRandomCityWeightedByPop]]></Name>
+					<X>300</X><Y>-140</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[if (cityDistribution == null) return getRandomCityUnconditional();
+else return cityDistribution.sample();
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[City]]></ReturnType>
+					<Id>1661633963650</Id>
+					<Name><![CDATA[getRandomCityWeightedByPopAndDistance]]></Name>
+					<X>300</X><Y>-160</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[currentLocation]]></Name>
+						<Type><![CDATA[City]]></Type>
+					</Parameter>
+					<Body><![CDATA[if (cities == null) return getRandomCityWeightedByPop();
+EnumeratedDistribution<City> cityDistribution = 
+	new EnumeratedDistribution<City>(
+		cities.stream().map(
+			c -> new Pair<>(
+				c, 
+				getLikelihoodMultiplierForCities(
+					currentLocation,
+					c
+				)
+			)
+		).collect(Collectors.toList())
+);
+return cityDistribution.sample();
 ]]></Body>
 				</Function>
 			</Functions>
 			<TableFunctions>
-				<TableFunction AccessType="public" StaticFunction="false">
+				<TableFunction AccessType="private" StaticFunction="false">
 					<Id>1661622657547</Id>
-					<Name><![CDATA[getCityProbMultiplier]]></Name>
-					<X>290</X><Y>-180</Y>
+					<Name><![CDATA[cityPairProbLookup]]></Name>
+					<X>300</X><Y>-200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<InterpolationMethod>LINEAR</InterpolationMethod>
+					<InterpolationMethod>NONE</InterpolationMethod>
 					<OutOfRangeBehaviour>ERROR</OutOfRangeBehaviour>
 					<OutOfRangeCustomValue><![CDATA[0.0]]></OutOfRangeCustomValue>
 					<ApproximationOrder><![CDATA[1]]></ApproximationOrder>
-					<LoadFromDatabase><![CDATA[false]]></LoadFromDatabase>
+					<LoadFromDatabase><![CDATA[true]]></LoadFromDatabase>
 					<ValuesQuery>
 						<TableReference>
+							<PackageName><![CDATA[trucker]]></PackageName>
+							<ClassName><![CDATA[city_prob_multipliers]]></ClassName>
 						</TableReference>
 							<ArgumentColumnReference>
+								<PackageName><![CDATA[trucker]]></PackageName>
+								<ClassName><![CDATA[city_prob_multipliers]]></ClassName>
+								<ItemName><![CDATA[pair_id]]></ItemName>
 							</ArgumentColumnReference>
 							<ValueColumnReference>
+								<PackageName><![CDATA[trucker]]></PackageName>
+								<ClassName><![CDATA[city_prob_multipliers]]></ClassName>
+								<ItemName><![CDATA[value]]></ItemName>
 							</ValueColumnReference>
 					</ValuesQuery>
 // arguments and values
@@ -401,7 +549,7 @@ else
 				<EmbeddedObject>
 					<Id>1661287374808</Id>
 					<Name><![CDATA[truckers]]></Name>
-					<X>400</X><Y>-50</Y>
+					<X>380</X><Y>-20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -419,6 +567,9 @@ else
 						</GenericParameterSubstituteReference>
 					</GenericParameterSubstitute>
 					<Parameters>
+						<Parameter>
+							<Name><![CDATA[milesPerMeter]]></Name>
+						</Parameter>
 					</Parameters>
 					<ReplicationFlag>true</ReplicationFlag>
 					<Replication Class="CodeValue">
@@ -469,7 +620,7 @@ else
 				<EmbeddedObject>
 					<Id>1661381544228</Id>
 					<Name><![CDATA[truckStops]]></Name>
-					<X>200</X><Y>-50</Y>
+					<X>230</X><Y>-20</Y>
 					<Label><X>-40</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -580,7 +731,7 @@ else
 				<EmbeddedObject>
 					<Id>1661383895451</Id>
 					<Name><![CDATA[cities]]></Name>
-					<X>300</X><Y>-50</Y>
+					<X>310</X><Y>-20</Y>
 					<Label><X>-15</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -814,8 +965,8 @@ else
 					<RouteNotFound>CREATE_STRAIGHT_LINE</RouteNotFound>
 					<OnlineRouteProvider>ANYLOGIC</OnlineRouteProvider>
 					<TransportType>CAR</TransportType>
-					<RoutingMethod>FASTEST</RoutingMethod>
-					<PathfindingAlgorithm>DIJKSTRABI</PathfindingAlgorithm>
+					<RoutingMethod>SHORTEST</RoutingMethod>
+					<PathfindingAlgorithm>ASTARBI</PathfindingAlgorithm>
 					<CustomRouteProvider>false</CustomRouteProvider>
 					<RouteSourceResourceReference>
 					</RouteSourceResourceReference>
@@ -899,8 +1050,7 @@ else
 			<Import><![CDATA[import java.util.Optional;
 import java.util.stream.Collectors;
 ]]></Import>
-			<StartupCode><![CDATA[City initCity = main.getNewDestination();
-jumpTo(initCity.Latitude, initCity.Longitude);
+			<StartupCode><![CDATA[
 
 ]]></StartupCode>
 			<Generic>false</Generic>
@@ -1108,6 +1258,31 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1661637400657</Id>
+					<Name><![CDATA[milesPerMeter]]></Name>
+					<X>20</X><Y>640</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0.000621371
+]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1661637400655</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 			</Variables>
 			<StatechartElements>
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
@@ -1301,7 +1476,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661287737305" Target="1661475381131" Trigger="timeout">
-						<Action><![CDATA[destination = main.getNewDestination();
+						<Action><![CDATA[destination = main.getRandomCityWeightedByPop();
 fuelEconomyForTrip = makeRandomFuelEconomy();
 traceln("Starting trip to " + destination.Name + ", " + destination.State);
 ]]></Action>
@@ -1325,7 +1500,7 @@ traceln("Starting trip to " + destination.Name + ", " + destination.State);
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
 					<Id>1661288050552</Id>
 					<Name><![CDATA[Drive]]></Name>
-					<X>792</X><Y>160</Y>
+					<X>490</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1334,7 +1509,11 @@ traceln("Starting trip to " + destination.Name + ", " + destination.State);
 						<Point><X>0</X><Y>0</Y></Point>
 						<Point><X>0</X><Y>100</Y></Point>
 					</Points>
-					<Properties Target="1661287737305">
+					<Properties Target="1661475381131">
+						<Action><![CDATA[City initCity = main.getRandomCityUnconditional();
+jumpTo(initCity.Latitude, initCity.Longitude);
+traceln("Starting at city: " + initCity.Name + ", " + initCity.State);
+destination = main.getRandomCityUnconditional();]]></Action>
 					</Properties>	
 				</StatechartElement>
 				<StatechartElement Class="InitialStatePointer" ParentState="Driving" ParentStateId="1661475381131">
@@ -1614,7 +1793,7 @@ traceln(
 					<IconOffset>10.0</IconOffset>
 					<Properties Source="1661364596509" Target="1661544283644" Trigger="timeout">
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[10
+							<Code><![CDATA[main.requiredRestHours
 ]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
 						</Timeout>
@@ -1686,8 +1865,8 @@ return possibleStops.stream()
 .sorted(
 	(s1, s2) -> 
 		Double.compare(
-			computeStopRating(s2),
-			computeStopRating(s1)
+			computeStopRating(s1),
+			computeStopRating(s2)
 		)
 )
 .findFirst()
@@ -1742,7 +1921,7 @@ else
 					<Body><![CDATA[
 return agentsInRange(
 	main.truckStops,
-	100,
+	150,
 	LengthUnits.MILE
 );
 
@@ -1987,15 +2166,38 @@ double myLat = this.getLatitude();
 double myLon = this.getLongitude();
 double destLat = this.getTargetLat();
 double destLon = this.getTargetLon();
-double myDistToDest = main.map.getDistanceByRoute(
+double distBwMeAndDest = main.map.getDistanceByRoute(
 	myLat, myLon, destLat, destLon 
 );
 
 List<TruckStop> nearbyStops = getNearbyStops();
-return nearbyStops.stream().filter(s -> 
-	main.map.getDistanceByRoute(
-		s.Latitude, s.Longitude, destLat, destLon
-	) < myDistToDest
+return nearbyStops.stream().filter(s -> {
+		double distBwStopAndDest = main.map.getDistanceByRoute(
+			s.Latitude, s.Longitude, destLat, destLon
+		);
+		double distBwMeAndStop = main.map.getDistanceByRoute(
+			myLat, myLon, s.Latitude, s.Longitude
+		);
+		boolean haveEnoughFuel = 
+			distBwMeAndStop * milesPerMeter / main.averageMPG 
+			< getGallonsInTank();
+		boolean wontBeTooHungry = 
+			getTimeSince(timeAte) 
+			+ distBwMeAndStop * milesPerMeter / main.averageMilesPerHour
+			< main.maxTimeBwMeals;
+		boolean wontBeTooSleepy = 
+			getTimeDrivenSinceRest() - main.maxDriveTimeOverrun 
+			< main.drivingHoursPerDay;
+		boolean isEnRoute = Math.abs(
+			(distBwMeAndStop + distBwStopAndDest) - distBwMeAndDest
+		) < 20;
+		
+		return haveEnoughFuel 
+			&& wontBeTooHungry 
+			&& wontBeTooSleepy
+			&& isEnRoute;
+	
+	}
 ).collect(Collectors.toList());
 ]]></Body>
 				</Function>
@@ -2023,6 +2225,7 @@ double hoursUntilArrivalAtDestination = main.map.getDistanceByRoute(
 	this.getLatitude(), this.getLongitude(),
 	destination.Latitude, destination.Longitude
 ) / main.averageMilesPerHour;
+
 double hoursUntilIdealFood = main.idealTimeBwMeals - getTimeSince(timeAte);
 double hoursUntilIdealRest = getDrivingHoursRemaining();
 
@@ -2030,9 +2233,21 @@ if (hoursUntilArrivalAtStop > getHoursToFuelEmpty())
 	return Double.POSITIVE_INFINITY;
 else if (hoursUntilArrivalAtStop > hoursUntilArrivalAtDestination)
 	return Double.POSITIVE_INFINITY;
+else if (
+	getDrivingHoursRemaining() 
+	+ main.maxDriveTimeOverrun 
+	- hoursUntilArrivalAtStop 
+	< 0
+)
+	return Double.POSITIVE_INFINITY;
+else if (
+	getTimeSince(timeAte) + hoursUntilArrivalAtStop 
+	> main.maxTimeBwMeals
+)
+	return Double.POSITIVE_INFINITY;
 else
-	return (hoursUntilArrivalAtStop - hoursUntilIdealFood) 
-		+ (hoursUntilArrivalAtStop - hoursUntilIdealRest);
+	return Math.abs(hoursUntilArrivalAtStop - hoursUntilIdealFood) 
+		+ Math.abs(hoursUntilArrivalAtStop - hoursUntilIdealRest);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -3964,8 +4179,8 @@ else
 	<RelativeAccuracy>1.0E-5</RelativeAccuracy>
 	<TimeAccuracy>1.0E-5</TimeAccuracy>
 	<Frame>
-		<Width>1000</Width>
-		<Height>600</Height>
+		<Width>1100</Width>
+		<Height>700</Height>
 	</Frame>
 	<Database>
 		<Logging>false</Logging>
@@ -4014,6 +4229,27 @@ else
 				<Login><![CDATA[]]></Login>
 				<Password><![CDATA[]]></Password>
 			</ExternalConnection>
+			<ExternalConnection>
+				<Id>1661632067013</Id>
+				<Name><![CDATA[database]]></Name>
+				<X>0</X><Y>0</Y>
+				<Label><X>10</X><Y>0</Y></Label>
+				<PublicFlag>false</PublicFlag>
+				<PresentationFlag>true</PresentationFlag>
+				<ShowLabel>true</ShowLabel>
+				<DatabaseType>EXCEL_ACCESS</DatabaseType>
+				<ConnectionURL><![CDATA[]]></ConnectionURL>
+				<ConnectOnStartup>true</ConnectOnStartup>
+				<DatabaseName><![CDATA[]]></DatabaseName>
+				<ResourceReference>
+					<PackageName><![CDATA[trucker]]></PackageName>
+					<ClassName><![CDATA[City_Prob_Multipliers.xlsx]]></ClassName>
+				</ResourceReference>
+				<Host><![CDATA[localhost]]></Host>
+				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
+				<Login><![CDATA[]]></Login>
+				<Password><![CDATA[]]></Password>
+			</ExternalConnection>
 			<TableImportSettings>
 				<TableReference>
 					<PackageName><![CDATA[trucker]]></PackageName>
@@ -4030,6 +4266,15 @@ else
 				</TableReference>
 				<ConnectionIndex>1</ConnectionIndex>
 				<ExternalTableName><![CDATA["Truck_Stop_Parking"]]></ExternalTableName>
+				<AutoImport>false</AutoImport>
+			</TableImportSettings>
+			<TableImportSettings>
+				<TableReference>
+					<PackageName><![CDATA[trucker]]></PackageName>
+					<ClassName><![CDATA[city_prob_multipliers]]></ClassName>
+				</TableReference>
+				<ConnectionIndex>2</ConnectionIndex>
+				<ExternalTableName><![CDATA["City_Prob_Multipliers"]]></ExternalTableName>
 				<AutoImport>false</AutoImport>
 			</TableImportSettings>
 		</ImportSettings>
@@ -4121,6 +4366,15 @@ else
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[idealTimeBwMeals]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[requiredRestHours]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[maxTimeBwMeals]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[maxDriveTimeOverrun]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -4244,6 +4498,26 @@ else
 		</Resource>
 		<Resource>
 			<Path><![CDATA[City_Prob_Multipliers.csv]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[lu228389ccdx17.tmp]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[City_Prob_Multipliers.xlsx]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[lu228389ccdx1c.tmp]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[City_Prob_Multipliers.ods]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[lu234519ccr2ca.tmp]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
