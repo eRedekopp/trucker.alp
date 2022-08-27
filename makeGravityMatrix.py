@@ -22,13 +22,9 @@ cities = []
 # Open the file and load the data into format {lat: w, lon: x, pop: y, id: z} for each
 with open(input_filename, 'r', encoding="utf-8") as dataFile:
     fileReader = csv.DictReader(dataFile)
-    readHeader = False
     for row in fileReader:
-        if not readHeader:
-            readHeader = True
-            continue
         # If using a new dataset, must edit the column names in row[xyz] to match
-        cities.append({"lat": row["Y"], "lon": row["\ufeffX"], "pop": row["POPULATION"], "id": row["NAME"] + row["ST"]})
+        cities.append({"lat": row["Y"], "lon": row["\ufeffX"], "pop": row["POPULATION"], "id": row["FID"]})
 
 # Build a matrix in format { "id1": [{ "idN": multiplier }, ...] }
 matrix = {city["id"]: {} for city in cities}
@@ -48,7 +44,9 @@ for city1 in cities:
 fieldnames = ["city"] + [city["id"] for city in cities]
 with open(output_filename, 'w', encoding="utf-8") as outfile:
     writer = csv.DictWriter(outfile, fieldnames=fieldnames)
-#    writer.writeHeader()
+    writer.writeheader()
     for city1 in cities:
-        writer.writeRow({"city": city1["id"]} + {city2["id"]: matrix[city1["id"]][city2["id"]] for city2 in cities})
+        row = {city2["id"]: matrix[city1["id"]][city2["id"]] for city2 in cities}
+        row.update({"city": city1["id"]})
+        writer.writerow(row)
 

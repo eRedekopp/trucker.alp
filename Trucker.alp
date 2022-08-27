@@ -130,6 +130,28 @@ import java.util.stream.Collectors;
 			</ScaleRuler>
 			<CurrentLevel>1661276760203</CurrentLevel>
 			<ConnectionsId>1661276760199</ConnectionsId>
+			<RouteProviders>
+				<RouteProvider>
+					<Id>1661559170122</Id>
+					<Name><![CDATA[routeProvider]]></Name>
+					<X>-200</X><Y>150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<RouteProviderType>FILE_BASED</RouteProviderType>
+					<RouteNotFound>CREATE_STRAIGHT_LINE</RouteNotFound>
+					<OnlineRouteProvider>ANYLOGIC</OnlineRouteProvider>
+					<TransportType>CAR</TransportType>
+					<RoutingMethod>FASTEST</RoutingMethod>
+					<PathfindingAlgorithm>DIJKSTRABI</PathfindingAlgorithm>
+					<CustomRouteProvider>false</CustomRouteProvider>
+					<RouteSourceResourceReference>
+					</RouteSourceResourceReference>
+					<RouteGraphResourceReference>
+					</RouteGraphResourceReference>
+				</RouteProvider>
+			</RouteProviders>
 			<Variables>
 				<Variable Class="PlainVariable">
 					<Id>1661547540401</Id>
@@ -647,25 +669,6 @@ else
 
 				</GISMap>
 				<EmbeddedObjectPresentation>
-					<Id>1661381972998</Id>
-					<Name><![CDATA[truckStops_presentation]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
-					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
-					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
-					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>33.15330882450677</Latitude>
-					<Longitude>-97.63657288282518</Longitude>
-				</EmbeddedObjectPresentation>
-				<EmbeddedObjectPresentation>
 					<Id>1661383896463</Id>
 					<Name><![CDATA[cities_presentation]]></Name>
 					<X>0</X><Y>0</Y>
@@ -683,6 +686,25 @@ else
 					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
 					<Latitude>33.27963677118487</Latitude>
 					<Longitude>-100.42321717800039</Longitude>
+				</EmbeddedObjectPresentation>
+				<EmbeddedObjectPresentation>
+					<Id>1661381972998</Id>
+					<Name><![CDATA[truckStops_presentation]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<DrawingMode>AGENT_CURRENT_POSITION</DrawingMode>
+					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+					<Latitude>33.15330882450677</Latitude>
+					<Longitude>-97.63657288282518</Longitude>
 				</EmbeddedObjectPresentation>
 			</Presentation>
 
@@ -966,8 +988,7 @@ jumpTo(initCity.Latitude, initCity.Longitude);
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[150.0
-
+							<Code><![CDATA[200.0
 ]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
@@ -1355,7 +1376,7 @@ traceln(
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661475523420" Target="1661475523420" Trigger="timeout">
-						<Action><![CDATA[if (shouldStop() && !getNearbyStops().isEmpty()) {
+						<Action><![CDATA[if (shouldStop() && getNearestStop() != null) {
 	send(
 	    TruckerMessage.GoToTruckStop,
 	    this
@@ -1531,7 +1552,7 @@ traceln(
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
 						</Timeout>
-						<Condition><![CDATA[getGallonsInTank() < 30
+						<Condition><![CDATA[getGallonsInTank() < fuelCapacityGals / 2
 ]]></Condition>
 						<Rate Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
@@ -1639,11 +1660,23 @@ return main.map.getDistanceByRoute(
 double myLon = this.getLongitude();
 double destLat = this.getTargetLat();
 double destLon = this.getTargetLon();
+double myDistToDest = main.map.getDistanceByRoute(
+	this.getLatitude(), this.getLongitude(),
+    destLat, destLon
+);
 
 // Only consider stops in the square with corners at
 // our location and the destination
 Optional<TruckStop> stop = getNearbyStops().stream()
-.min(
+.filter(
+	s -> {
+		double stopDistToDest = main.map.getDistanceByRoute(
+            s.getLatitude(), s.getLongitude(),
+            destLat, destLon
+        );
+        return stopDistToDest < myDistToDest;
+	}
+).min(
     (s1, s2) -> {
         double s1Dist = main.map.getDistanceByRoute(
             s1.getLatitude(), s1.getLongitude(),
