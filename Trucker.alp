@@ -1051,9 +1051,6 @@ return cityDistribution.sample();
 			<Import><![CDATA[import java.util.Optional;
 import java.util.stream.Collectors;
 ]]></Import>
-			<StartupCode><![CDATA[
-
-]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1661287355914</Id>
@@ -1628,6 +1625,8 @@ traceln(
 					</Points>
 					<IconOffset>40.0</IconOffset>
 					<Properties Source="1661475707578" Target="1661481820640" Trigger="arrival">
+						<Action><![CDATA[
+]]></Action>
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
@@ -1886,7 +1885,7 @@ double distBwMeAndDest = main.map.getDistanceByRoute(
 // Only consider stops in the square with corners at
 // our location and the destination
 Optional<TruckStop> stop = getNearbyStops().stream()
-.filter(
+/*.filter(
 	s -> {
 		double stopDistToDest = main.map.getDistanceByRoute(
             s.getLatitude(), s.getLongitude(),
@@ -1894,7 +1893,7 @@ Optional<TruckStop> stop = getNearbyStops().stream()
         );
         return stopDistToDest < distBwMeAndDest;
 	}
-).min(
+)*/.min(
     (s1, s2) -> {
         double s1Dist = main.map.getDistanceByRoute(
             s1.getLatitude(), s1.getLongitude(),
