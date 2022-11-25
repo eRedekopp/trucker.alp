@@ -20,6 +20,14 @@
 				<Name><![CDATA[GoToTruckStop]]></Name>
 			</Option>
 		</OptionList>
+		<OptionList>
+			<Id>1668644190264</Id>
+			<Name><![CDATA[ModelCommand]]></Name>
+			<Option>
+				<Id>1668644191986</Id>
+				<Name><![CDATA[Start]]></Name>
+			</Option>
+		</OptionList>
 	</OptionLists>
 	<ActiveObjectClasses>
 		<!--   =========   Active Object Class   ========  -->
@@ -32,7 +40,8 @@ import org.apache.commons.math3.distribution.EnumeratedDistribution;
 import org.apache.commons.math3.util.Pair;
 import java.util.stream.Collectors;
 ]]></Import>
-			<StartupCode><![CDATA[EnumeratedDistribution<City> cityDistribution = 
+			<StartupCode><![CDATA[
+EnumeratedDistribution<City> cityDistribution = 
 	new EnumeratedDistribution<City>(
 		cities.stream().map(
 			c -> new Pair<>(c, (double) c.Population)
@@ -303,35 +312,9 @@ import java.util.stream.Collectors;
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1661630445506</Id>
-					<Name><![CDATA[idealTimeBwMeals]]></Name>
-					<X>50</X><Y>-150</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[6.0
-
-]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1661630445504</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
 					<Id>1661635877807</Id>
 					<Name><![CDATA[requiredRestHours]]></Name>
-					<X>50</X><Y>-130</Y>
+					<X>50</X><Y>-150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -356,7 +339,7 @@ import java.util.stream.Collectors;
 				<Variable Class="Parameter">
 					<Id>1661636301912</Id>
 					<Name><![CDATA[maxTimeBwMeals]]></Name>
-					<X>50</X><Y>-110</Y>
+					<X>50</X><Y>-130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -381,7 +364,7 @@ import java.util.stream.Collectors;
 				<Variable Class="Parameter">
 					<Id>1661636311077</Id>
 					<Name><![CDATA[maxDriveTimeOverrun]]></Name>
-					<X>50</X><Y>-90</Y>
+					<X>50</X><Y>-110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -396,6 +379,81 @@ import java.util.stream.Collectors;
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1661636311075</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1669071240757</Id>
+					<Name><![CDATA[allowUnsafeStops]]></Name>
+					<X>50</X><Y>-290</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[boolean]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[true
+]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1669071240755</Id>
+							<EditorContolType>CHECK_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1669149231814</Id>
+					<Name><![CDATA[maxExtraMilesToReachStop]]></Name>
+					<X>50</X><Y>-310</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[20.0
+]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1669149231812</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1669257372395</Id>
+					<Name><![CDATA[minComfortableFuelLevel]]></Name>
+					<X>50</X><Y>-330</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[0.3
+]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1669257372393</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -548,77 +606,6 @@ return cityDistribution.sample();
 
 			<EmbeddedObjects>
 				<EmbeddedObject>
-					<Id>1661287374808</Id>
-					<Name><![CDATA[truckers]]></Name>
-					<X>380</X><Y>-20</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<PresentationId>1661287374821</PresentationId>
-					<ActiveObjectClass>
-						<PackageName><![CDATA[trucker]]></PackageName>
-						<ClassName><![CDATA[Trucker]]></ClassName>
-					</ActiveObjectClass>
-					<GenericParameterSubstitute>
-						<GenericParameterSubstituteReference>
-							<PackageName><![CDATA[trucker]]></PackageName>
-							<ClassName><![CDATA[Trucker]]></ClassName>
-							<ItemName><![CDATA[1661287355914]]></ItemName>
-						</GenericParameterSubstituteReference>
-					</GenericParameterSubstitute>
-					<Parameters>
-						<Parameter>
-							<Name><![CDATA[milesPerMeter]]></Name>
-						</Parameter>
-					</Parameters>
-					<ReplicationFlag>true</ReplicationFlag>
-					<Replication Class="CodeValue">
-						<Code><![CDATA[numOfDrivers
-]]></Code>
-					</Replication>
-					<CollectionType>ARRAY_LIST_BASED</CollectionType>
-					<InEnvironment>true</InEnvironment>	
-					<InitialSpeedCode Class="CodeUnitValue">
-						<Code><![CDATA[50
-]]></Code>
-						<Unit Class="SpeedUnits"><![CDATA[MPH]]></Unit>
-					</InitialSpeedCode>
-					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
-					<XCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</XCode>
-					<YCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</YCode>
-					<ZCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</ZCode>
-					<ColumnCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</ColumnCode>
-					<RowCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</RowCode>
-					<LatitudeCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</LatitudeCode>
-					<LongitudeCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</LongitudeCode>
-					<LocationNameCode Class="CodeValue">
-						<Code><![CDATA[""]]></Code>
-					</LocationNameCode>
-					<InitializationType>SPECIFIED_NUMBER</InitializationType>
-					<InitializationDatabaseTableQuery>
-						<TableReference>
-						</TableReference>
-					</InitializationDatabaseTableQuery>
-					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
-					<QuantityColumn>
-					</QuantityColumn>
-				</EmbeddedObject>
-				<EmbeddedObject>
 					<Id>1661381544228</Id>
 					<Name><![CDATA[truckStops]]></Name>
 					<X>230</X><Y>-20</Y>
@@ -647,6 +634,9 @@ return cityDistribution.sample();
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[Name]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA["Unknown"]]></Code>
+							</Value>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>true</ReplicationFlag>
@@ -923,6 +913,141 @@ return cityDistribution.sample();
 						</Item>	
 					</ParameterToDatabaseColumnMapping>
 				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1669264555714</Id>
+					<Name><![CDATA[tempTruckStops]]></Name>
+					<X>510</X><Y>-30</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[trucker]]></PackageName>
+						<ClassName><![CDATA[RoadsideTruckStop]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[trucker]]></PackageName>
+							<ClassName><![CDATA[RoadsideTruckStop]]></ClassName>
+							<ItemName><![CDATA[1669143913937]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+						<Parameter>
+							<Name><![CDATA[Latitude]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[Longitude]]></Name>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[Name]]></Name>
+						</Parameter>
+					</Parameters>
+					<ReplicationFlag>true</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[100]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>EMPTY</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
+				<EmbeddedObject>
+					<Id>1669265206058</Id>
+					<Name><![CDATA[truckers]]></Name>
+					<X>370</X><Y>-20</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<PresentationId>1669265206059</PresentationId>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[trucker]]></PackageName>
+						<ClassName><![CDATA[Trucker]]></ClassName>
+					</ActiveObjectClass>
+					<GenericParameterSubstitute>
+						<GenericParameterSubstituteReference>
+							<PackageName><![CDATA[trucker]]></PackageName>
+							<ClassName><![CDATA[Trucker]]></ClassName>
+							<ItemName><![CDATA[1661287355914]]></ItemName>
+						</GenericParameterSubstituteReference>
+					</GenericParameterSubstitute>
+					<Parameters>
+						<Parameter>
+							<Name><![CDATA[milesPerMeter]]></Name>
+						</Parameter>
+					</Parameters>
+					<ReplicationFlag>true</ReplicationFlag>
+					<Replication Class="CodeValue">
+						<Code><![CDATA[numOfDrivers]]></Code>
+					</Replication>
+					<CollectionType>ARRAY_LIST_BASED</CollectionType>
+					<InEnvironment>true</InEnvironment>	
+					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
+					<XCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</XCode>
+					<YCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</YCode>
+					<ZCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ZCode>
+					<ColumnCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</ColumnCode>
+					<RowCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</RowCode>
+					<LatitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LatitudeCode>
+					<LongitudeCode Class="CodeValue">
+						<Code><![CDATA[0]]></Code>
+					</LongitudeCode>
+					<LocationNameCode Class="CodeValue">
+						<Code><![CDATA[""]]></Code>
+					</LocationNameCode>
+					<InitializationType>SPECIFIED_NUMBER</InitializationType>
+					<InitializationDatabaseTableQuery>
+						<TableReference>
+						</TableReference>
+					</InitializationDatabaseTableQuery>
+					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+					<QuantityColumn>
+					</QuantityColumn>
+				</EmbeddedObject>
 			</EmbeddedObjects>
 
 			<Presentation>
@@ -949,27 +1074,29 @@ return cityDistribution.sample();
 					<ShowLabel>false</ShowLabel>
 					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>1000</Width>
-					<Height>600</Height>
+					<Width>1100</Width>
+					<Height>700</Height>
 					<GISShapes>
 					</GISShapes>
-					<Latitude>40.827160043858775</Latitude>
-					<Longitude>-96.51093331531645</Longitude>
-					<Scale>25000000</Scale>
+					<Latitude>31.26020283703758</Latitude>
+					<Longitude>-99.10539524530734</Longitude>
+					<Scale>8850000</Scale>
 					<BorderColor>-4144960</BorderColor>
 					<FillColor>-1</FillColor>
 					<ShowTiles>true</ShowTiles>
 					<TileURLProvider>ANYLOGIC</TileURLProvider>
 					<CustomTileURL>false</CustomTileURL>
 					<TileURL><![CDATA[https://a.tile.openstreetmap.org/[zoom]/[x]/[y].png]]></TileURL>				
-					<RouteProviderType>WEB_SERVICE</RouteProviderType>
+					<RouteProviderType>FILE_BASED</RouteProviderType>
 					<RouteNotFound>CREATE_STRAIGHT_LINE</RouteNotFound>
 					<OnlineRouteProvider>ANYLOGIC</OnlineRouteProvider>
 					<TransportType>CAR</TransportType>
-					<RoutingMethod>SHORTEST</RoutingMethod>
+					<RoutingMethod>FASTEST</RoutingMethod>
 					<PathfindingAlgorithm>ASTARBI</PathfindingAlgorithm>
 					<CustomRouteProvider>false</CustomRouteProvider>
 					<RouteSourceResourceReference>
+						<PackageName><![CDATA[trucker]]></PackageName>
+						<ClassName><![CDATA[/home/eric/Applications/anylogic/north-america-latest.osm.pbf]]></ClassName>
 					</RouteSourceResourceReference>
 					<RouteGraphResourceReference>
 						<PackageName><![CDATA[trucker]]></PackageName>
@@ -996,8 +1123,8 @@ return cityDistribution.sample();
 					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
 					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
 					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>33.27963677118487</Latitude>
-					<Longitude>-100.42321717800039</Longitude>
+					<Latitude>36.135354388856946</Latitude>
+					<Longitude>-109.99636988031202</Longitude>
 				</EmbeddedObjectPresentation>
 				<EmbeddedObjectPresentation>
 					<Id>1661381972998</Id>
@@ -1015,16 +1142,39 @@ return cityDistribution.sample();
 					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
 					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
 					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>33.15330882450677</Latitude>
-					<Longitude>-97.63657288282518</Longitude>
+					<Latitude>31.11658243763641</Latitude>
+					<Longitude>-99.2401974471718</Longitude>
 				</EmbeddedObjectPresentation>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1668644352468</Id>
+					<Name><![CDATA[button]]></Name>
+					<X>230</X><Y>90</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="100" Height="30">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[truckers.forEach(t -> send(ModelCommand.Start, t));
+map.setVisible(true);
+button.setVisible(false);]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<LabelText><![CDATA[Start]]></LabelText>
+					</ExtendedProperties>
+				</Control>
 			</Presentation>
 
 				</Level>
 				<EmbeddedObjectPresentation>
-					<Id>1661287374821</Id>
+					<Id>1669265206059</Id>
 					<Name><![CDATA[truckers_presentation]]></Name>
-					<X>0</X><Y>0</Y>
+					<X>470</X><Y>-20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1037,8 +1187,8 @@ return cityDistribution.sample();
 					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
 					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
 					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
-					<Latitude>30.573005345919228</Latitude>
-					<Longitude>-97.88476268014708</Longitude>
+					<Latitude>31.26020283703758</Latitude>
+					<Longitude>-99.10539524530734</Longitude>
 				</EmbeddedObjectPresentation>
 			</Presentation>
 
@@ -1074,7 +1224,7 @@ import java.util.stream.Collectors;
 				<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
 				<RotateAnimationVertically>false</RotateAnimationVertically>
 				<VelocityCode Class="CodeUnitValue">
-					<Code><![CDATA[50
+					<Code><![CDATA[main.averageMilesPerHour
 ]]></Code>
 					<Unit Class="SpeedUnits"><![CDATA[MPH]]></Unit>
 				</VelocityCode>
@@ -1148,7 +1298,7 @@ import java.util.stream.Collectors;
 				<Variable Class="PlainVariable">
 					<Id>1661364485789</Id>
 					<Name><![CDATA[destination]]></Name>
-					<X>20</X><Y>230</Y>
+					<X>600</X><Y>290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1164,7 +1314,7 @@ import java.util.stream.Collectors;
 				<Variable Class="PlainVariable">
 					<Id>1661481487932</Id>
 					<Name><![CDATA[timeStarted]]></Name>
-					<X>20</X><Y>270</Y>
+					<X>600</X><Y>350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1180,7 +1330,7 @@ import java.util.stream.Collectors;
 				<Variable Class="PlainVariable">
 					<Id>1661532769631</Id>
 					<Name><![CDATA[timeStopped]]></Name>
-					<X>20</X><Y>290</Y>
+					<X>600</X><Y>370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1196,7 +1346,7 @@ import java.util.stream.Collectors;
 				<Variable Class="PlainVariable">
 					<Id>1661532853733</Id>
 					<Name><![CDATA[timeAte]]></Name>
-					<X>20</X><Y>310</Y>
+					<X>600</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1204,14 +1354,15 @@ import java.util.stream.Collectors;
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[double]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[0.0]]></Code>
+							<Code><![CDATA[0.0
+]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1661532958925</Id>
-					<Name><![CDATA[hoursDrivenBwRestAndLastStop]]></Name>
-					<X>20</X><Y>330</Y>
+					<Name><![CDATA[hoursDriven]]></Name>
+					<X>600</X><Y>410</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1226,8 +1377,8 @@ import java.util.stream.Collectors;
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1661534418257</Id>
-					<Name><![CDATA[gallonsConsumedBwFuelAndLastStop]]></Name>
-					<X>20</X><Y>350</Y>
+					<Name><![CDATA[gallonsConsumed]]></Name>
+					<X>600</X><Y>430</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1242,8 +1393,8 @@ import java.util.stream.Collectors;
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1661543199135</Id>
-					<Name><![CDATA[fuelEconomyForTrip]]></Name>
-					<X>20</X><Y>250</Y>
+					<Name><![CDATA[fuelEconomy]]></Name>
+					<X>600</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1256,10 +1407,26 @@ import java.util.stream.Collectors;
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1664310409200</Id>
+					<Name><![CDATA[nextTruckStop]]></Name>
+					<X>600</X><Y>310</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[TruckStop]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[null
+]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1661637400657</Id>
 					<Name><![CDATA[milesPerMeter]]></Name>
-					<X>20</X><Y>640</Y>
+					<X>600</X><Y>570</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1269,7 +1436,7 @@ import java.util.stream.Collectors;
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[0.000621371
+							<Code><![CDATA[0.000621371192237
 ]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
@@ -1286,22 +1453,15 @@ import java.util.stream.Collectors;
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661475381131</Id>
 					<Name><![CDATA[Driving]]></Name>
-					<X>400</X><Y>230</Y>
+					<X>20</X><Y>120</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="200" Height="300">
-						<EntryAction><![CDATA[timeStarted = time();
-traceln("Starting: " + getDrivingHoursRemaining() + " hours remaining. " + getGallonsInTank() + " gallons in tank. Ate " + getTimeSince(timeAte) + " hours ago.");
-
+						<EntryAction><![CDATA[startDriving();
 ]]></EntryAction>
-						<ExitAction><![CDATA[traceln("Stopping: " + getDrivingHoursRemaining() + " hours remaining. " + getGallonsInTank() + " gallons in tank. Ate " + getTimeSince(timeAte) + " hours ago.");
-
-hoursDrivenBwRestAndLastStop += getTimeSince(timeStarted);
-gallonsConsumedBwFuelAndLastStop += getGallonsConsumedSinceStart();
-timeStopped = time();
-timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incorrect
+						<ExitAction><![CDATA[stopDriving();
 ]]></ExitAction>
 						<FillColor>-6632142</FillColor>
 					</Properties>
@@ -1309,13 +1469,13 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475523420</Id>
 					<Name><![CDATA[ToReceiver]]></Name>
-					<X>430</X><Y>280</Y>
+					<X>70</X><Y>160</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="130" Height="60">
-						<EntryAction><![CDATA[this.moveTo(destination);
+						<EntryAction><![CDATA[this.moveTo(destination.Latitude, destination.Longitude);
 ]]></EntryAction>
 						<FillColor/>
 					</Properties>
@@ -1323,19 +1483,21 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475707578</Id>
 					<Name><![CDATA[ToTruckStop]]></Name>
-					<X>430</X><Y>420</Y>
+					<X>70</X><Y>340</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="120" Height="30">
+						<EntryAction><![CDATA[this.moveTo(nextTruckStop.Latitude, nextTruckStop.Longitude);
+]]></EntryAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="Branch" ParentState="ROOT_NODE">
 					<Id>1661481820640</Id>
 					<Name><![CDATA[branch]]></Name>
-					<X>650</X><Y>430</Y>
+					<X>270</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1346,7 +1508,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="ROOT_NODE">
 					<Id>1661527050692</Id>
 					<Name><![CDATA[Stationary]]></Name>
-					<X>688</X><Y>230</Y>
+					<X>308</X><Y>120</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1358,7 +1520,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="Stationary" ParentStateId="1661527050692">
 					<Id>1661287737305</Id>
 					<Name><![CDATA[AtReceiver]]></Name>
-					<X>720</X><Y>260</Y>
+					<X>340</X><Y>150</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1370,7 +1532,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="Stationary" ParentStateId="1661527050692">
 					<Id>1661534693053</Id>
 					<Name><![CDATA[AtTruckStop]]></Name>
-					<X>700</X><Y>320</Y>
+					<X>320</X><Y>210</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1382,63 +1544,90 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661364596509</Id>
 					<Name><![CDATA[Resting]]></Name>
-					<X>750</X><Y>340</Y>
+					<X>340</X><Y>240</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="100" Height="30">
-						<EntryAction><![CDATA[traceln("Resting.");
+						<EntryAction><![CDATA[rest();
 ]]></EntryAction>
-						<ExitAction><![CDATA[hoursDrivenBwRestAndLastStop = 0.0;
-]]></ExitAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661481790810</Id>
 					<Name><![CDATA[Eating]]></Name>
-					<X>750</X><Y>480</Y>
-					<Label><X>10</X><Y>10</Y></Label>
+					<X>340</X><Y>370</Y>
+					<Label><X>9</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="100" Height="30">
-						<EntryAction><![CDATA[traceln("Eating.");
-
+						<EntryAction><![CDATA[eat();
 ]]></EntryAction>
-						<ExitAction><![CDATA[timeAte = time();
-]]></ExitAction>
 						<FillColor/>
 					</Properties>
 				</StatechartElement>
 				<StatechartElement Class="State" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661544283644</Id>
 					<Name><![CDATA[Refuelling]]></Name>
-					<X>750</X><Y>410</Y>
+					<X>340</X><Y>310</Y>
 					<Label><X>10</X><Y>10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="100" Height="30">
-						<EntryAction><![CDATA[traceln("Refuelling.")
+						<EntryAction><![CDATA[refuel();
 ]]></EntryAction>
-						<ExitAction><![CDATA[gallonsConsumedBwFuelAndLastStop = 0.0;
-]]></ExitAction>
 						<FillColor/>
 					</Properties>
+				</StatechartElement>
+				<StatechartElement Class="Branch" ParentState="Driving" ParentStateId="1661475381131">
+					<Id>1664482227628</Id>
+					<Name><![CDATA[branch1]]></Name>
+					<X>120</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Properties>	
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="State" ParentState="ROOT_NODE">
+					<Id>1668644095845</Id>
+					<Name><![CDATA[Uninitialized]]></Name>
+					<X>80</X><Y>40</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="110" Height="30">
+						<FillColor/>
+					</Properties>
+				</StatechartElement>
+				<StatechartElement Class="Branch" ParentState="AtTruckStop" ParentStateId="1661534693053">
+					<Id>1669250985248</Id>
+					<Name><![CDATA[branch2]]></Name>
+					<X>490</X><Y>325</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Properties>	
+					</Properties>	
 				</StatechartElement>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661287757965</Id>
 					<Name><![CDATA[Arrived]]></Name>
-					<X>560</X><Y>290</Y>
+					<X>200</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>160</X><Y>0</Y></Point>
+						<Point><X>140</X><Y>0</Y></Point>
 					</Points>
 					<IconOffset>30.0</IconOffset>
 					<Properties Source="1661475523420" Target="1661287737305" Trigger="arrival">
@@ -1463,7 +1652,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661287897814</Id>
 					<Name><![CDATA[transition]]></Name>
-					<X>720</X><Y>270</Y>
+					<X>340</X><Y>160</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1474,9 +1663,7 @@ timeStarted = time(); // necessary, or else getXHoursRemaining() funcs are incor
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661287737305" Target="1661475381131" Trigger="timeout">
-						<Action><![CDATA[destination = main.getRandomCityWeightedByPop();
-fuelEconomyForTrip = makeRandomFuelEconomy();
-traceln("Starting trip to " + destination.Name + ", " + destination.State);
+						<Action><![CDATA[startNewTrip();
 ]]></Action>
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[makeRandomDetentionTime()
@@ -1498,130 +1685,48 @@ traceln("Starting trip to " + destination.Name + ", " + destination.State);
 				<StatechartElement Class="EntryPoint" ParentState="ROOT_NODE">
 					<Id>1661288050552</Id>
 					<Name><![CDATA[Drive]]></Name>
-					<X>490</X><Y>130</Y>
+					<X>250</X><Y>50</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>100</Y></Point>
+						<Point><X>-60</X><Y>0</Y></Point>
 					</Points>
-					<Properties Target="1661475381131">
+					<Properties Target="1668644095845">
 						<Action><![CDATA[City initCity = main.getRandomCityUnconditional();
 jumpTo(initCity.Latitude, initCity.Longitude);
 traceln("Starting at city: " + initCity.Name + ", " + initCity.State);
-destination = main.getRandomCityUnconditional();]]></Action>
+startNewTrip();]]></Action>
 					</Properties>	
 				</StatechartElement>
 				<StatechartElement Class="InitialStatePointer" ParentState="Driving" ParentStateId="1661475381131">
 					<Id>1661475510021</Id>
 					<Name><![CDATA[initialState]]></Name>
-					<X>490</X><Y>250</Y>
+					<X>40</X><Y>280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>30</Y></Point>
+						<Point><X>68</X><Y>0</Y></Point>
 					</Points>
-					<Properties Target="1661475523420">
-					</Properties>	
-				</StatechartElement>
-				<StatechartElement Class="Transition" ParentState="Driving" ParentStateId="1661475381131">
-					<Id>1661475748799</Id>
-					<Name><![CDATA[transition7]]></Name>
-					<X>490</X><Y>340</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<Points>
-						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>80</Y></Point>
-					</Points>
-					<IconOffset>20.0</IconOffset>
-					<Properties Source="1661475523420" Target="1661475707578" Trigger="message">
-						<Action><![CDATA[TruckStop stop = getBestStop();
-this.moveTo(stop);
-traceln(
-	"Moving to stop " 
-	+ stop.Name 
-	+ " " 
-	+ main.map.getDistanceByRoute(
-		this.getLatitude(), this.getLongitude(), 
-		stop.Latitude, stop.Longitude
-	) / 1000 
-	+ "km away"
-);
-]]></Action>
-						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[1]]></Code>
-							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
-						</Timeout>
-						<Condition><![CDATA[true]]></Condition>
-						<Rate Class="CodeUnitValue">
-							<Code><![CDATA[1]]></Code>
-							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
-						</Rate>
-						<MessageType><![CDATA[TruckerMessage]]></MessageType>
-						<DefaultTransition>true</DefaultTransition>
-						<FilterType><![CDATA[equalsTo]]></FilterType>
-						<EqualsExpression><![CDATA[TruckerMessage.GoToTruckStop
-]]></EqualsExpression>
-						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
-					</Properties>	
-				</StatechartElement>
-				<StatechartElement Class="Transition" ParentState="ToReceiver" ParentStateId="1661475523420">
-					<Id>1661475853242</Id>
-					<Name><![CDATA[transition8]]></Name>
-					<X>560</X><Y>310</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<Points>
-						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-30</X><Y>30</Y></Point>
-					</Points>
-					<IconOffset>20.0</IconOffset>
-					<Properties Source="1661475523420" Target="1661475523420" Trigger="timeout">
-						<Action><![CDATA[if (shouldStop() && !getNearbyStopsEnRoute().isEmpty()) {
-	send(
-	    TruckerMessage.GoToTruckStop,
-	    this
-	);
-}
-]]></Action>
-						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[30
-]]></Code>
-							<Unit Class="TimeUnits"><![CDATA[MINUTE]]></Unit>
-						</Timeout>
-						<Condition><![CDATA[true]]></Condition>
-						<Rate Class="CodeUnitValue">
-							<Code><![CDATA[1]]></Code>
-							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
-						</Rate>
-						<MessageType><![CDATA[Object]]></MessageType>
-						<DefaultTransition>true</DefaultTransition>
-						<FilterType><![CDATA[unconditionally]]></FilterType>
-						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
-						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					<Properties Target="1664482227628">
 					</Properties>	
 				</StatechartElement>
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661476104066</Id>
 					<Name><![CDATA[transition1]]></Name>
-					<X>550</X><Y>430</Y>
+					<X>190</X><Y>350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>88</X><Y>0</Y></Point>
+						<Point><X>68</X><Y>-20</Y></Point>
 					</Points>
 					<IconOffset>40.0</IconOffset>
 					<Properties Source="1661475707578" Target="1661481820640" Trigger="arrival">
@@ -1646,14 +1751,14 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481833925</Id>
 					<Name><![CDATA[transition2]]></Name>
-					<X>662</X><Y>430</Y>
+					<X>282</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>88</X><Y>60</Y></Point>
+						<Point><X>58</X><Y>50</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661481820640" Target="1661481790810" Trigger="timeout">
@@ -1676,14 +1781,14 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481842016</Id>
 					<Name><![CDATA[transition6]]></Name>
-					<X>662</X><Y>430</Y>
+					<X>282</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>88</X><Y>-70</Y></Point>
+						<Point><X>58</X><Y>-70</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661481820640" Target="1661364596509" Trigger="timeout">
@@ -1691,8 +1796,7 @@ traceln(
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
 						</Timeout>
-						<Condition><![CDATA[getDrivingHoursRemaining() < 1
-
+						<Condition><![CDATA[shouldRest()
 ]]></Condition>
 						<Rate Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
@@ -1708,28 +1812,17 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661481927658</Id>
 					<Name><![CDATA[transition9]]></Name>
-					<X>750</X><Y>510</Y>
+					<X>340</X><Y>390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
-						<Point><X>0</X><Y>-10</Y></Point>
-						<Point><X>-150</X><Y>-10</Y></Point>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-120</X><Y>0</Y></Point>
 					</Points>
-					<IconOffset>30.0</IconOffset>
+					<IconOffset>40.0</IconOffset>
 					<Properties Source="1661481790810" Target="1661475381131" Trigger="timeout">
-						<Action><![CDATA[traceln(
-	"Continuing on to destination "
-	+ destination.Name
-	+ " "
-	+ main.map.getDistanceByRoute(
-		destination.Latitude, destination.Longitude, 
-		this.getLatitude(), this.getLongitude()
-	) / 1000
-	+ "km away"
-);
-]]></Action>
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[0.5
 ]]></Code>
@@ -1750,14 +1843,14 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
 					<Id>1661544333875</Id>
 					<Name><![CDATA[transition4]]></Name>
-					<X>662</X><Y>430</Y>
+					<X>282</X><Y>330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>88</X><Y>0</Y></Point>
+						<Point><X>58</X><Y>0</Y></Point>
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661481820640" Target="1661544283644" Trigger="timeout">
@@ -1765,7 +1858,9 @@ traceln(
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
 						</Timeout>
-						<Condition><![CDATA[getGallonsInTank() < main.fuelCapacityGals / 2
+						<Condition><![CDATA[!shouldRest()
+    && shouldFuelIfStopped() 
+    && nextStopHasFuel()
 ]]></Condition>
 						<Rate Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
@@ -1781,17 +1876,17 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661544452819</Id>
 					<Name><![CDATA[transition3]]></Name>
-					<X>800</X><Y>370</Y>
+					<X>440</X><Y>255</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>40</Y></Point>
+						<Point><X>50</X><Y>60</Y></Point>
 					</Points>
-					<IconOffset>10.0</IconOffset>
-					<Properties Source="1661364596509" Target="1661544283644" Trigger="timeout">
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1661364596509" Target="1669250985248" Trigger="timeout">
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[main.requiredRestHours
 ]]></Code>
@@ -1812,14 +1907,14 @@ traceln(
 				<StatechartElement Class="Transition" ParentState="AtTruckStop" ParentStateId="1661534693053">
 					<Id>1661544495988</Id>
 					<Name><![CDATA[transition5]]></Name>
-					<X>800</X><Y>440</Y>
+					<X>390</X><Y>340</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>40</Y></Point>
+						<Point><X>0</X><Y>30</Y></Point>
 					</Points>
 					<IconOffset>10.0</IconOffset>
 					<Properties Source="1661544283644" Target="1661481790810" Trigger="timeout">
@@ -1840,75 +1935,182 @@ traceln(
 						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
 					</Properties>	
 				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="Driving" ParentStateId="1661475381131">
+					<Id>1664482254015</Id>
+					<Name><![CDATA[transition7]]></Name>
+					<X>120</X><Y>290</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>50</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1664482227628" Target="1661475707578" Trigger="timeout">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[nextTruckStop != null
+]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>false</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="Driving" ParentStateId="1661475381131">
+					<Id>1664482271344</Id>
+					<Name><![CDATA[transition8]]></Name>
+					<X>120</X><Y>270</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>-50</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1664482227628" Target="1661475523420" Trigger="timeout">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="ROOT_NODE">
+					<Id>1668644113740</Id>
+					<Name><![CDATA[transition10]]></Name>
+					<X>130</X><Y>70</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>0</X><Y>31</Y></Point>
+						<Point><X>0</X><Y>50</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1668644095845" Target="1661475381131" Trigger="message">
+						<Action><![CDATA[
+timeStarted = time();
+timeStopped = time();
+timeAte = time();
+hoursDriven = 0;
+gallonsConsumed = 0;]]></Action>
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[equalsTo]]></FilterType>
+						<EqualsExpression><![CDATA[ModelCommand.Start
+]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="AtTruckStop" ParentStateId="1661534693053">
+					<Id>1669251010977</Id>
+					<Name><![CDATA[transition11]]></Name>
+					<X>478</X><Y>325</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-38</X><Y>0</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1669250985248" Target="1661544283644" Trigger="timeout">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[nextStopHasFuel()
+]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>false</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
+				<StatechartElement Class="Transition" ParentState="AtTruckStop" ParentStateId="1661534693053">
+					<Id>1669251023787</Id>
+					<Name><![CDATA[transition12]]></Name>
+					<X>490</X><Y>335</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-50</X><Y>55</Y></Point>
+					</Points>
+					<IconOffset>20.0</IconOffset>
+					<Properties Source="1669250985248" Target="1661481790810" Trigger="timeout">
+						<Timeout Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+						</Timeout>
+						<Condition><![CDATA[true]]></Condition>
+						<Rate Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="RateUnits"><![CDATA[PER_HOUR]]></Unit>
+						</Rate>
+						<MessageType><![CDATA[Object]]></MessageType>
+						<DefaultTransition>true</DefaultTransition>
+						<FilterType><![CDATA[unconditionally]]></FilterType>
+						<EqualsExpression><![CDATA["text"]]></EqualsExpression>
+						<SatisfiesExpression><![CDATA[true]]></SatisfiesExpression>
+					</Properties>	
+				</StatechartElement>
 			</StatechartElements>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[TruckStop]]></ReturnType>
 					<Id>1661297403269</Id>
-					<Name><![CDATA[getBestStop]]></Name>
-					<X>20</X><Y>610</Y>
+					<Name><![CDATA[getFarthestReachableStop]]></Name>
+					<X>880</X><Y>360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[/*
-double myLat = this.getLatitude();
-double myLon = this.getLongitude();
-double destLat = this.getTargetLat();
-double destLon = this.getTargetLon();
-double myDistToDest = main.map.getDistanceByRoute(
-	myLat, myLon, destLat, destLon 
-);
-
-List<TruckStop> possibleStops = getNearbyStopsEnRoute();
-return possibleStops.stream()
-.sorted(
-	(s1, s2) -> 
-		Double.compare(
-			computeStopRating(s1),
-			computeStopRating(s2)
-		)
-)
-.findFirst()
-.orElseThrow(RuntimeException::new);
-*/
+					<Body><![CDATA[Optional<TruckStop> stop = getReachableStopsEnRoute()
+	.stream()
+	.max(this::compareByDistanceFromMe);
 	
-double myLat = this.getLatitude();
-double myLon = this.getLongitude();
-double destLat = this.getTargetLat();
-double destLon = this.getTargetLon();
-double distBwMeAndDest = main.map.getDistanceByRoute(
-	myLat, myLon, destLat, destLon 
-);
-	
-// Only consider stops in the square with corners at
-// our location and the destination
-Optional<TruckStop> stop = getNearbyStops().stream()
-/*.filter(
-	s -> {
-		double stopDistToDest = main.map.getDistanceByRoute(
-            s.getLatitude(), s.getLongitude(),
-            destLat, destLon
-        );
-        return stopDistToDest < distBwMeAndDest;
-	}
-)*/.min(
-    (s1, s2) -> {
-        double s1Dist = main.map.getDistanceByRoute(
-            s1.getLatitude(), s1.getLongitude(),
-            myLat, myLon
-        );
-        double s2Dist = main.map.getDistanceByRoute(
-            s2.getLatitude(), s2.getLongitude(),
-            myLat, myLon
-        );
-        double diff = s1Dist - s2Dist;
-        if (diff < 0) return -1;
-        else if (diff == 0) return 0;
-        else return 1;
-    }
-);
 if (stop.isPresent())
 	return stop.get();
 else
@@ -1918,60 +2120,10 @@ else
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[List<TruckStop>
-]]></ReturnType>
-					<Id>1661463275556</Id>
-					<Name><![CDATA[getNearbyStops]]></Name>
-					<X>20</X><Y>550</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[/*
-return agentsInRange(
-	main.truckStops,
-	150,
-	LengthUnits.MILE
-);
-*/
-
-
-
-double myLat = this.getLatitude();
-double myLon = this.getLongitude();
-double destLat = this.getTargetLat();
-double destLon = this.getTargetLon();
-double fudgeDegrees = 0.5;
-
-return main.truckStops.stream().filter(
-	s -> {
-	    double theirLat = s.Latitude;
-	    return 
-	    	(myLat - fudgeDegrees < theirLat && theirLat - fudgeDegrees < destLat) 
-	    	|| 
-	    	(myLat > theirLat - fudgeDegrees && theirLat > destLat - fudgeDegrees);
-	}
-).filter(
-	s -> {
-	    double theirLon = s.Longitude;
-	    return 
-	    	(myLon - fudgeDegrees < theirLon && theirLon - fudgeDegrees < destLon) 
-	    	|| 
-	    	(myLon > theirLon - fudgeDegrees && theirLon > destLon - fudgeDegrees);
-	}
-).sorted(
-	(s1, s2) -> 
-		compareStopsByDistanceFromPoint(s1, s2, myLat, myLon)
-).limit(5).collect(Collectors.toList());
-
-]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661467739682</Id>
 					<Name><![CDATA[makeRandomDetentionTime]]></Name>
-					<X>280</X><Y>60</Y>
+					<X>600</X><Y>480</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1984,25 +2136,10 @@ return time;
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[boolean]]></ReturnType>
-					<Id>1661475886268</Id>
-					<Name><![CDATA[shouldStop]]></Name>
-					<X>20</X><Y>470</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return shouldStopForFood() 
-	|| shouldStopForFuel() 
-	|| shouldStopForRest();
-]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661481609473</Id>
 					<Name><![CDATA[getDrivingHoursRemaining]]></Name>
-					<X>20</X><Y>160</Y>
+					<X>600</X><Y>110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2012,63 +2149,10 @@ return time;
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[boolean]]></ReturnType>
-					<Id>1661533111563</Id>
-					<Name><![CDATA[shouldStopForFuel]]></Name>
-					<X>20</X><Y>410</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getGallonsInTank() < 35;
-
-]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[boolean]]></ReturnType>
-					<Id>1661533217687</Id>
-					<Name><![CDATA[shouldStopForFood]]></Name>
-					<X>20</X><Y>430</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getTimeSince(timeAte) > main.hoursUntilHungry;
-]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[boolean]]></ReturnType>
-					<Id>1661533224653</Id>
-					<Name><![CDATA[shouldStopForRest]]></Name>
-					<X>20</X><Y>450</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getDrivingHoursRemaining() < 1.5;
-]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1661533487035</Id>
-					<Name><![CDATA[getGallonsInTank]]></Name>
-					<X>20</X><Y>120</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return main.fuelCapacityGals - gallonsConsumedBwFuelAndLastStop - getGallonsConsumedSinceStart();
-]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534014081</Id>
 					<Name><![CDATA[getTimeSince]]></Name>
-					<X>20</X><Y>60</Y>
+					<X>600</X><Y>550</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2085,12 +2169,12 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534094709</Id>
 					<Name><![CDATA[getTimeDrivenSinceRest]]></Name>
-					<X>20</X><Y>140</Y>
+					<X>600</X><Y>90</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getTimeSince(timeStarted) + hoursDrivenBwRestAndLastStop;
+					<Body><![CDATA[return getTimeSince(timeStarted) + hoursDriven;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -2098,12 +2182,12 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534329675</Id>
 					<Name><![CDATA[getGallonsConsumedSinceStart]]></Name>
-					<X>20</X><Y>180</Y>
+					<X>600</X><Y>130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getTimeSince(timeStarted) * main.averageMilesPerHour / fuelEconomyForTrip;
+					<Body><![CDATA[return getTimeSince(timeStarted) * main.averageMilesPerHour / fuelEconomy;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -2111,7 +2195,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661543268076</Id>
 					<Name><![CDATA[makeRandomFuelEconomy]]></Name>
-					<X>280</X><Y>80</Y>
+					<X>600</X><Y>500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2122,101 +2206,548 @@ return time;
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[int]]></ReturnType>
-					<Id>1661553481649</Id>
-					<Name><![CDATA[compareStopsByDistanceFromPoint]]></Name>
-					<X>20</X><Y>530</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[s1]]></Name>
-						<Type><![CDATA[TruckStop]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[s2]]></Name>
-						<Type><![CDATA[TruckStop]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[pointLat]]></Name>
-						<Type><![CDATA[double]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[pointLon]]></Name>
-						<Type><![CDATA[double]]></Type>
-					</Parameter>
-					<Body><![CDATA[double s1Dist = main.map.getDistance(
-	s1.getLatitude(), s1.getLongitude(),
-	pointLat, pointLon
-);
-double s2Dist = main.map.getDistance(
-    s2.getLatitude(), s2.getLongitude(),
-    pointLat, pointLon
-);
-double diff = s1Dist - s2Dist;
-if (diff < 0) return -1;
-else if (diff == 0) return 0;
-else return 1;
-        ]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[List<TruckStop>
 ]]></ReturnType>
 					<Id>1661625017635</Id>
-					<Name><![CDATA[getNearbyStopsEnRoute]]></Name>
-					<X>20</X><Y>570</Y>
+					<Name><![CDATA[getReachableStopsEnRoute]]></Name>
+					<X>880</X><Y>240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[
-double myLat = this.getLatitude();
-double myLon = this.getLongitude();
-double destLat = this.getTargetLat();
-double destLon = this.getTargetLon();
-double distBwMeAndDest = main.map.getDistanceByRoute(
-	myLat, myLon, destLat, destLon 
-);
-
-List<TruckStop> nearbyStops = getNearbyStops();
-return nearbyStops.stream().filter(s -> {
-		double distBwStopAndDest = main.map.getDistanceByRoute(
-			s.Latitude, s.Longitude, destLat, destLon
-		);
-		double distBwMeAndStop = main.map.getDistanceByRoute(
-			myLat, myLon, s.Latitude, s.Longitude
-		);
-		boolean haveEnoughFuel = 
-			distBwMeAndStop * milesPerMeter / main.averageMPG 
-			< getGallonsInTank();
-		boolean wontBeTooHungry = 
-			getTimeSince(timeAte) 
-			+ distBwMeAndStop * milesPerMeter / main.averageMilesPerHour
-			< main.maxTimeBwMeals;
-		boolean wontBeTooSleepy = 
-			getTimeDrivenSinceRest() - main.maxDriveTimeOverrun 
-			< main.drivingHoursPerDay;
-		boolean isEnRoute = Math.abs(
-			(distBwMeAndStop + distBwStopAndDest) - distBwMeAndDest
-		) < 20;
-		
-		return haveEnoughFuel 
-			&& wontBeTooHungry 
-			&& wontBeTooSleepy
-			&& isEnRoute;
-	
-	}
-).collect(Collectors.toList());
+					<Body><![CDATA[return getStopsWithinStraightLineRange()
+	.stream()
+	.filter(this::isStopReachable)
+	.collect(Collectors.toList());
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1661625403393</Id>
-					<Name><![CDATA[computeStopRating]]></Name>
-					<X>20</X><Y>590</Y>
+					<Id>1661630020214</Id>
+					<Name><![CDATA[getHoursToFuelEmpty]]></Name>
+					<X>600</X><Y>150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[double milesRemaining = getGallonsInTank() * fuelEconomy;
+double hoursRemaining = milesRemaining / main.averageMilesPerHour;
+
+return hoursRemaining;
+
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1664305823118</Id>
+					<Name><![CDATA[getMaximumTimeUntilNextStop]]></Name>
+					<X>600</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[double min = List.of(
+	getHoursUntilHungry(),
+	getHoursToFuelEmpty(),
+	getDrivingHoursRemaining()
+).stream().min(Double::compare).get();
+
+if (min < 0) return 0;
+else return min;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1664305942138</Id>
+					<Name><![CDATA[getHoursUntilHungry]]></Name>
+					<X>600</X><Y>170</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return main.hoursUntilHungry - getTimeSince(timeAte);
+
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1664306643945</Id>
+					<Name><![CDATA[getMaximumMilesUntilNextStop]]></Name>
+					<X>600</X><Y>210</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return getMaximumTimeUntilNextStop() * main.averageMilesPerHour;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[List<TruckStop>
+]]></ReturnType>
+					<Id>1664306773196</Id>
+					<Name><![CDATA[getStopsWithinStraightLineRange]]></Name>
+					<X>880</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[double straightLineRangeMiles = getMaximumMilesUntilNextStop();
+
+List<TruckStop> stops = filter(
+	main.truckStops,
+	s -> getMilesToStop(s) < straightLineRangeMiles
+);
+
+return stops;
+
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1664310672528</Id>
+					<Name><![CDATA[startDriving]]></Name>
+					<X>880</X><Y>420</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[timeStarted = time();
+clearNextTruckStop();
+setNextTruckStop();
+logStartedDriving();
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1664310686495</Id>
+					<Name><![CDATA[stopDriving]]></Name>
+					<X>880</X><Y>440</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[hoursDriven += getTimeSince(timeStarted);
+gallonsConsumed += getGallonsConsumedSinceStart();
+timeStopped = time();
+// necessary, or else getXHoursRemaining() functions are incorrect
+timeStarted = time();
+
+logStoppedDriving();
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1664310976012</Id>
+					<Name><![CDATA[rest]]></Name>
+					<X>880</X><Y>460</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[hoursDriven = 0.0;
+traceln("Resting.");
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1664311054208</Id>
+					<Name><![CDATA[refuel]]></Name>
+					<X>880</X><Y>480</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[gallonsConsumed = 0.0;
+traceln("Refuelling.");
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1664311082999</Id>
+					<Name><![CDATA[eat]]></Name>
+					<X>880</X><Y>500</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[traceln("Eating.");
+timeAte = time();
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1664312343029</Id>
+					<Name><![CDATA[startNewTrip]]></Name>
+					<X>880</X><Y>520</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[if (destination != null) destination.setIsDestination(false);
+destination = main.getRandomCityWeightedByPop();
+fuelEconomy = makeRandomFuelEconomy();
+destination.setIsDestination(true);
+
+traceln("Starting trip to " + destination.Name + ", " + destination.State);
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1664481001053</Id>
+					<Name><![CDATA[getMilesToDest]]></Name>
+					<X>600</X><Y>230</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[double myLat = this.getLatitude();
+double myLon = this.getLongitude();
+double destLat = destination.Latitude;
+double destLon = destination.Longitude;
+return main.map.getDistanceByRoute(
+	myLat, myLon, destLat, destLon 
+) * milesPerMeter;
+
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[TruckStop]]></ReturnType>
+					<Id>1664482533511</Id>
+					<Name><![CDATA[getNextTruckStop]]></Name>
+					<X>880</X><Y>320</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[if (getMilesToDest() < getMaximumMilesUntilNextStop()) {
+	return null;
+}
+else {
+	TruckStop farthestReachableStop;
+	farthestReachableStop = getFarthestReachableStop();
+	if (farthestReachableStop != null) {
+		return farthestReachableStop;
+	}
+	else {
+		return getBestOutOfRangeStop();
+	}
+}
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[TruckStop]]></ReturnType>
+					<Id>1664482954454</Id>
+					<Name><![CDATA[getNearestTruckStop]]></Name>
+					<X>880</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return main
+	.truckStops
+	.stream()
+	.min(this::compareByDistanceFromMe)
+	.get();
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[boolean]]></ReturnType>
+					<Id>1664485301354</Id>
+					<Name><![CDATA[shouldFuelIfStopped]]></Name>
+					<X>880</X><Y>620</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return getGallonsInTank() < main.fuelCapacityGals / 2;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[boolean]]></ReturnType>
+					<Id>1664485335884</Id>
+					<Name><![CDATA[shouldRest]]></Name>
+					<X>880</X><Y>660</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[if (main.allowUnsafeStops) {
+	// If truckers are allowed to stop roadside, then
+	// stop at the truck stop if we have under 1 hour left
+	// Otherwise keep driving and stop roadside if necessary
+	return getDrivingHoursRemaining() < 1;
+}
+
+TruckStop nextStop = getNearestTruckStopEnRoute();
+double hoursUntilNextStop;
+if (nextStop != null) {
+	hoursUntilNextStop = main.map.getDistanceByRoute(
+		this.getLatitude(), this.getLongitude(),
+		nextStop.getLatitude(), nextStop.getLongitude()
+	) * milesPerMeter / main.averageMilesPerHour;
+}
+else {
+	// Budget an hour after arriving to find a truck stop 
+	hoursUntilNextStop = getMilesToDest() / main.averageMilesPerHour + 1;
+}
+
+return getDrivingHoursRemaining() < hoursUntilNextStop;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1664485629165</Id>
+					<Name><![CDATA[getGallonsInTank]]></Name>
+					<X>600</X><Y>70</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return main.fuelCapacityGals - gallonsConsumed;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[TruckStop]]></ReturnType>
+					<Id>1664485787516</Id>
+					<Name><![CDATA[getNearestTruckStopEnRoute]]></Name>
+					<X>880</X><Y>300</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[Optional<TruckStop> nearest = getAllStopsEnRoute()
+	.stream()
+	.min(this::compareByDistanceFromMe);
+
+if (nearest.isPresent())
+	return nearest.get();
+else
+	return null;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Id>1664485850892</Id>
+					<Name><![CDATA[compareByDistanceFromMe]]></Name>
+					<X>880</X><Y>80</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[a]]></Name>
+						<Type><![CDATA[TruckStop]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[b]]></Name>
+						<Type><![CDATA[TruckStop]]></Type>
+					</Parameter>
+					<Body><![CDATA[double aDist = main.map.getDistance(
+	this.getLatitude(), this.getLongitude(), 
+	a.getLatitude(), a.getLongitude()
+);
+double bDist = main.map.getDistance(
+	this.getLatitude(), this.getLongitude(), 
+	b.getLatitude(), b.getLongitude()
+);
+double minMilesFromMe = 20.0 / milesPerMeter;
+if (aDist < minMilesFromMe) return 1;
+if (bDist < minMilesFromMe) return -1;
+return Double.compare(aDist, bDist);
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[List<TruckStop>
+]]></ReturnType>
+					<Id>1668646860852</Id>
+					<Name><![CDATA[getAllStopsEnRoute]]></Name>
+					<X>880</X><Y>260</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return filter(
+	main.truckStops,
+	s -> isEnRoute(s.Latitude, s.Longitude)
+);
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[boolean]]></ReturnType>
+					<Id>1668646930643</Id>
+					<Name><![CDATA[isEnRoute]]></Name>
+					<X>880</X><Y>100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[lat]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[lon]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Body><![CDATA[double tripLentheningToleranceMeters = main.maxExtraMilesToReachStop / milesPerMeter;
+double metersBwMeAndDest = getMilesToDest() / milesPerMeter;
+double metersBwStopAndDest = main.map.getDistanceByRoute(
+	lat, lon, 
+	destination.Latitude, destination.Longitude
+);
+double metersBwMeAndStop = main.map.getDistanceByRoute(
+	this.getLatitude(), this.getLongitude(), 
+	lat, lon
+);
+double tripLengtheningMeters = (metersBwMeAndStop + metersBwStopAndDest) - metersBwMeAndDest;
+boolean isAlreadyThere = metersBwMeAndStop < 15000;
+boolean isEnRoute = tripLengtheningMeters < tripLentheningToleranceMeters;
+
+return isEnRoute && !isAlreadyThere;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[TruckStop]]></ReturnType>
+					<Id>1669071534360</Id>
+					<Name><![CDATA[getBestOutOfRangeStop]]></Name>
+					<X>880</X><Y>340</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[if (main.allowUnsafeStops && !shouldStopForFuel()) {
+	return getRoadsideStop();
+}
+else {
+	return getNearestTruckStopEnRoute();
+}
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[TruckStop]]></ReturnType>
+					<Id>1669071855141</Id>
+					<Name><![CDATA[getRoadsideStop]]></Name>
+					<X>880</X><Y>60</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[GISRoute route = main.map.getRoute(
+	this.getLatitude(),
+	this.getLongitude(),
+	destination.Latitude,
+	destination.Longitude
+);
+route.setVisible(false);
+
+double milesToStop = getMaximumMilesUntilNextStop();
+Position stopPos = route.getPositionAtOffset(
+	milesToStop,
+	LengthUnits.MILE,
+	null
+);
+TruckStop newStop = main.add_tempTruckStops(
+	stopPos.getLatitude(),
+	stopPos.getLongitude(),
+	"Roadside Stop"
+);
+return newStop;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1669144549805</Id>
+					<Name><![CDATA[clearNextTruckStop]]></Name>
+					<X>880</X><Y>560</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[if (nextTruckStop != null) {
+	nextTruckStop.setIsBeingConsidered(false);
+	if (nextTruckStop instanceof RoadsideTruckStop) {
+		nextTruckStop.deleteSelf();
+	}
+}
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1669144893118</Id>
+					<Name><![CDATA[setNextTruckStop]]></Name>
+					<X>880</X><Y>540</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[nextTruckStop = getNextTruckStop();
+if (nextTruckStop != null) {
+	nextTruckStop.setIsBeingConsidered(true);
+}
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[boolean]]></ReturnType>
+					<Id>1669147030027</Id>
+					<Name><![CDATA[nextStopHasFuel]]></Name>
+					<X>880</X><Y>120</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return !(nextTruckStop instanceof RoadsideTruckStop);
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1669147567398</Id>
+					<Name><![CDATA[getMilesToNextTruckStop]]></Name>
+					<X>600</X><Y>250</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[if (nextTruckStop == null) {
+	return getMilesToDest();
+}
+else {
+	return getMilesToStop(nextTruckStop);
+}
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1669147740580</Id>
+					<Name><![CDATA[getMilesToStop]]></Name>
+					<X>880</X><Y>140</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2225,53 +2756,123 @@ return nearbyStops.stream().filter(s -> {
 						<Name><![CDATA[stop]]></Name>
 						<Type><![CDATA[TruckStop]]></Type>
 					</Parameter>
-					<Body><![CDATA[// Lower value = better stop, minimum 0
-
-double hoursUntilArrivalAtStop = main.map.getDistanceByRoute(
+					<Body><![CDATA[double metersToStop = main.map.getDistance(
 	this.getLatitude(), this.getLongitude(),
 	stop.Latitude, stop.Longitude
-) / main.averageMilesPerHour;
-double hoursUntilArrivalAtDestination = main.map.getDistanceByRoute(
-	this.getLatitude(), this.getLongitude(),
-	destination.Latitude, destination.Longitude
-) / main.averageMilesPerHour;
-
-double hoursUntilIdealFood = main.idealTimeBwMeals - getTimeSince(timeAte);
-double hoursUntilIdealRest = getDrivingHoursRemaining();
-
-if (hoursUntilArrivalAtStop > getHoursToFuelEmpty())
-	return Double.POSITIVE_INFINITY;
-else if (hoursUntilArrivalAtStop > hoursUntilArrivalAtDestination)
-	return Double.POSITIVE_INFINITY;
-else if (
-	getDrivingHoursRemaining() 
-	+ main.maxDriveTimeOverrun 
-	- hoursUntilArrivalAtStop 
-	< 0
-)
-	return Double.POSITIVE_INFINITY;
-else if (
-	getTimeSince(timeAte) + hoursUntilArrivalAtStop 
-	> main.maxTimeBwMeals
-)
-	return Double.POSITIVE_INFINITY;
-else
-	return Math.abs(hoursUntilArrivalAtStop - hoursUntilIdealFood) 
-		+ Math.abs(hoursUntilArrivalAtStop - hoursUntilIdealRest);
+);
+return metersToStop * milesPerMeter;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1661630020214</Id>
-					<Name><![CDATA[getHoursToFuelEmpty]]></Name>
-					<X>20</X><Y>200</Y>
+					<ReturnType><![CDATA[boolean]]></ReturnType>
+					<Id>1669147899068</Id>
+					<Name><![CDATA[isStopReachable]]></Name>
+					<X>880</X><Y>160</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getGallonsInTank() * main.averageMPG / main.averageMilesPerHour;
+					<Parameter>
+						<Name><![CDATA[stop]]></Name>
+						<Type><![CDATA[TruckStop]]></Type>
+					</Parameter>
+					<Body><![CDATA[double metersBwStopAndDest = main.map.getDistanceByRoute(
+	stop.Latitude, stop.Longitude, 
+	destination.Latitude, destination.Longitude
+);
+double metersBwMeAndStop = main.map.getDistanceByRoute(
+	this.getLatitude(), this.getLongitude(), 
+	stop.Latitude, stop.Longitude
+);
+		
+boolean isReachable = (metersBwMeAndStop * milesPerMeter) < getMaximumMilesUntilNextStop();
+boolean isEnRoute = isEnRoute(stop.Latitude, stop.Longitude);
+boolean isNotAlreadyThere = metersBwMeAndStop > 1000;
+		
+return isReachable && isEnRoute && isNotAlreadyThere;
+		]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1669149903575</Id>
+					<Name><![CDATA[logStartedDriving]]></Name>
+					<X>600</X><Y>630</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[double distanceToNextStop = -1.0;
+String nameOfNextTruckStop = "null";
+if (nextTruckStop != null) {
+	distanceToNextStop = main.map.getDistanceByRoute(
+		nextTruckStop.Latitude, nextTruckStop.Longitude, 
+		this.getLatitude(), this.getLongitude()
+	) * milesPerMeter;
+	nameOfNextTruckStop = nextTruckStop.Name;
+}
+else {
+	distanceToNextStop = main.map.getDistanceByRoute(
+		destination.Latitude, destination.Longitude, 
+		this.getLatitude(), this.getLongitude()
+	) * milesPerMeter;
+}
+traceln(
+	"Driving toward "
+	+ destination.Name
+	+ " via "
+	+ nameOfNextTruckStop
+	+ ", "
+	+ distanceToNextStop
+	+ "miles away. "
+	+ getDrivingHoursRemaining() 
+	+ " allowable hours remaining. " 
+	+ getGallonsInTank()
+	+ " gallons in tank. Ate " 
+	+ getTimeSince(timeAte) 
+	+ " hours ago. "
+	+ "Max range: "
+	+ getMaximumMilesUntilNextStop()
+	+ " miles"
+);
 
+
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1669149973463</Id>
+					<Name><![CDATA[logStoppedDriving]]></Name>
+					<X>600</X><Y>650</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[traceln(
+	"Stopping: " 
+	+ getDrivingHoursRemaining() 
+	+ " hours remaining. " 
+	+ getGallonsInTank() 
+	+ " gallons in tank. Ate " 
+	+ getTimeSince(timeAte) 
+	+ " hours ago."
+);
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[boolean]]></ReturnType>
+					<Id>1669257040382</Id>
+					<Name><![CDATA[shouldStopForFuel]]></Name>
+					<X>880</X><Y>640</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[double fuelLevel = getGallonsInTank() / main.fuelCapacityGals;
+return fuelLevel < main.minComfortableFuelLevel;
 ]]></Body>
 				</Function>
 			</Functions>
@@ -2305,7 +2906,7 @@ else
 
 			<ContainerLinks>
 				<ContainerLink>
-					<Id>1661287374818</Id>
+					<Id>1669265206064</Id>
 					<Name><![CDATA[main]]></Name>
 					<X>50</X><Y>-100</Y>
 					<Label><X>10</X><Y>0</Y></Label>
@@ -2333,6 +2934,174 @@ else
 					<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
 
 			<Presentation>
+				<Text>
+					<Id>1661619558870</Id>
+					<Name><![CDATA[text1]]></Name>
+					<X>590</X><Y>30</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Driver State]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1661619668766</Id>
+					<Name><![CDATA[text2]]></Name>
+					<X>590</X><Y>450</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Randomize]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1661619712036</Id>
+					<Name><![CDATA[text3]]></Name>
+					<X>870</X><Y>30</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Truck Stops]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1661619797549</Id>
+					<Name><![CDATA[text4]]></Name>
+					<X>590</X><Y>520</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Utilities]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1664311287075</Id>
+					<Name><![CDATA[text5]]></Name>
+					<X>870</X><Y>390</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Actions]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1664485275208</Id>
+					<Name><![CDATA[text]]></Name>
+					<X>870</X><Y>590</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Decisions]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1669149887099</Id>
+					<Name><![CDATA[text6]]></Name>
+					<X>590</X><Y>600</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Logging]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1669251535369</Id>
+					<Name><![CDATA[text7]]></Name>
+					<X>870</X><Y>190</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Finding Stops]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>1</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
 				<Group>
 					<Id>1661287355918</Id>
 					<Name><![CDATA[truck]]></Name>
@@ -2798,126 +3567,7 @@ else
 			</Presentation>
 
 				</Group>
-				<Text>
-					<Id>1661619494732</Id>
-					<Name><![CDATA[text]]></Name>
-					<X>10</X><Y>370</Y>
-					<Label><X>0</X><Y>-10</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<Color>-16777216</Color>
-					<Text><![CDATA[Decisions]]></Text>
-					<Font>
-						<Name>SansSerif</Name>
-						<Size>16</Size>
-						<Style>1</Style>
-					</Font>
-					<Alignment>LEFT</Alignment>
-				</Text>
-				<Text>
-					<Id>1661619558870</Id>
-					<Name><![CDATA[text1]]></Name>
-					<X>10</X><Y>80</Y>
-					<Label><X>0</X><Y>-10</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<Color>-16777216</Color>
-					<Text><![CDATA[Driver State]]></Text>
-					<Font>
-						<Name>SansSerif</Name>
-						<Size>16</Size>
-						<Style>1</Style>
-					</Font>
-					<Alignment>LEFT</Alignment>
-				</Text>
-				<Text>
-					<Id>1661619668766</Id>
-					<Name><![CDATA[text2]]></Name>
-					<X>270</X><Y>30</Y>
-					<Label><X>0</X><Y>-10</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<Color>-16777216</Color>
-					<Text><![CDATA[Randomize]]></Text>
-					<Font>
-						<Name>SansSerif</Name>
-						<Size>16</Size>
-						<Style>1</Style>
-					</Font>
-					<Alignment>LEFT</Alignment>
-				</Text>
-				<Text>
-					<Id>1661619712036</Id>
-					<Name><![CDATA[text3]]></Name>
-					<X>10</X><Y>490</Y>
-					<Label><X>0</X><Y>-10</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<Color>-16777216</Color>
-					<Text><![CDATA[Routing]]></Text>
-					<Font>
-						<Name>SansSerif</Name>
-						<Size>16</Size>
-						<Style>1</Style>
-					</Font>
-					<Alignment>LEFT</Alignment>
-				</Text>
-				<Text>
-					<Id>1661619797549</Id>
-					<Name><![CDATA[text4]]></Name>
-					<X>10</X><Y>30</Y>
-					<Label><X>0</X><Y>-10</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D</DrawMode>
-					<EmbeddedIcon>false</EmbeddedIcon>
-					<Z>0</Z>
-					<Rotation>0.0</Rotation>
-					<Color>-16777216</Color>
-					<Text><![CDATA[Utilities]]></Text>
-					<Font>
-						<Name>SansSerif</Name>
-						<Size>16</Size>
-						<Style>1</Style>
-					</Font>
-					<Alignment>LEFT</Alignment>
-				</Text>
 			</Presentation>
-
-				</Level>
-				<Level>
-					<Id>1661527443476</Id>
-					<Name><![CDATA[level1]]></Name>
-					<X>0</X><Y>0</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>true</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<Z>0</Z>
-					<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
-
 
 				</Level>
 			</Presentation>
@@ -3023,6 +3673,22 @@ else
 			<CurrentLevel>1661381532718</CurrentLevel>
 			<ConnectionsId>1661381532714</ConnectionsId>
 			<Variables>
+				<Variable Class="PlainVariable">
+					<Id>1668542046051</Id>
+					<Name><![CDATA[isBeingConsidered]]></Name>
+					<X>70</X><Y>160</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[false
+]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1661381571180</Id>
 					<Name><![CDATA[Latitude]]></Name>
@@ -3095,6 +3761,38 @@ else
 					</Properties>                 
 				</Variable>
 			</Variables>
+			<Functions>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1668542026672</Id>
+					<Name><![CDATA[getVisualScale]]></Name>
+					<X>70</X><Y>130</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return this.isBeingConsidered ? 1.0 : 0.15;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Id>1668542065811</Id>
+					<Name><![CDATA[setIsBeingConsidered]]></Name>
+					<X>70</X><Y>190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[b]]></Name>
+						<Type><![CDATA[boolean]]></Type>
+					</Parameter>
+					<Body><![CDATA[this.isBeingConsidered = b;
+]]></Body>
+				</Function>
+			</Functions>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1661381532714</Id>
@@ -3159,8 +3857,10 @@ else
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
-					<ScaleXCode><![CDATA[0.25]]></ScaleXCode>
-					<ScaleYCode><![CDATA[0.25]]></ScaleYCode>
+					<ScaleXCode><![CDATA[getVisualScale()
+]]></ScaleXCode>
+					<ScaleYCode><![CDATA[getVisualScale()
+]]></ScaleYCode>
 
 			<Presentation>
 				<Polyline>
@@ -3546,6 +4246,22 @@ else
 			<CurrentLevel>1661383811448</CurrentLevel>
 			<ConnectionsId>1661383811444</ConnectionsId>
 			<Variables>
+				<Variable Class="PlainVariable">
+					<Id>1668562629952</Id>
+					<Name><![CDATA[isDestination]]></Name>
+					<X>50</X><Y>250</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[false
+]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1661383830988</Id>
 					<Name><![CDATA[Population]]></Name>
@@ -3673,6 +4389,38 @@ else
 					</Properties>                 
 				</Variable>
 			</Variables>
+			<Functions>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1668562629945</Id>
+					<Name><![CDATA[getVisualScale]]></Name>
+					<X>50</X><Y>220</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return this.isDestination ? 1.0 : 0.15;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Id>1668562629950</Id>
+					<Name><![CDATA[setIsDestination]]></Name>
+					<X>50</X><Y>280</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[b]]></Name>
+						<Type><![CDATA[boolean]]></Type>
+					</Parameter>
+					<Body><![CDATA[this.isDestination = b;
+]]></Body>
+				</Function>
+			</Functions>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1661383811444</Id>
@@ -3737,8 +4485,10 @@ else
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
-					<ScaleXCode><![CDATA[0.25]]></ScaleXCode>
-					<ScaleYCode><![CDATA[0.25]]></ScaleYCode>
+					<ScaleXCode><![CDATA[getVisualScale()
+]]></ScaleXCode>
+					<ScaleYCode><![CDATA[getVisualScale()
+]]></ScaleYCode>
 
 			<Presentation>
 				<Polyline>
@@ -4180,6 +4930,316 @@ else
 			</Presentation>
 
 		</ActiveObjectClass>
+		<!--   =========   Active Object Class   ========  -->
+		<ActiveObjectClass>
+			<Id>1669143913939</Id>
+			<Name><![CDATA[RoadsideTruckStop]]></Name>
+			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
+			<ExtendsReference>
+				<PackageName><![CDATA[trucker]]></PackageName>
+				<ClassName><![CDATA[TruckStop]]></ClassName>
+			</ExtendsReference>
+			<Parameters>
+				<Parameter>
+					<Name><![CDATA[Latitude]]></Name>
+				</Parameter>
+				<Parameter>
+					<Name><![CDATA[Longitude]]></Name>
+				</Parameter>
+				<Parameter>
+					<Name><![CDATA[Name]]></Name>
+				</Parameter>
+			</Parameters>
+			<StartupCode><![CDATA[jumpTo(Latitude, Longitude);
+]]></StartupCode>
+			<Generic>false</Generic>
+			<GenericParameter>
+				<Id>1669143913937</Id>
+				<Name><![CDATA[1669143913937]]></Name>
+				<GenericParameterValue Class="CodeValue">
+					<Code><![CDATA[T extends Agent]]></Code>
+				</GenericParameterValue>
+				<GenericParameterLabel><![CDATA[Generic parameter:]]></GenericParameterLabel>
+			</GenericParameter>
+			<FlowChartsUsage>ENTITY</FlowChartsUsage>
+			<SamplesToKeep>100</SamplesToKeep>
+			<LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
+			<ElementsLimitValue>100</ElementsLimitValue>
+			<MakeDefaultViewArea>true</MakeDefaultViewArea>
+			<SceneGridColor/>
+			<SceneBackgroundColor/>
+			<SceneSkybox>null</SceneSkybox>
+			<AgentProperties>
+	 			<SpaceType>CONTINUOUS</SpaceType>			
+				<EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
+				<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
+				<RotateAnimationVertically>false</RotateAnimationVertically>
+				<VelocityCode Class="CodeUnitValue">
+					<Code><![CDATA[10]]></Code>
+					<Unit Class="SpeedUnits"><![CDATA[MPS]]></Unit>
+				</VelocityCode>
+				<PhysicalLength Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="LengthUnits"><![CDATA[METER]]></Unit>
+				</PhysicalLength>
+				<PhysicalWidth Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="LengthUnits"><![CDATA[METER]]></Unit>
+				</PhysicalWidth>
+				<PhysicalHeight Class="CodeUnitValue">
+					<Code><![CDATA[1]]></Code>
+					<Unit Class="LengthUnits"><![CDATA[METER]]></Unit>
+				</PhysicalHeight>
+			</AgentProperties>
+			<EnvironmentProperties>
+					<EnableSteps>false</EnableSteps>
+					<StepDurationCode Class="CodeUnitValue">
+						<Code><![CDATA[1.0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+					</StepDurationCode>
+					<SpaceType>CONTINUOUS</SpaceType>
+					<WidthCode><![CDATA[500]]></WidthCode>
+					<HeightCode><![CDATA[500]]></HeightCode>
+					<ZHeightCode><![CDATA[0]]></ZHeightCode>
+					<ColumnsCountCode><![CDATA[100]]></ColumnsCountCode>
+					<RowsCountCode><![CDATA[100]]></RowsCountCode>
+					<NeigborhoodType>MOORE</NeigborhoodType>
+					<LayoutType>USER_DEF</LayoutType>
+					<LayoutTypeApplyOnStartup>true</LayoutTypeApplyOnStartup>
+					<NetworkType>USER_DEF</NetworkType>
+					<NetworkTypeApplyOnStartup>true</NetworkTypeApplyOnStartup>
+					<ConnectionsPerAgentCode><![CDATA[2]]></ConnectionsPerAgentCode>
+					<ConnectionsRangeCode><![CDATA[50]]></ConnectionsRangeCode>
+					<NeighborLinkFractionCode><![CDATA[0.95]]></NeighborLinkFractionCode>
+					<MCode><![CDATA[10]]></MCode>
+			</EnvironmentProperties>
+			<DatasetsCreationProperties>
+				<AutoCreate>true</AutoCreate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1669190400000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
+					</RecurrenceCode>
+			</DatasetsCreationProperties>
+			<ScaleRuler>
+				<Id>1669143913935</Id>
+				<Name><![CDATA[scale]]></Name>
+				<X>0</X><Y>-150</Y>
+				<PublicFlag>false</PublicFlag>
+				<PresentationFlag>false</PresentationFlag>
+				<ShowLabel>false</ShowLabel>
+				<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+				<Length>100</Length>
+				<Rotation>0</Rotation>
+				<ScaleType>BASED_ON_LENGTH</ScaleType>
+				<ModelLength>10</ModelLength>
+				<LengthUnits>METER</LengthUnits>
+				<Scale>10</Scale>
+				<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
+			</ScaleRuler>
+			<CurrentLevel>1669143913938</CurrentLevel>
+			<ConnectionsId>1669143913934</ConnectionsId>
+			<AgentLinks>
+				<AgentLink>
+					<Id>1669143913934</Id>
+					<Name><![CDATA[connections]]></Name>
+					<X>50</X><Y>-50</Y>
+					<Label><X>15</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<HandleReceiveInConnections>false</HandleReceiveInConnections>
+					<AgentLinkType>COLLECTION_OF_LINKS</AgentLinkType>
+					<AgentLinkBidirectional>true</AgentLinkBidirectional>
+					<MessageType><![CDATA[Object]]></MessageType>
+					<LineStyle>SOLID</LineStyle>
+					<LineWidth>1</LineWidth>
+					<LineColor>-16777216</LineColor>
+					<LineZOrder>UNDER_AGENTS</LineZOrder>
+					<LineArrow>NONE</LineArrow>
+					<LineArrowPosition>END</LineArrowPosition>
+				</AgentLink>
+			</AgentLinks>
+
+			<ContainerLinks>
+				<ContainerLink>
+					<Id>1669264555721</Id>
+					<Name><![CDATA[main]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
+					<X>50</X><Y>-100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ActiveObjectClass>
+						<PackageName><![CDATA[trucker]]></PackageName>
+						<ClassName><![CDATA[Main]]></ClassName>
+					</ActiveObjectClass>
+				</ContainerLink>
+			</ContainerLinks>
+
+			<Presentation>
+				<Level>
+					<Id>1669143913938</Id>
+					<Name><![CDATA[level]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Z>0</Z>
+					<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
+
+			<Presentation>
+				<Group>
+					<Id>1669143913941</Id>
+					<Name><![CDATA[cloud]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<ScaleXCode><![CDATA[0.25]]></ScaleXCode>
+					<ScaleYCode><![CDATA[0.25]]></ScaleYCode>
+
+			<Presentation>
+				<Curve ControlPoints="true">
+					<Id>1669143913943</Id>
+					<Name><![CDATA[_ps300]]></Name>
+					<X>-40</X><Y>-31</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>1</LineWidth>
+					<LineColor>-11702146</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<BeginArrowSize>1</BeginArrowSize>
+					<BeginArrowStyle>0</BeginArrowStyle>
+					<EndArrowSize>1</EndArrowSize>
+					<EndArrowStyle>0</EndArrowStyle>
+					<FillColor>-5383962</FillColor>
+					<FillMaterial>null</FillMaterial>
+					<Points>
+					   <Point><X>0</X><Y>0</Y><Z>0</Z></Point>
+					   <Point><X>11</X><Y>-10</Y><Z>0</Z></Point>
+					   <Point><X>23</X><Y>2</Y><Z>0</Z></Point>
+					   <Point><X>23</X><Y>2</Y><Z>0</Z></Point>
+					   <Point><X>23</X><Y>2</Y><Z>0</Z></Point>
+					   <Point><X>26</X><Y>-12</Y><Z>0</Z></Point>
+					   <Point><X>45</X><Y>-12</Y><Z>0</Z></Point>
+					   <Point><X>64</X><Y>-12</Y><Z>0</Z></Point>
+					   <Point><X>68</X><Y>6</Y><Z>0</Z></Point>
+					   <Point><X>68</X><Y>6</Y><Z>0</Z></Point>
+					   <Point><X>68</X><Y>6</Y><Z>0</Z></Point>
+					   <Point><X>82</X><Y>-2</Y><Z>0</Z></Point>
+					   <Point><X>89</X><Y>12</Y><Z>0</Z></Point>
+					   <Point><X>97</X><Y>26</Y><Z>0</Z></Point>
+					   <Point><X>83</X><Y>32</Y><Z>0</Z></Point>
+					   <Point><X>83</X><Y>32</Y><Z>0</Z></Point>
+					   <Point><X>83</X><Y>32</Y><Z>0</Z></Point>
+					   <Point><X>93</X><Y>42</Y><Z>0</Z></Point>
+					   <Point><X>85</X><Y>53</Y><Z>0</Z></Point>
+					   <Point><X>76</X><Y>64</Y><Z>0</Z></Point>
+					   <Point><X>59</X><Y>56</Y><Z>0</Z></Point>
+					   <Point><X>59</X><Y>56</Y><Z>0</Z></Point>
+					   <Point><X>59</X><Y>56</Y><Z>0</Z></Point>
+					   <Point><X>54</X><Y>70</Y><Z>0</Z></Point>
+					   <Point><X>37</X><Y>70</Y><Z>0</Z></Point>
+					   <Point><X>21</X><Y>70</Y><Z>0</Z></Point>
+					   <Point><X>17</X><Y>55</Y><Z>0</Z></Point>
+					   <Point><X>17</X><Y>55</Y><Z>0</Z></Point>
+					   <Point><X>17</X><Y>55</Y><Z>0</Z></Point>
+					   <Point><X>7</X><Y>61</Y><Z>0</Z></Point>
+					   <Point><X>-3</X><Y>51</Y><Z>0</Z></Point>
+					   <Point><X>-15</X><Y>35</Y><Z>0</Z></Point>
+					   <Point><X>0</X><Y>23</Y><Z>0</Z></Point>
+					   <Point><X>0</X><Y>23</Y><Z>0</Z></Point>
+					   <Point><X>0</X><Y>23</Y><Z>0</Z></Point>
+					   <Point><X>-11</X><Y>10</Y><Z>0</Z></Point>
+					</Points>
+					<Closed>true</Closed>
+				</Curve>
+				<Curve ControlPoints="true">
+					<Id>1669143913945</Id>
+					<Name><![CDATA[_ps301]]></Name>
+					<X>-37</X><Y>-26</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>1</LineWidth>
+					<LineColor/>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<BeginArrowSize>1</BeginArrowSize>
+					<BeginArrowStyle>0</BeginArrowStyle>
+					<EndArrowSize>1</EndArrowSize>
+					<EndArrowStyle>0</EndArrowStyle>
+					<FillColor>-1</FillColor>
+					<FillMaterial>null</FillMaterial>
+					<Points>
+					   <Point><X>0</X><Y>0</Y><Z>0</Z></Point>
+					   <Point><X>9</X><Y>-10</Y><Z>0</Z></Point>
+					   <Point><X>21</X><Y>2</Y><Z>0</Z></Point>
+					   <Point><X>21</X><Y>2</Y><Z>0</Z></Point>
+					   <Point><X>21</X><Y>2</Y><Z>0</Z></Point>
+					   <Point><X>24</X><Y>-14</Y><Z>0</Z></Point>
+					   <Point><X>42</X><Y>-14</Y><Z>0</Z></Point>
+					   <Point><X>58</X><Y>-13</Y><Z>0</Z></Point>
+					   <Point><X>60</X><Y>2</Y><Z>0</Z></Point>
+					   <Point><X>60</X><Y>2</Y><Z>0</Z></Point>
+					   <Point><X>60</X><Y>2</Y><Z>0</Z></Point>
+					   <Point><X>58</X><Y>-11</Y><Z>0</Z></Point>
+					   <Point><X>42</X><Y>-12</Y><Z>0</Z></Point>
+					   <Point><X>27</X><Y>-13</Y><Z>0</Z></Point>
+					   <Point><X>21</X><Y>5</Y><Z>0</Z></Point>
+					   <Point><X>21</X><Y>5</Y><Z>0</Z></Point>
+					   <Point><X>21</X><Y>5</Y><Z>0</Z></Point>
+					   <Point><X>10</X><Y>-5</Y><Z>0</Z></Point>
+					   <Point><X>2</X><Y>2</Y><Z>0</Z></Point>
+					   <Point><X>-5</X><Y>8</Y><Z>0</Z></Point>
+					   <Point><X>3</X><Y>19</Y><Z>0</Z></Point>
+					   <Point><X>3</X><Y>19</Y><Z>0</Z></Point>
+					   <Point><X>3</X><Y>19</Y><Z>0</Z></Point>
+					   <Point><X>-8</X><Y>29</Y><Z>0</Z></Point>
+					   <Point><X>-4</X><Y>42</Y><Z>0</Z></Point>
+					   <Point><X>-11</X><Y>30</Y><Z>0</Z></Point>
+					   <Point><X>1</X><Y>18</Y><Z>0</Z></Point>
+					   <Point><X>1</X><Y>18</Y><Z>0</Z></Point>
+					   <Point><X>1</X><Y>18</Y><Z>0</Z></Point>
+					   <Point><X>-9</X><Y>10</Y><Z>0</Z></Point>
+					</Points>
+					<Closed>true</Closed>
+				</Curve>
+			</Presentation>
+
+				</Group>
+			</Presentation>
+
+				</Level>
+			</Presentation>
+
+		</ActiveObjectClass>
 	</ActiveObjectClasses>	
 	<DifferentialEquationsMethod>EULER</DifferentialEquationsMethod>
 	<MixedEquationsMethod>RK45_NEWTON</MixedEquationsMethod>
@@ -4326,7 +5386,7 @@ else
 			<MaximumMemory>512</MaximumMemory>
 			<RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType>
 			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
-			<SeedValue>1</SeedValue>
+			<SeedValue>11</SeedValue>
 			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
 			<VmArgs><![CDATA[]]></VmArgs>
 			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
@@ -4375,7 +5435,97 @@ else
 					<ParameterName><![CDATA[hoursUntilHungry]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[idealTimeBwMeals]]></ParameterName>
+					<ParameterName><![CDATA[requiredRestHours]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[maxTimeBwMeals]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[maxDriveTimeOverrun]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[allowUnsafeStops]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[maxExtraMilesToReachStop]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[minComfortableFuelLevel]]></ParameterName>
+				</Parameter>
+			</Parameters>			
+			<PresentationProperties>
+				<EnableZoomAndPanning>true</EnableZoomAndPanning>
+				<ExecutionMode><![CDATA[realTimeScaled]]></ExecutionMode>
+				<Title><![CDATA[Trucker : Simulation]]></Title>	
+				<EnableDeveloperPanel>true</EnableDeveloperPanel>
+				<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
+				<RealTimeScale>1.0</RealTimeScale>
+			</PresentationProperties>
+			<ModelTimeProperties>
+				<StopOption><![CDATA[Never]]></StopOption>
+				<InitialDate><![CDATA[1661212800000]]></InitialDate>	
+				<InitialTime><![CDATA[0.0]]></InitialTime>	
+				<FinalDate><![CDATA[1663891200000]]></FinalDate>	
+				<FinalTime><![CDATA[100.0]]></FinalTime>	
+			</ModelTimeProperties>
+			<BypassInitialScreen>true</BypassInitialScreen>
+		</SimulationExperiment>
+		<!--   =========   Simulation Experiment   ========  -->
+		<SimulationExperiment ActiveObjectClassId="1661276760204">
+			<Id>1669261651804</Id>
+			<Name><![CDATA[RoadsideStopsNotAllowed]]></Name>
+			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
+			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
+			<MaximumMemory>512</MaximumMemory>
+			<RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType>
+			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
+			<SeedValue>1</SeedValue>
+			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+			<VmArgs><![CDATA[]]></VmArgs>
+			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+
+			<Presentation>
+				<Text>
+					<Id>1669261651805</Id>
+					<Name><![CDATA[text]]></Name>
+					<X>50</X><Y>30</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-12490271</Color>
+					<Text><![CDATA[Trucker]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>24</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+			</Presentation>
+
+			<Parameters>			
+				<Parameter>
+					<ParameterName><![CDATA[numOfDrivers]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[averageMPG]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[fuelCapacityGals]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[drivingHoursPerDay]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[averageMilesPerHour]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[hoursUntilHungry]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[requiredRestHours]]></ParameterName>
@@ -4386,11 +5536,117 @@ else
 				<Parameter>
 					<ParameterName><![CDATA[maxDriveTimeOverrun]]></ParameterName>
 				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[allowUnsafeStops]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[maxExtraMilesToReachStop]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[minComfortableFuelLevel]]></ParameterName>
+				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
 				<ExecutionMode><![CDATA[realTimeScaled]]></ExecutionMode>
-				<Title><![CDATA[Trucker : Simulation]]></Title>	
+				<Title><![CDATA[Trucker : RoadsideStopsNotAllowed]]></Title>	
+				<EnableDeveloperPanel>true</EnableDeveloperPanel>
+				<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
+				<RealTimeScale>1.0</RealTimeScale>
+			</PresentationProperties>
+			<ModelTimeProperties>
+				<StopOption><![CDATA[Never]]></StopOption>
+				<InitialDate><![CDATA[1661212800000]]></InitialDate>	
+				<InitialTime><![CDATA[0.0]]></InitialTime>	
+				<FinalDate><![CDATA[1663891200000]]></FinalDate>	
+				<FinalTime><![CDATA[100.0]]></FinalTime>	
+			</ModelTimeProperties>
+			<BypassInitialScreen>true</BypassInitialScreen>
+		</SimulationExperiment>
+		<!--   =========   Simulation Experiment   ========  -->
+		<SimulationExperiment ActiveObjectClassId="1661276760204">
+			<Id>1669261725177</Id>
+			<Name><![CDATA[TenTruckers]]></Name>
+			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
+			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
+			<MaximumMemory>512</MaximumMemory>
+			<RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType>
+			<CustomGeneratorCode>new Random()</CustomGeneratorCode>
+			<SeedValue>1</SeedValue>
+			<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+			<VmArgs><![CDATA[]]></VmArgs>
+			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+
+			<Presentation>
+				<Text>
+					<Id>1669261725178</Id>
+					<Name><![CDATA[text]]></Name>
+					<X>50</X><Y>30</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-12490271</Color>
+					<Text><![CDATA[Trucker]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>24</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+			</Presentation>
+
+			<Parameters>			
+				<Parameter>
+					<ParameterName><![CDATA[numOfDrivers]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[10
+]]></Code>
+					</ParameterValue>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[averageMPG]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[fuelCapacityGals]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[drivingHoursPerDay]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[averageMilesPerHour]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[hoursUntilHungry]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[requiredRestHours]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[maxTimeBwMeals]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[maxDriveTimeOverrun]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[allowUnsafeStops]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[maxExtraMilesToReachStop]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[minComfortableFuelLevel]]></ParameterName>
+				</Parameter>
+			</Parameters>			
+			<PresentationProperties>
+				<EnableZoomAndPanning>true</EnableZoomAndPanning>
+				<ExecutionMode><![CDATA[realTimeScaled]]></ExecutionMode>
+				<Title><![CDATA[Trucker : TenTruckers]]></Title>	
 				<EnableDeveloperPanel>true</EnableDeveloperPanel>
 				<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
 				<RealTimeScale>1.0</RealTimeScale>
@@ -4532,6 +5788,10 @@ else
 		</Resource>
 		<Resource>
 			<Path><![CDATA[lu248676cgic4c.tmp]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+		<Resource>
+			<Path><![CDATA[/home/eric/Applications/anylogic/north-america-latest.osm.pbf]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
