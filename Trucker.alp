@@ -363,7 +363,7 @@ EnumeratedDistribution<City> cityDistribution =
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1661636311077</Id>
-					<Name><![CDATA[maxDriveTimeOverrun]]></Name>
+					<Name><![CDATA[maxMilesOverrun]]></Name>
 					<X>50</X><Y>-110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -374,7 +374,7 @@ EnumeratedDistribution<City> cityDistribution =
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[1.5
+							<Code><![CDATA[25.0
 ]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
@@ -424,7 +424,7 @@ EnumeratedDistribution<City> cityDistribution =
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[20.0
+							<Code><![CDATA[10.0
 ]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
@@ -454,6 +454,31 @@ EnumeratedDistribution<City> cityDistribution =
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1669257372393</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1669399958614</Id>
+					<Name><![CDATA[maxDriveTimeUndershootHours]]></Name>
+					<X>50</X><Y>-350</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[1.0
+]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1669399958612</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -676,6 +701,18 @@ return cityDistribution.sample();
 							<PackageName><![CDATA[trucker]]></PackageName>
 							<ClassName><![CDATA[truck_stop_parking]]></ClassName>
 						</TableReference>
+						<Condition>
+							<ColumnReference>
+								<PackageName><![CDATA[trucker]]></PackageName>
+								<ClassName><![CDATA[truck_stop_parking]]></ClassName>
+								<ItemName><![CDATA[state]]></ItemName>
+							</ColumnReference>
+							<Value Class="CodeValue">
+								<Code><![CDATA["TX"
+]]></Code>
+							</Value>
+							<Operator>EQUALS</Operator>
+						</Condition>
 					</InitializationDatabaseTableQuery>
 					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
 					<QuantityColumn>
@@ -833,6 +870,18 @@ return cityDistribution.sample();
 ]]></Code>
 							</Value>
 							<Operator>NOT_EQUAL</Operator>
+						</Condition>
+						<Condition>
+							<ColumnReference>
+								<PackageName><![CDATA[trucker]]></PackageName>
+								<ClassName><![CDATA[usa_major_cities]]></ClassName>
+								<ItemName><![CDATA[st]]></ItemName>
+							</ColumnReference>
+							<Value Class="CodeValue">
+								<Code><![CDATA["TX"
+]]></Code>
+							</Value>
+							<Operator>EQUALS</Operator>
 						</Condition>
 					</InitializationDatabaseTableQuery>
 					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
@@ -2399,7 +2448,7 @@ destination = main.getRandomCityWeightedByPop();
 fuelEconomy = makeRandomFuelEconomy();
 destination.setIsDestination(true);
 
-traceln("Starting trip to " + destination.Name + ", " + destination.State);
+logStartedNewTrip();
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -2432,18 +2481,24 @@ return main.map.getDistanceByRoute(
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (getMilesToDest() < getMaximumMilesUntilNextStop()) {
+					<Body><![CDATA[if (getMilesToDest() < getMaximumMilesUntilNextStop() + main.maxMilesOverrun) {
 	return null;
 }
 else {
 	TruckStop farthestReachableStop;
 	farthestReachableStop = getFarthestReachableStop();
 	if (farthestReachableStop != null) {
-		return farthestReachableStop;
+		double metersToStop = main.map.getDistanceByRoute(
+			this.getLatitude(), this.getLongitude(),
+			farthestReachableStop.Latitude, farthestReachableStop.Longitude
+		);
+		double timeToStop = (metersToStop * milesPerMeter) / main.averageMilesPerHour;
+		double hoursUnderMax = getMaximumTimeUntilNextStop() - timeToStop;
+		if (hoursUnderMax < main.maxDriveTimeUndershootHours) {
+			return farthestReachableStop;
+		}
 	}
-	else {
-		return getBestOutOfRangeStop();
-	}
+	return getBestOutOfRangeStop();
 }
 ]]></Body>
 				</Function>
@@ -2637,7 +2692,23 @@ return isEnRoute && !isAlreadyThere;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (main.allowUnsafeStops && !shouldStopForFuel()) {
+					<Body><![CDATA[TruckStop nearestEnRoute = getNearestTruckStopEnRoute();
+double milesToStop;
+if (nearestEnRoute != null) {
+	milesToStop = main.map.getDistanceByRoute(
+		this.getLatitude(), this.getLongitude(),
+		nearestEnRoute.Latitude, nearestEnRoute.Longitude
+	) * milesPerMeter;
+}
+else {
+	milesToStop = Integer.MAX_VALUE;
+}
+
+if (
+	main.allowUnsafeStops
+	&& milesToStop > getMaximumMilesUntilNextStop() + main.maxMilesOverrun
+	&& !shouldStopForFuel()
+) {
 	return getRoadsideStop();
 }
 else {
@@ -2873,6 +2944,20 @@ traceln(
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[double fuelLevel = getGallonsInTank() / main.fuelCapacityGals;
 return fuelLevel < main.minComfortableFuelLevel;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1669929788468</Id>
+					<Name><![CDATA[logStartedNewTrip]]></Name>
+					<X>600</X><Y>670</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[traceln("Starting trip to " + destination.Name + ", " + destination.State);
+
 ]]></Body>
 				</Function>
 			</Functions>
@@ -5249,7 +5334,7 @@ return fuelLevel < main.minComfortableFuelLevel;
 	<RelativeAccuracy>1.0E-5</RelativeAccuracy>
 	<TimeAccuracy>1.0E-5</TimeAccuracy>
 	<Frame>
-		<Width>1100</Width>
+		<Width>1150</Width>
 		<Height>700</Height>
 	</Frame>
 	<Database>
@@ -5380,7 +5465,7 @@ return fuelLevel < main.minComfortableFuelLevel;
 		<!--   =========   Simulation Experiment   ========  -->
 		<SimulationExperiment ActiveObjectClassId="1661276760204">
 			<Id>1661276760223</Id>
-			<Name><![CDATA[Simulation]]></Name>
+			<Name><![CDATA[RoadsideStopsAllowed]]></Name>
 			<ClientAreaTopLeft><X>0</X><Y>0</Y></ClientAreaTopLeft>
 			<CommandLineArguments><![CDATA[]]></CommandLineArguments>
 			<MaximumMemory>512</MaximumMemory>
@@ -5441,16 +5526,23 @@ return fuelLevel < main.minComfortableFuelLevel;
 					<ParameterName><![CDATA[maxTimeBwMeals]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[maxDriveTimeOverrun]]></ParameterName>
+					<ParameterName><![CDATA[maxMilesOverrun]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[allowUnsafeStops]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[maxExtraMilesToReachStop]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[10.0
+]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[minComfortableFuelLevel]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[maxDriveTimeUndershootHours]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -5534,16 +5626,23 @@ return fuelLevel < main.minComfortableFuelLevel;
 					<ParameterName><![CDATA[maxTimeBwMeals]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[maxDriveTimeOverrun]]></ParameterName>
+					<ParameterName><![CDATA[maxMilesOverrun]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[allowUnsafeStops]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[false
+]]></Code>
+					</ParameterValue>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[maxExtraMilesToReachStop]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[minComfortableFuelLevel]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[maxDriveTimeUndershootHours]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -5631,7 +5730,7 @@ return fuelLevel < main.minComfortableFuelLevel;
 					<ParameterName><![CDATA[maxTimeBwMeals]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[maxDriveTimeOverrun]]></ParameterName>
+					<ParameterName><![CDATA[maxMilesOverrun]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[allowUnsafeStops]]></ParameterName>
@@ -5641,6 +5740,9 @@ return fuelLevel < main.minComfortableFuelLevel;
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[minComfortableFuelLevel]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[maxDriveTimeUndershootHours]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
