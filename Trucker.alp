@@ -3498,6 +3498,145 @@ traceln("Starting at city: " + initCity.Name + ", " + initCity.State);
 						<FillColor>-1</FillColor>
 					</Properties>	
 				</ActionChartElement>
+				<ActionChartElement Class="ActionChart">
+					<Id>1670526734464</Id>
+					<Name><![CDATA[canDriveMilesWithinDayLimit]]></Name>
+					<X>3660</X><Y>-700</Y>
+					<Label><X>-30</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties AccessType="default" StaticFunction="false" Width="20" Height="20" Next="1670527466757" >
+						<FillColor/>
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[boolean]]></ReturnType>
+					<Parameter>
+						<Name><![CDATA[miles]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[driveHoursLimit]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Parameter>
+						<Name><![CDATA[workingDaysLimit]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					</Properties>
+				</ActionChartElement>
+				<ActionChartElement Class="LocalVariable">
+					<Id>1670527827041</Id>
+					<Name><![CDATA[drivingHoursInPeriodOnArrival]]></Name>
+					<X>3660</X><Y>-500</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Comment><![CDATA[How many total hours will I have driven this period when I arrive?]]></Comment>
+					<Properties Width="480" Height="60" Constant="true" Previous="1670527558275" Next="1670527103821" >
+						<FillColor/>
+						<Type><![CDATA[int]]></Type>
+						<InitialValue><![CDATA[hoursDrivenInPeriod + drivingHoursReqd;
+]]></InitialValue>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Decision">
+					<Id>1670527103821</Id>
+					<Name><![CDATA[decision12]]></Name>
+					<X>3660</X><Y>-420</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Comment><![CDATA[Would driving the given number of miles put me over the max hours at all?]]></Comment>
+					<Properties Width="280" Height="160" Appearance="0" Previous="1670527827041" Next="1670526737405" TrueAction="1670527704664" >
+						<FillColor/>
+						<Condition><![CDATA[drivingHoursInPeriodOnArrival < maxHours 
+]]></Condition>
+					</Properties>
+				</ActionChartElement>
+				<ActionChartElement Class="Decision">
+					<Id>1670527920697</Id>
+					<Name><![CDATA[decision13]]></Name>
+					<X>3820</X><Y>-225</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Comment><![CDATA[Is that less than the given number of days?]]></Comment>
+					<Properties Width="200" Height="120" Appearance="0" Previous="1670527704664" TrueAction="1670527980583" >
+						<FillColor/>
+						<Condition><![CDATA[workingDaysOnArrival < workingDaysLimit
+]]></Condition>
+					</Properties>
+				</ActionChartElement>
+				<ActionChartElement Class="Return">
+					<Id>1670527980583</Id>
+					<Name><![CDATA[returnStatement10]]></Name>
+					<X>3940</X><Y>-135</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="80" Height="20" Previous="1670527920697" >
+						<FillColor>-65536</FillColor>
+						<Return><![CDATA[false]]></Return>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="LocalVariable">
+					<Id>1670527704664</Id>
+					<Name><![CDATA[workingDaysOnArrival]]></Name>
+					<X>3820</X><Y>-310</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Comment><![CDATA[How many days will I have been working
+after driving the given number of miles?]]></Comment>
+					<Properties Width="300" Height="65" Constant="false" Previous="1670527103821" Next="1670527920697" >
+						<FillColor/>
+						<Type><![CDATA[double]]></Type>
+						<InitialValue><![CDATA[(getTimeSince(timeStartedPeriod) + totalHoursReqd)/ 24.0
+]]></InitialValue>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Return">
+					<Id>1670526737405</Id>
+					<Name><![CDATA[returnStatement9]]></Name>
+					<X>3660</X><Y>-35</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="80" Height="20" Previous="1670527103821" >
+						<FillColor>-16711936</FillColor>
+						<Return><![CDATA[true]]></Return>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="LocalVariable">
+					<Id>1670527558275</Id>
+					<Name><![CDATA[totalHoursReqd]]></Name>
+					<X>3660</X><Y>-580</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Comment><![CDATA[How long do I estimate it will take including breaks?]]></Comment>
+					<Properties Width="440" Height="60" Constant="true" Previous="1670527466757" Next="1670527827041" >
+						<FillColor/>
+						<Type><![CDATA[int]]></Type>
+						<InitialValue><![CDATA[drivingHoursReqd * 1.5;
+]]></InitialValue>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="LocalVariable">
+					<Id>1670527466757</Id>
+					<Name><![CDATA[drivingHoursReqd]]></Name>
+					<X>3660</X><Y>-650</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Comment><![CDATA[How long will it take me to drive the given number of miles?]]></Comment>
+					<Properties Width="440" Height="50" Constant="true" Previous="1670526734464" Next="1670527558275" >
+						<FillColor/>
+						<Type><![CDATA[double]]></Type>
+						<InitialValue><![CDATA[miles * 1.5 / main.averageMilesPerHour;
+]]></InitialValue>
+					</Properties>	
+				</ActionChartElement>
 			</ActionChartElements>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
@@ -4590,69 +4729,6 @@ isGoingHome = true;
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
 					<Body><![CDATA[return couldGetHomeFrom(main.maxDrivingHours8Day, 8, lat, lon);
-]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[boolean]]></ReturnType>
-					<Id>1670523660225</Id>
-					<Name><![CDATA[couldGetHomeFrom]]></Name>
-					<X>570</X><Y>-380</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Parameter>
-						<Name><![CDATA[maxHours]]></Name>
-						<Type><![CDATA[double]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[days]]></Name>
-						<Type><![CDATA[double]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[lat]]></Name>
-						<Type><![CDATA[double]]></Type>
-					</Parameter>
-					<Parameter>
-						<Name><![CDATA[lon]]></Name>
-						<Type><![CDATA[double]]></Type>
-					</Parameter>
-					<Body><![CDATA[// Multiply drive time to account for potential stops.
-// We can't get the specific amount of time including
-// stops to the destination since that could vary based
-// on model parameters and stop availability, so instead
-// just make a guess.
-final double driveTimeMultiplier = 1.5;
-
-double drivingHoursToDest = 
-	getMilesTo(lat, lon) 
-	/ main.averageMilesPerHour;
-	
-double drivingHoursFromDestToHome =
-	getMilesBetween(
-		lat, lon, home.Latitude, home.Longitude
-	) / main.averageMilesPerHour;
-
-double totalDrivingHoursToHome =
-	drivingHoursToDest + drivingHoursFromDestToHome;
-
-// Case 1: going to dest then home won't even cross our
-//    max driving hours
-if (totalDrivingHoursToHome < maxHours) return true;
-
-// Case 2: going to dest then home will cross our max
-//    driving hours but not until after the time window
-// TODO this is naive. What about if we exceed our hours in
-//    a window starting on day 2 for example?
-double totalTimeWindowHours = days * 24.0;
-double hoursUntilEndOfTimeWindow = 
-	totalTimeWindowHours - getTimeSince(timeStartedPeriod);
-double hoursUntilMax = maxHours - hoursDrivenInPeriod;
-if (hoursUntilEndOfTimeWindow < hoursUntilMax) return true;
-
-// If neither of the above returned true, then we can't make it.
-return false;
 ]]></Body>
 				</Function>
 			</Functions>
