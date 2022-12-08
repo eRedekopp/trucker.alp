@@ -1,0 +1,20 @@
+
+Wait/detention times for drivers at shippers/consignees:
+https://www.businessinsider.com/truck-drivers-trucking-detention-time-2019-9
+There's a nice graph that shows the distribution of wait times in 2018 (most recent data I could find)
+
+Stopping location data:
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6037566/
+"Most truckers (80%) reported taking their breaks at a truck stop, with 10.8% breaking at a rest area, 2.1% at a highway on/off ramp, and 7.2% at a different location"
+
+Driving distance data:
+https://www.sciencedirect.com/science/article/pii/S2093791115000104
+"Miles driven per week (mean = 2812.61)"
+
+Hours-of-service violations data:
+https://www.sciencedirect.com/science/article/pii/S1369847820305854?casa_token=-IZ5SydsuaEAAAAA:ORg0ySx7Sv_5ACV2Cahtfn-2QwtLklULecjrqwovxNzefQVFiaw2XppQKR1G3IfRfIdy9dOAol4
+It was difficult to find this data, because most "violations" that are reported are from DOT inspections and therefore don't specifically represent what we'll be featuring in the model (yet).  However, this link includes a table with some self-reported HOS violation data that might be helpful.  FYI - these are the same data as the miles driven per week data (just analyzed and published much later!)
+
+Employment of truck drivers by state:
+https://www.bls.gov/oes/current/oes533032.htm
+This might be helpful for setting up initial model conditions and/or focusing on just one state (e.g., Texas) and wanting a realistic representation of the number of truckers based out of there
