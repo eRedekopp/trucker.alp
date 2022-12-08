@@ -3534,7 +3534,7 @@ traceln("Starting at city: " + initCity.Name + ", " + initCity.State);
 					<Comment><![CDATA[How many total hours will I have driven this period when I arrive?]]></Comment>
 					<Properties Width="480" Height="60" Constant="true" Previous="1670527558275" Next="1670527103821" >
 						<FillColor/>
-						<Type><![CDATA[int]]></Type>
+						<Type><![CDATA[double]]></Type>
 						<InitialValue><![CDATA[hoursDrivenInPeriod + drivingHoursReqd;
 ]]></InitialValue>
 					</Properties>	
@@ -3549,28 +3549,109 @@ traceln("Starting at city: " + initCity.Name + ", " + initCity.State);
 					<Comment><![CDATA[Would driving the given number of miles put me over the max hours at all?]]></Comment>
 					<Properties Width="280" Height="160" Appearance="0" Previous="1670527827041" Next="1670526737405" TrueAction="1670527704664" >
 						<FillColor/>
-						<Condition><![CDATA[drivingHoursInPeriodOnArrival < maxHours 
+						<Condition><![CDATA[drivingHoursInPeriodOnArrival < driveHoursLimit 
 ]]></Condition>
 					</Properties>
 				</ActionChartElement>
 				<ActionChartElement Class="Decision">
 					<Id>1670527920697</Id>
 					<Name><![CDATA[decision13]]></Name>
-					<X>3820</X><Y>-225</Y>
+					<X>4400</X><Y>-225</Y>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Comment><![CDATA[Is that less than the given number of days?]]></Comment>
-					<Properties Width="200" Height="120" Appearance="0" Previous="1670527704664" TrueAction="1670527980583" >
+					<Properties Width="200" Height="120" Appearance="0" Previous="1670527704664" TrueAction="1670527980583" FalseAction="1670529171525" >
 						<FillColor/>
 						<Condition><![CDATA[workingDaysOnArrival < workingDaysLimit
 ]]></Condition>
 					</Properties>
 				</ActionChartElement>
+				<ActionChartElement Class="Decision">
+					<Id>1670529171525</Id>
+					<Name><![CDATA[decision14]]></Name>
+					<X>4020</X><Y>-135</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Comment><![CDATA[Is it more than 1 full day over?]]></Comment>
+					<Properties Width="160" Height="95" Appearance="0" Previous="1670527920697" TrueAction="1670529723681" FalseAction="1670529437679" >
+						<FillColor/>
+						<Condition><![CDATA[true
+]]></Condition>
+					</Properties>
+				</ActionChartElement>
+				<ActionChartElement Class="Decision">
+					<Id>1670529723681</Id>
+					<Name><![CDATA[decision16]]></Name>
+					<X>4210</X><Y>-58</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Comment><![CDATA[TODO: check whether this will cause us to go over our limit for any time window during this period]]></Comment>
+					<Properties Width="320" Height="198" Appearance="0" Previous="1670529171525" >
+						<FillColor/>
+						<Condition><![CDATA[true]]></Condition>
+					</Properties>
+				</ActionChartElement>
+				<ActionChartElement Class="LocalVariable">
+					<Id>1670529437679</Id>
+					<Name><![CDATA[hoursDrivenAtEndOfWindow]]></Name>
+					<X>3840</X><Y>-58</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Comment><![CDATA[How many hours will I have driven when I 
+cross the given number of working days?]]></Comment>
+					<Properties Width="340" Height="58" Constant="false" Previous="1670529171525" Next="1670529237335" >
+						<FillColor/>
+						<Type><![CDATA[double]]></Type>
+						<InitialValue><![CDATA[
+]]></InitialValue>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Decision">
+					<Id>1670529237335</Id>
+					<Name><![CDATA[decision15]]></Name>
+					<X>3840</X><Y>20</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Comment><![CDATA[Is that over the limit?]]></Comment>
+					<Properties Width="200" Height="78" Appearance="0" Previous="1670529437679" TrueAction="1670529243989" FalseAction="1670529240093" >
+						<FillColor/>
+						<Condition><![CDATA[hoursDrivenAtEndOfWindow > driveHoursLimit
+]]></Condition>
+					</Properties>
+				</ActionChartElement>
+				<ActionChartElement Class="Return">
+					<Id>1670529240093</Id>
+					<Name><![CDATA[returnStatement11]]></Name>
+					<X>3720</X><Y>89</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="80" Height="20" Previous="1670529237335" >
+						<FillColor>-16711936</FillColor>
+						<Return><![CDATA[true]]></Return>
+					</Properties>	
+				</ActionChartElement>
+				<ActionChartElement Class="Return">
+					<Id>1670529243989</Id>
+					<Name><![CDATA[returnStatement12]]></Name>
+					<X>3960</X><Y>89</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties Width="80" Height="20" Previous="1670529237335" >
+						<FillColor>-65536</FillColor>
+						<Return><![CDATA[false]]></Return>
+					</Properties>	
+				</ActionChartElement>
 				<ActionChartElement Class="Return">
 					<Id>1670527980583</Id>
 					<Name><![CDATA[returnStatement10]]></Name>
-					<X>3940</X><Y>-135</Y>
+					<X>4520</X><Y>-135</Y>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -3582,7 +3663,7 @@ traceln("Starting at city: " + initCity.Name + ", " + initCity.State);
 				<ActionChartElement Class="LocalVariable">
 					<Id>1670527704664</Id>
 					<Name><![CDATA[workingDaysOnArrival]]></Name>
-					<X>3820</X><Y>-310</Y>
+					<X>4400</X><Y>-310</Y>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -3598,7 +3679,7 @@ after driving the given number of miles?]]></Comment>
 				<ActionChartElement Class="Return">
 					<Id>1670526737405</Id>
 					<Name><![CDATA[returnStatement9]]></Name>
-					<X>3660</X><Y>-35</Y>
+					<X>3660</X><Y>250</Y>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -3617,7 +3698,7 @@ after driving the given number of miles?]]></Comment>
 					<Comment><![CDATA[How long do I estimate it will take including breaks?]]></Comment>
 					<Properties Width="440" Height="60" Constant="true" Previous="1670527466757" Next="1670527827041" >
 						<FillColor/>
-						<Type><![CDATA[int]]></Type>
+						<Type><![CDATA[double]]></Type>
 						<InitialValue><![CDATA[drivingHoursReqd * 1.5;
 ]]></InitialValue>
 					</Properties>	
@@ -3660,7 +3741,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661481609473</Id>
 					<Name><![CDATA[getDrivingHoursRemaining]]></Name>
-					<X>290</X><Y>-700</Y>
+					<X>290</X><Y>-670</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3690,7 +3771,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534094709</Id>
 					<Name><![CDATA[getHoursDrivenSinceRest]]></Name>
-					<X>290</X><Y>-500</Y>
+					<X>290</X><Y>-470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3703,7 +3784,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534329675</Id>
 					<Name><![CDATA[getGallonsConsumedSinceStart]]></Name>
-					<X>290</X><Y>-520</Y>
+					<X>290</X><Y>-490</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3747,7 +3828,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661630020214</Id>
 					<Name><![CDATA[getHoursToFuelEmpty]]></Name>
-					<X>290</X><Y>-660</Y>
+					<X>290</X><Y>-630</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3764,7 +3845,7 @@ return hoursRemaining;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664305823118</Id>
 					<Name><![CDATA[getMaximumTimeUntilNextStop]]></Name>
-					<X>290</X><Y>-620</Y>
+					<X>290</X><Y>-590</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3785,7 +3866,7 @@ return Math.max(min, 0);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664305942138</Id>
 					<Name><![CDATA[getHoursUntilHungry]]></Name>
-					<X>290</X><Y>-640</Y>
+					<X>290</X><Y>-610</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3799,7 +3880,7 @@ return Math.max(min, 0);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664306643945</Id>
 					<Name><![CDATA[getMaximumMilesUntilNextStop]]></Name>
-					<X>290</X><Y>-600</Y>
+					<X>290</X><Y>-570</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3881,7 +3962,7 @@ logStoppedDriving();
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[trackRested();
 hoursDrivenSinceRest = 0.0;
-timeRested = time();
+timeRested = time() + main.requiredRestHours;
 traceln("Resting.");
 ]]></Body>
 				</Function>
@@ -3940,7 +4021,7 @@ logStartedNewTrip();
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664481001053</Id>
 					<Name><![CDATA[getMilesToDest]]></Name>
-					<X>290</X><Y>-580</Y>
+					<X>290</X><Y>-550</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -3978,11 +4059,16 @@ return main.map.getDistanceByRoute(
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (main.allowUnsafeStops) {
+					<Body><![CDATA[double legalHoursRemaining = Math.min(
+	getDrivingHoursRemaining(),
+	getWorkingHoursRemaining()
+);
+
+if (main.allowUnsafeStops) {
 	// If truckers are allowed to stop roadside, then
 	// stop at the truck stop if we have under 1 hour left
 	// Otherwise keep driving and stop roadside if necessary
-	return getDrivingHoursRemaining() < 1;
+	return legalHoursRemaining < 1;
 }
 
 TruckStop nextStop = getNearestTruckStopEnRoute();
@@ -3998,7 +4084,7 @@ else {
 	hoursUntilNextStop = getMilesToDest() / main.averageMilesPerHour + 1;
 }
 
-return getDrivingHoursRemaining() < hoursUntilNextStop;
+return legalHoursRemaining < hoursUntilNextStop;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -4006,7 +4092,7 @@ return getDrivingHoursRemaining() < hoursUntilNextStop;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664485629165</Id>
 					<Name><![CDATA[getGallonsInTank]]></Name>
-					<X>290</X><Y>-740</Y>
+					<X>290</X><Y>-710</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4203,7 +4289,7 @@ if (nextTruckStop != null) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1669147567398</Id>
 					<Name><![CDATA[getMilesToNextTruckStop]]></Name>
-					<X>290</X><Y>-560</Y>
+					<X>290</X><Y>-530</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -4295,8 +4381,13 @@ traceln(
 	+ ", "
 	+ distanceToNextStop
 	+ "miles away. "
+	+ "Rested " 
+	+ getTimeSince(timeRested)
+	+ " hours ago. "
 	+ getDrivingHoursRemaining() 
-	+ " allowable hours remaining. " 
+	+ " driving hours remaining. " 
+	+ getWorkingHoursRemaining() 
+	+ " working hours remaining. " 
 	+ getGallonsInTank()
 	+ " gallons in tank. Ate " 
 	+ getTimeSince(timeAte) 
@@ -4322,7 +4413,9 @@ traceln(
 					<Body><![CDATA[traceln(
 	"Stopping: " 
 	+ getDrivingHoursRemaining() 
-	+ " hours remaining. " 
+	+ " driving hours remaining. " 
+	+ getWorkingHoursRemaining() 
+	+ " working hours remaining. " 
 	+ getGallonsInTank() 
 	+ " gallons in tank. Ate " 
 	+ getTimeSince(timeAte) 
@@ -4623,7 +4716,7 @@ isGoingHome = true;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1670471043192</Id>
 					<Name><![CDATA[getHoursSinceRest]]></Name>
-					<X>290</X><Y>-540</Y>
+					<X>290</X><Y>-510</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4636,7 +4729,7 @@ isGoingHome = true;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1670515326022</Id>
 					<Name><![CDATA[getWorkingHoursRemaining]]></Name>
-					<X>290</X><Y>-680</Y>
+					<X>290</X><Y>-650</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4649,7 +4742,7 @@ isGoingHome = true;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1670515374456</Id>
 					<Name><![CDATA[getHoursWorkedSinceRest]]></Name>
-					<X>290</X><Y>-720</Y>
+					<X>290</X><Y>-690</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -4707,7 +4800,10 @@ isGoingHome = true;
 						<Name><![CDATA[lon]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
-					<Body><![CDATA[return couldGetHomeFrom(main.maxDrivingHours7Day, 7, lat, lon);
+					<Body><![CDATA[double totalMiles = 
+	getMilesTo(lat, lon) 
+	+ getMilesBetween(lat, lon, home.Latitude, home.Longitude);
+return canDriveMilesWithinDayLimit(totalMiles, main.maxDrivingHours7Day, 7);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -4728,7 +4824,10 @@ isGoingHome = true;
 						<Name><![CDATA[lon]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
-					<Body><![CDATA[return couldGetHomeFrom(main.maxDrivingHours8Day, 8, lat, lon);
+					<Body><![CDATA[double totalMiles = 
+	getMilesTo(lat, lon) 
+	+ getMilesBetween(lat, lon, home.Latitude, home.Longitude);
+return canDriveMilesWithinDayLimit(totalMiles, main.maxDrivingHours8Day, 8);
 ]]></Body>
 				</Function>
 			</Functions>
@@ -4793,7 +4892,7 @@ isGoingHome = true;
 				<Text>
 					<Id>1661619558870</Id>
 					<Name><![CDATA[text1]]></Name>
-					<X>280</X><Y>-770</Y>
+					<X>280</X><Y>-740</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
