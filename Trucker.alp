@@ -223,7 +223,7 @@ mapViewArea.navigateTo();
 				<Variable Class="PlainVariable">
 					<Id>1699377552155</Id>
 					<Name><![CDATA[jhighwayRouter]]></Name>
-					<X>390</X><Y>-460</Y>
+					<X>1480</X><Y>-120</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -250,6 +250,22 @@ mapViewArea.navigateTo();
 ]]></Type>        
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA[null]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1702845440471</Id>
+					<Name><![CDATA[jhighwayRouteProvider]]></Name>
+					<X>1480</X><Y>-100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[JHighwayRouteProvider]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[new JHighwayRouteProvider()
+]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -5059,6 +5075,7 @@ import java.util.stream.Stream;
 import com.github.eRedekopp.jhighway.LocationAlongPath;
 ]]></Import>
 			<StartupCode><![CDATA[main.add_storytellers(this);
+this.setRouteProvider(main.jhighwayRouteProvider);
 ]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
@@ -6961,8 +6978,8 @@ return isReachable && isNotAlreadyThere;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[double distanceToNextStop = -1.0;
-String nameOfNextTruckStop = nextStop == null ? "destination" : nextStop.getSecond().Name;
+					<Body><![CDATA[double distanceToNextStop = this.getMilesToNextTruckStop();
+String nameOfNextTruckStop = nextStop == null ? "[none]" : nextStop.getSecond().Name;
 
 String message = String.format(
 	"Driving toward %s via %s, %.1f miles away",
@@ -7587,7 +7604,7 @@ List<LocationAlongPath> locationsAlongRoute = currentRoute.getLocationsWithinDis
 // Can I legally drive directly to the destination?
 if (milesToDest < maxMilesBeforeStop) {
 	// Do I have enough fuel to drive directly to the destination?
-	if (milesToEmpty < milesToDest) {
+	if (milesToDest < milesToEmpty) {
 		// Go directly to the destination
 		plannedStops.add(null);
 		return;
@@ -8144,13 +8161,10 @@ else
 						<Name><![CDATA[lon]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
-					<Body><![CDATA[Path2D route = currentRoute.getPathBetween(
-		this.getLatitude(),
-		this.getLongitude(),
-		lat,
-		lon
+					<Body><![CDATA[main.jhighwayRouteProvider.setCurrentRouteData(
+		this.currentRoute
 );
-this.moveTo(lat, lon, route);
+this.moveTo(lat, lon);
 
 ]]></Body>
 				</Function>
@@ -14267,9 +14281,7 @@ import org.locationtech.jts.geom.Coordinate;
 
 /**
  * This class wraps a JHighway object and provides its data in a way that
- * is usable by Agents in Anylogic. This is NOT a RouteProvider and only
- * provides routes as a Path2D object. This means that you have to use
- * the legacy `Agent::moveTo(double x, double y, Path2D path)` method
+ * is usable by Agents in Anylogic
  */	
 public class JHighwayWrapper implements Serializable {
 	
@@ -14278,7 +14290,7 @@ public class JHighwayWrapper implements Serializable {
 	private static final double DEGREE_LATITUDE_KM = 111.321;
 
 	private final JHighway jhighway;
-	
+		
 	private final double marginKm;
 	
 	public JHighwayWrapper(String osmFilePath, String compiledDataPath, double marginKm) {
@@ -14333,27 +14345,31 @@ import org.locationtech.jts.geom.Coordinate;
 public class RouteDataWrapper implements Serializable {
 	
 	private final RoutePlanningData routeData;
-	
+		
 	public RouteDataWrapper(RoutePlanningData data) {
 		this.routeData = data;
 	}
 	
-	public Path2D getPathStartingFrom(double lat, double lon) {
-		Point[] points = Arrays
-				.stream(this.routeData.getPathPointsAfter(lat, lon))
-				.parallel()
-				.map(c -> new Point(c.x, c.y))
-				.toArray(Point[]::new);
-		return new InvisiblePath(points);
+	public Curve<GISMarkupSegment> getPathStartingFrom(double lat, double lon) {
+		Coordinate[] points = this.routeData.getPathPointsAfter(lat, lon);
+		return this.makeRouteFromPoints(points);
 	}
 	
-	public Path2D getPathBetween(double fromLat, double fromLon, double toLat, double toLon) {
-		Point[] points = Arrays
-				.stream(this.routeData.getPathPointsBetween(fromLat, fromLon, toLat, toLon))
-				.parallel()
-				.map(c -> new Point(c.x, c.y))
-				.toArray(Point[]::new);
-		return new InvisiblePath(points);
+	public Curve<GISMarkupSegment> getPathBetween(double fromLat, double fromLon, double toLat, double toLon) {
+		Coordinate[] points = this.routeData.getPathPointsBetween(fromLat, fromLon, toLat, toLon);
+		return this.makeRouteFromPoints(points);
+	}
+	
+	private Curve<GISMarkupSegment> makeRouteFromPoints(Coordinate[] points) {
+		Curve<GISMarkupSegment> curve = new Curve<>();
+		for (int i = 0; i < points.length - 1; i++) {
+			curve.addSegment(new GISMarkupSegmentLine(
+					points[i].y, points[i].x,
+					points[i+1].y, points[i+1].x
+			));
+		}
+		curve.initialize();
+		return curve;
 	}
 	
 	public double translateToKilometers(double dist) {
@@ -14361,7 +14377,8 @@ public class RouteDataWrapper implements Serializable {
 	}
 	
 	public double getMetersBetween(double fromLat, double fromLon, double toLat, double toLon) {
-		return routeData.getDistanceBetween(fromLat, fromLon, toLat, toLon);
+		double distDegs = routeData.getDistanceBetween(fromLat, fromLon, toLat, toLon);
+		return routeData.degreesAlongPathToKms(distDegs);
 	}
 	
 	public List<LocationAlongPath> getLocationsWithinDistanceFrom(double lat, double lon, double distKms) {
@@ -14388,39 +14405,66 @@ public class RouteDataWrapper implements Serializable {
 		</JavaClass>
 		<!--   =========   Java Class   ========  -->
 		<JavaClass>
-			<Id>1701972152591</Id>
-			<Name><![CDATA[InvisiblePath]]></Name>
+			<Id>1702843776873</Id>
+			<Name><![CDATA[JHighwayRouteProvider]]></Name>
 			<Text><![CDATA[/**
- * InvisiblePath
+ * JHighwayRouteProvider
  */	
-public class InvisiblePath implements Serializable, Path2D {
+public class JHighwayRouteProvider implements Serializable, IGISRouteProvider {
+	
+	private RouteDataWrapper currentRouteData;
+    
+    public void setCurrentRouteData(RouteDataWrapper route) {
+    	this.currentRouteData = route;
+    }
+    
+    public Curve<GISMarkupSegment> getPathData(
+    		double fromLat, 
+    		double fromLon, 
+    		double toLat, 
+    		double toLon
+    ) {
+    	return currentRouteData.getPathBetween(fromLat, fromLon, toLat, toLon);
+    }
+    
+    public double getDistance​(
+    		double startLat,
+            double startLon,
+            double endLat,
+            double endLon
+    ) {
+    	return currentRouteData.getMetersBetween(startLat, startLon, endLat, endLon);
+    }
+    
+    public double getDistance​(Point startPoint, Point endPoint) {
+    	return this.getDistance(
+    			startPoint.getLatitude(), 
+    			startPoint.getLongitude(), 
+    			endPoint.getLatitude(), 
+    			endPoint.getLongitude()
+    	);
+    }
+    
+    public double getDistance​(Point... points) {
+    	throw new RuntimeException("Not implemented");
+    }
+    
+    public double getDistance​(double... latLonPoints) {
+    	throw new RuntimeException("Not implemented");
+    }
+    
+    public Curve<GISMarkupSegment> getPathData​(
+    		Point startPoint,
+            Point endPoint,
+            Curve<GISMarkupSegment> out
+    ) {
+    	throw new RuntimeException("Not implemented");
+    }
+    
+    public Curve<GISMarkupSegment> getPathData​(Point... points) {
+    	throw new RuntimeException("Not implemented");
+    }
 
-	private final Point[] points;
-	
-	public InvisiblePath(Point[] points) {
-		this.points = points;
-	}
-	
-	public int getNPoints() {
-		return this.points.length;
-	}
-	
-	public double getX() {
-		return this.points[0].getX();
-	}
-	
-	public double getY() {
-		return this.points[0].getY();
-	}
-	
-	public double getPointDx(int i) {
-		return this.points[i].getX();
-	}
-	
-	public double getPointDy(int i) {
-		return this.points[i].getY();
-	}
-	
 	/**
 	 * This number is here for model snapshot storing purpose<br>
 	 * It needs to be changed when this class gets changed
@@ -14500,7 +14544,7 @@ public class InvisiblePath implements Serializable, Path2D {
 			<ReferencedFromUserCode>true</ReferencedFromUserCode>
 		</Resource>
 		<Resource>
-			<Path><![CDATA[GravityModelDistribution-1.0.0.jar]]></Path>
+			<Path><![CDATA[GravityModelDistribution-1.0.1.jar]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 		</Resource>
 	</ModelResources>
@@ -14543,7 +14587,7 @@ public class InvisiblePath implements Serializable, Path2D {
 	<ClassPathEntry>
 		<ResourceReference>
 			<PackageName><![CDATA[trucker]]></PackageName>
-			<ClassName><![CDATA[GravityModelDistribution-1.0.0.jar]]></ClassName>
+			<ClassName><![CDATA[jhighway-0.0.1.jar]]></ClassName>
 		</ResourceReference>
 		<Imported>true</Imported>
 		<Folder>false</Folder>
@@ -14551,7 +14595,7 @@ public class InvisiblePath implements Serializable, Path2D {
 	<ClassPathEntry>
 		<ResourceReference>
 			<PackageName><![CDATA[trucker]]></PackageName>
-			<ClassName><![CDATA[jhighway-0.0.1.jar]]></ClassName>
+			<ClassName><![CDATA[GravityModelDistribution-1.0.1.jar]]></ClassName>
 		</ResourceReference>
 		<Imported>true</Imported>
 		<Folder>false</Folder>
