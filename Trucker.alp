@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.8.3.202304281219" AlpVersion="8.7.7">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.8.6.202312140446" AlpVersion="8.8.3">
 <Model>
 	<Id>1661276760197</Id>
 	<Name><![CDATA[Trucker]]></Name>
@@ -119,9 +119,14 @@ import java.util.stream.Stream;
 import com.github.eRedekopp.GravityModelDistribution.GravityModelDistribution;
 import com.github.eRedekopp.GravityModelDistribution.SimpleGravityModelDistribution;
 import com.github.eRedekopp.GravityModelDistribution.Body2D;
-import java.util.concurrent.atomic.AtomicInteger;]]></Import>
+import java.util.concurrent.atomic.AtomicInteger;
+import com.github.eRedekopp.jhighway.LocationQuadTree;
+import java.util.stream.StreamSupport;
+import com.anylogic.engine.graph.algorithms.GeometryUtils;
+import org.locationtech.jts.geom.Coordinate;]]></Import>
 			<StartupCode><![CDATA[loadingArea.navigateTo();
 filterToRelevantRegion();
+setupCitiesQuadtree();
 setupJHighway();
 setupGravityModel();
 initializeTrucks();
@@ -265,6 +270,23 @@ mapViewArea.navigateTo();
 						<Type><![CDATA[JHighwayRouteProvider]]></Type>        
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA[new JHighwayRouteProvider()
+]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1703343131983</Id>
+					<Name><![CDATA[citiesQuadtree]]></Name>
+					<X>700</X><Y>-400</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[LocationQuadTree
+]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[null
 ]]></Code>
 						</InitialValue>
 					</Properties>
@@ -1172,7 +1194,7 @@ mapViewArea.navigateTo();
 				<Variable Class="Parameter">
 					<Id>1701974510910</Id>
 					<Name><![CDATA[pathToOsmFile]]></Name>
-					<X>1480</X><Y>-300</Y>
+					<X>1480</X><Y>-240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1197,7 +1219,7 @@ mapViewArea.navigateTo();
 				<Variable Class="Parameter">
 					<Id>1701974534938</Id>
 					<Name><![CDATA[pathToRouteDataCache]]></Name>
-					<X>1480</X><Y>-280</Y>
+					<X>1480</X><Y>-220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1212,81 +1234,6 @@ mapViewArea.navigateTo();
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1701974534936</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1702049137739</Id>
-					<Name><![CDATA[TRUCK_STOP_ID]]></Name>
-					<X>1480</X><Y>-260</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[int]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[0
-]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1702049137737</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1702049155205</Id>
-					<Name><![CDATA[REST_AREA_ID]]></Name>
-					<X>1480</X><Y>-240</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[int]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[1
-]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1702049155203</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1702049182664</Id>
-					<Name><![CDATA[GAS_STATION_ID]]></Name>
-					<X>1480</X><Y>-220</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[int]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[2
-]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1702049182662</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -1435,15 +1382,17 @@ else return 0;
 						<Name><![CDATA[lon]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
-					<Body><![CDATA[double distance;
-City city;
-do {
-	city = getRandomCityGravityWeighted(lat, lon);
-	distance = map.getDistance(
-		lat, lon, city.Latitude, city.Longitude
-	) * milesPerMeter;
-} while (distance > rangeMiles);
-return city;
+					<Body><![CDATA[double ONE_DEGREE_LON_AT_EQUATOR_MILES = 69.4;
+double oneDegWidthMiles = Math.cos(Math.toRadians(lat)) * ONE_DEGREE_LON_AT_EQUATOR_MILES;
+double degs = rangeMiles / oneDegWidthMiles;
+List<com.github.eRedekopp.jhighway.Location> citiesInRange = citiesQuadtree.queryRegion(
+	new Coordinate(lon - degs, lat + degs),
+	new Coordinate(lon + degs, lat - degs)
+);
+int idx = getDefaultRandomGenerator().nextInt(citiesInRange.size());
+com.github.eRedekopp.jhighway.Location l = citiesInRange.get(idx);
+assert l != null;
+return this.cities.findFirst(c -> c.getId() == l.id);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1587,8 +1536,6 @@ for (City city : citiesToRemove) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[truckers.forEach(Trucker::setHomeCity);
-//traceln("Setting router " + graphhopperRouter);
-//truckers.forEach(t -> t.setRouteProvider(graphhopperRouter));
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1609,13 +1556,13 @@ for (City city : citiesToRemove) {
 
 final AtomicInteger i = new AtomicInteger(0);
 truckStops.forEach(t -> this.jhighwayRouter.addLocation(
-		t.Latitude, t.Longitude, i.getAndIncrement(), TRUCK_STOP_ID
+		t.Latitude, t.Longitude, i.getAndIncrement(), RouteDataWrapper.TRUCK_STOP_ID
 ));
 gasStations.forEach(g -> this.jhighwayRouter.addLocation(
-		g.Latitude, g.Longitude, i.getAndIncrement(), GAS_STATION_ID
+		g.Latitude, g.Longitude, i.getAndIncrement(), RouteDataWrapper.GAS_STATION_ID
 ));
 restAreas.forEach(r -> this.jhighwayRouter.addLocation(
-		r.Latitude, r.Longitude, i.getAndIncrement(), REST_AREA_ID
+		r.Latitude, r.Longitude, i.getAndIncrement(), RouteDataWrapper.REST_AREA_ID
 ));]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -1637,7 +1584,8 @@ restAreas.forEach(r -> this.jhighwayRouter.addLocation(
 					c.Longitude,
 					c.Latitude,
 					c
-			)).collect(Collectors.toList())
+			)).collect(Collectors.toList()),
+		getDefaultRandomGenerator()
 );
 ]]></Body>
 				</Function>
@@ -1736,16 +1684,32 @@ return truckStops.get(id);
 						<Name><![CDATA[location]]></Name>
 						<Type><![CDATA[com.github.eRedekopp.jhighway.Location]]></Type>
 					</Parameter>
-					<Body><![CDATA[if (location.type == TRUCK_STOP_ID) {
+					<Body><![CDATA[if (location.type == RouteDataWrapper.TRUCK_STOP_ID) {
 	return getTruckStopWithId(location.id);
 }
-else if (location.type == GAS_STATION_ID) {
+else if (location.type == RouteDataWrapper.GAS_STATION_ID) {
 	return getGasStationWithId(location.id);
 }
 else {
 	return getRestAreaWithId(location.id);
 }
 ]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1703345046740</Id>
+					<Name><![CDATA[setupCitiesQuadtree]]></Name>
+					<X>1120</X><Y>-160</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[citiesQuadtree = new LocationQuadTree(
+	StreamSupport.stream(cities.spliterator(), false)
+	.map(c -> new com.github.eRedekopp.jhighway.Location(c.getId(), c.Latitude, c.Longitude, -1))
+	.collect(Collectors.toList())
+);]]></Body>
 				</Function>
 			</Functions>
 			<AnalysisData>
@@ -1966,7 +1930,7 @@ else {
 								<ItemName><![CDATA[parking]]></ItemName>
 							</ColumnReference>
 							<Value Class="CodeValue">
-								<Code><![CDATA[5
+								<Code><![CDATA[1
 ]]></Code>
 							</Value>
 							<Operator>GREATER</Operator>
@@ -2280,7 +2244,7 @@ else {
 								<ItemName><![CDATA[parking]]></ItemName>
 							</ColumnReference>
 							<Value Class="CodeValue">
-								<Code><![CDATA[5
+								<Code><![CDATA[1
 ]]></Code>
 							</Value>
 							<Operator>LESS_OR_EQUAL</Operator>
@@ -5418,7 +5382,7 @@ new HashMap<>();
 				<Variable Class="PlainVariable">
 					<Id>1697221655517</Id>
 					<Name><![CDATA[storyteller]]></Name>
-					<X>890</X><Y>-310</Y>
+					<X>890</X><Y>-250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -5648,7 +5612,8 @@ takeSleeperRest();
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="100" Height="30">
-						<EntryAction><![CDATA[refuel();
+						<EntryAction><![CDATA[logRefuelling();
+refuel();
 ]]></EntryAction>
 						<FillColor/>
 					</Properties>
@@ -6066,7 +6031,8 @@ takeShortRest();
 					</Points>
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1668644095845" Target="1661475381131" Trigger="message">
-						<Action><![CDATA[startNewDrivingPeriod();
+						<Action><![CDATA[logStartedSimulation();
+startNewDrivingPeriod();
 ]]></Action>
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
@@ -6881,13 +6847,13 @@ if (plannedStops.isEmpty()) {
 double hoursToNextStop;
 if (plannedStops.getFirst() != null) {
 	StoppableLocation nextStop = plannedStops.getFirst().getSecond();
-	double kmsToNextStop = currentRoute.getMetersBetween(
+	double metersToNextStop = currentRoute.getMetersBetween(
 			this.getLatitude(), 
 			this.getLongitude(), 
 			nextStop.Latitude, 
 			nextStop.Longitude
 	);
-	double milesToNextStop = kmsToNextStop * 1000 * main.milesPerMeter;
+	double milesToNextStop = metersToNextStop * main.milesPerMeter;
 	hoursToNextStop = milesToNextStop / main.averageMilesPerHour;
 }
 else {
@@ -6973,7 +6939,7 @@ return isReachable && isNotAlreadyThere;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1669149903575</Id>
 					<Name><![CDATA[logStartedDriving]]></Name>
-					<X>890</X><Y>-550</Y>
+					<X>890</X><Y>-510</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6994,7 +6960,7 @@ storyteller.addItem(message);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1669149973463</Id>
 					<Name><![CDATA[logStoppedDriving]]></Name>
-					<X>890</X><Y>-530</Y>
+					<X>890</X><Y>-490</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -7033,7 +6999,7 @@ if (nextStop != null) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1669929788468</Id>
 					<Name><![CDATA[logStartedNewTrip]]></Name>
-					<X>890</X><Y>-510</Y>
+					<X>890</X><Y>-470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -7137,7 +7103,7 @@ else {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1669937233980</Id>
 					<Name><![CDATA[logStopAccepted]]></Name>
-					<X>890</X><Y>-490</Y>
+					<X>890</X><Y>-450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -7150,7 +7116,7 @@ else {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1669937240888</Id>
 					<Name><![CDATA[logStopDenied]]></Name>
-					<X>890</X><Y>-470</Y>
+					<X>890</X><Y>-430</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -7319,7 +7285,7 @@ return currentHours + hoursWorkedSinceRest;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1675444747056</Id>
 					<Name><![CDATA[logDrivingHoursIn24HrPeriod]]></Name>
-					<X>890</X><Y>-450</Y>
+					<X>890</X><Y>-410</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7663,7 +7629,20 @@ if (farthestReachableTS != null) {
 }
 
 // Find the nearest en-route truck stop that I can NOT legally drive to.
-TruckStop nearestNotReachable = getNearestNotReachableTruckStop(locationsAlongRoute);
+TruckStop nearestNotReachable;
+if (farthestReachableTS != null) {
+	nearestNotReachable = main.getTruckStopWithId(currentRoute.getNextTruckStopAfterPoint(
+			farthestReachableTS.Latitude,
+			farthestReachableTS.Longitude
+	).id);
+}
+else {
+	nearestNotReachable = main.getTruckStopWithId(currentRoute.getNextTruckStopAfterPoint(
+			this.getLatitude(), 
+			this.getLongitude()
+	).id);
+}
+
 // Does it exist, and do I have enough fuel to make it?
 if (nearestNotReachable != null) {
 	double milesToNNR =	currentRoute.getMetersBetween(
@@ -7671,7 +7650,7 @@ if (nearestNotReachable != null) {
 			this.getLongitude(), 
 			nearestNotReachable.Latitude, 
 			nearestNotReachable.Longitude
-	) / main.milesPerMeter;
+	) * main.milesPerMeter;
 	if (milesToNNR < milesToEmpty) {
 		// Am I allowed to make roadside stops?
 		if (main.allowUnsafeStops) {
@@ -7690,7 +7669,7 @@ if (nearestNotReachable != null) {
 					this.getLongitude(), 
 					nearestNotReachable.Latitude, 
 					nearestNotReachable.Longitude
-			) / main.milesPerMeter;
+			) * main.milesPerMeter;
 			if (milesToFarthestReachableTS < 0 || milesToFarthestReachableTS < milesToFarthestRA) {
 				// Stop for the night at the rest area, 
 				// then proceed to the nearest illegal truck stop.
@@ -7722,7 +7701,8 @@ if (nearestNotReachable != null) {
 }
 
 // Are there any truck stops en route at all?
-StoppableLocation gasStop = getNearestReachableFuel(locationsAlongRoute);
+// TODO refine this
+StoppableLocation gasStop = main.getLocation(currentRoute.getNextLocationAfterPoint(this.getLatitude(), this.getLongitude()));
 if (gasStop != null) {
 	// Stop for fuel at the nearest opportunity en route
 	plannedStops.add(new Pair<>(NoRest, gasStop));
@@ -7733,12 +7713,13 @@ else {
 	logNoStopsFound();
 	
 	// Stop for fuel at the nearest reachable stop in any direction
-	// If there are none available, this will crash the simulation.
-	// Let's just run it and see if this ever happens -- it really 
-	// shouldn't be possible if everything else is working correctly
 	gasStop = getNearestReachableFuelInAnyDirection();
-	if (gasStop == null) throw new RuntimeException("Unable to find any reachable gas stations in any direction");
-	plannedStops.add(new Pair<>(NoRest, gasStop));
+	if (gasStop == null) {
+		throw new RuntimeException("Can't find any stops in any direction");
+	}
+	else {
+		plannedStops.add(new Pair<>(NoRest, gasStop));
+	}
 	return;
 }
 ]]></Body>
@@ -7761,7 +7742,7 @@ else {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1697216822780</Id>
 					<Name><![CDATA[logHOSViolation]]></Name>
-					<X>890</X><Y>-430</Y>
+					<X>890</X><Y>-390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7786,7 +7767,7 @@ storyteller.addItem(message, RED);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1697216839885</Id>
 					<Name><![CDATA[logParkingViolation]]></Name>
-					<X>890</X><Y>-410</Y>
+					<X>890</X><Y>-370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7807,18 +7788,22 @@ storyteller.addItem(message, RED);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1697216853219</Id>
 					<Name><![CDATA[logNoStopsFound]]></Name>
-					<X>890</X><Y>-390</Y>
+					<X>890</X><Y>-350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[String message = String.format(
 	"Unable to find any reasonable stops. lat = %.4f, lon = %.4f\n"
-	+ "Destination = %s, max range %.1f miles",
+	+ "Destination = %s, max range %.1f miles, driving hours: %.1f,\n"
+	+ "working hours: %.1f, gallons in tank: %.1f",
 	this.getLatitude(),
 	this.getLongitude(),
 	destination.Name,
-	getMaximumMilesUntilNextStop()
+	getMaximumMilesUntilNextStop(),
+	getDrivingHoursRemaining(),
+	getWorkingHoursRemaining(),
+	getGallonsInTank()
 );
 storyteller.addItem(message, RED);
 ]]></Body>
@@ -7828,7 +7813,7 @@ storyteller.addItem(message, RED);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1697814125655</Id>
 					<Name><![CDATA[logSleeperRest]]></Name>
-					<X>890</X><Y>-370</Y>
+					<X>890</X><Y>-330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7841,7 +7826,7 @@ storyteller.addItem(message, RED);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1697814604586</Id>
 					<Name><![CDATA[logRestartRest]]></Name>
-					<X>890</X><Y>-350</Y>
+					<X>890</X><Y>-310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7928,8 +7913,11 @@ if (inState(Loaded)) {
 		return;
 	}
 	else {
-		// Get a random new receiver and go there
-		City newCity = main.getRandomCityGravityWeighted(this.getLatitude(), this.getLongitude());
+		// Get a random new receiver and go there. Make sure we don't randomly get assigned
+		// the same city again
+		City newCity = destination;
+		while (newCity == destination) 
+			newCity = main.getRandomCityGravityWeighted(this.getLatitude(), this.getLongitude());
 		startNewTripTo(newCity);
 		return;
 	}
@@ -7939,13 +7927,17 @@ if (inState(Loaded)) {
 double rand = uniform(0, 1);
 if (rand < main.probShipperIsInSameCityAsReceiver) {
 	// If destination is null, we're at home
-	if (destination == null) destination = home;
-	// Pick up a load from the current city
-	startNewTripTo(destination);
+	if (destination == null) startNewTripTo(home);
+	// Otherwise pick up a load from the current city
+	else startNewTripTo(destination);
 }
 else {
 	// Get a random new city and pick up a load
-	City newCity =  main.getRandomCityUnconditional();
+	City newCity =  main.getRandomCityWithinRange(
+			main.maxMilesToShipper,
+			this.getLatitude(),
+			this.getLongitude()
+	);
 	startNewTripTo(newCity);
 }
 ]]></Body>
@@ -8120,7 +8112,7 @@ timeShortRested = time() + main.shortRestHours;
 List<LocationAlongPath> allReachable = locations
 		.stream()
 		.filter(l -> 
-				l.type == main.REST_AREA_ID
+				l.type == RouteDataWrapper.REST_AREA_ID
 				&& currentRoute.translateToKilometers(l.pathOffset) <= maxLegalKms
 		).collect(Collectors.toList());
 
@@ -8135,7 +8127,7 @@ else
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1699375061633</Id>
 					<Name><![CDATA[logShortRest]]></Name>
-					<X>890</X><Y>-330</Y>
+					<X>890</X><Y>-290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8186,12 +8178,12 @@ this.moveTo(lat, lon);
 Optional<LocationAlongPath> nearest = locations
 		.stream()
 		.filter(l -> 
-				l.type == main.TRUCK_STOP_ID || l.type == main.GAS_STATION_ID
+				l.type == RouteDataWrapper.TRUCK_STOP_ID || l.type == RouteDataWrapper.GAS_STATION_ID
 				&& currentRoute.translateToKilometers(l.pathOffset) <= maxLegalKms
 		).findFirst();
 
 if (nearest.isPresent())
-	if (nearest.get().type == main.TRUCK_STOP_ID) return main.getTruckStopWithId(nearest.get().id);
+	if (nearest.get().type == RouteDataWrapper.TRUCK_STOP_ID) return main.getTruckStopWithId(nearest.get().id);
 	else return main.getGasStationWithId(nearest.get().id);
 else
 	return null;
@@ -8215,7 +8207,7 @@ else
 List<LocationAlongPath> allReachable = locations
 		.stream()
 		.filter(l -> 				
-				l.type == main.TRUCK_STOP_ID
+				l.type == RouteDataWrapper.TRUCK_STOP_ID
 				&& currentRoute.translateToKilometers(l.pathOffset) <= maxLegalKms)
 		.collect(Collectors.toList());
 		
@@ -8243,7 +8235,7 @@ else
 Optional<LocationAlongPath> nearest = locations
 		.stream()
 		.filter(l -> 
-				l.type == main.TRUCK_STOP_ID
+				l.type == RouteDataWrapper.TRUCK_STOP_ID
 				&& currentRoute.translateToKilometers(l.pathOffset) > maxLegalKms
 		).findFirst();
 
@@ -8272,7 +8264,7 @@ List<com.github.eRedekopp.jhighway.Location> locationsInRange = main.jhighwayRou
 		
 for (com.github.eRedekopp.jhighway.Location location : locationsInRange) {
 	if (
-			(location.type == main.TRUCK_STOP_ID || location.type == main.GAS_STATION_ID)
+			(location.type == RouteDataWrapper.TRUCK_STOP_ID || location.type == RouteDataWrapper.GAS_STATION_ID)
 			&& currentRoute.getMetersBetween(
 					this.getLatitude(), this.getLongitude(), 
 					location.getLatitude(), location.getLongitude()
@@ -8284,6 +8276,36 @@ for (com.github.eRedekopp.jhighway.Location location : locationsInRange) {
 }
 
 return null;]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1703338310427</Id>
+					<Name><![CDATA[logStartedSimulation]]></Name>
+					<X>890</X><Y>-530</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[this.storyteller.addItem(String.format(
+	"Starting simulation. Home: %s, %s",
+	this.home.Name,
+	this.home.State
+));
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1703349450832</Id>
+					<Name><![CDATA[logRefuelling]]></Name>
+					<X>890</X><Y>-270</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[storyteller.addItem("Refuelling");
+]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -11912,6 +11934,22 @@ set_Capacity(main.getRandomRestAreaParking(Name));
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1705012001475</Id>
+					<Name><![CDATA[printToConsole]]></Name>
+					<X>-200</X><Y>90</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[true
+]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1697218289476</Id>
 					<Name><![CDATA[trucker]]></Name>
@@ -11939,7 +11977,7 @@ set_Capacity(main.getRandomRestAreaParking(Name));
 				<Variable Class="CollectionVariable">
 					<Id>1697219749480</Id>
 					<Name><![CDATA[items]]></Name>
-					<X>-200</X><Y>90</Y>
+					<X>-200</X><Y>110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -11958,7 +11996,7 @@ set_Capacity(main.getRandomRestAreaParking(Name));
 					<ReturnType><![CDATA[StoryItem]]></ReturnType>
 					<Id>1697219836796</Id>
 					<Name><![CDATA[getDisplayItemAtIndex]]></Name>
-					<X>-200</X><Y>120</Y>
+					<X>-200</X><Y>160</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -11985,7 +12023,7 @@ return items.stream()
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1697220020917</Id>
 					<Name><![CDATA[addItem]]></Name>
-					<X>-200</X><Y>140</Y>
+					<X>-200</X><Y>180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -11994,7 +12032,7 @@ return items.stream()
 						<Name><![CDATA[message]]></Name>
 						<Type><![CDATA[String]]></Type>
 					</Parameter>
-					<Body><![CDATA[items.add(new StoryItem(time(), message));
+					<Body><![CDATA[this.addItem(message, Color.BLACK);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -12002,7 +12040,7 @@ return items.stream()
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1697220033224</Id>
 					<Name><![CDATA[addItem]]></Name>
-					<X>-200</X><Y>160</Y>
+					<X>-200</X><Y>200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12016,6 +12054,7 @@ return items.stream()
 						<Type><![CDATA[Color]]></Type>
 					</Parameter>
 					<Body><![CDATA[items.add(new StoryItem(time(), message, color));
+if (printToConsole) traceln(message);
 ]]></Body>
 				</Function>
 			</Functions>
@@ -13023,15 +13062,6 @@ leave.]]></Text>
 				<Parameter>
 					<ParameterName><![CDATA[pathToRouteDataCache]]></ParameterName>
 				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[TRUCK_STOP_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[REST_AREA_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[GAS_STATION_ID]]></ParameterName>
-				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
@@ -13206,15 +13236,6 @@ leave.]]></Text>
 				<Parameter>
 					<ParameterName><![CDATA[pathToRouteDataCache]]></ParameterName>
 				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[TRUCK_STOP_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[REST_AREA_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[GAS_STATION_ID]]></ParameterName>
-				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
@@ -13388,15 +13409,6 @@ leave.]]></Text>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[pathToRouteDataCache]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[TRUCK_STOP_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[REST_AREA_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[GAS_STATION_ID]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -13576,15 +13588,6 @@ leave.]]></Text>
 				<Parameter>
 					<ParameterName><![CDATA[pathToRouteDataCache]]></ParameterName>
 				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[TRUCK_STOP_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[REST_AREA_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[GAS_STATION_ID]]></ParameterName>
-				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
@@ -13762,15 +13765,6 @@ leave.]]></Text>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[pathToRouteDataCache]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[TRUCK_STOP_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[REST_AREA_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[GAS_STATION_ID]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -13954,15 +13948,6 @@ leave.]]></Text>
 				<Parameter>
 					<ParameterName><![CDATA[pathToRouteDataCache]]></ParameterName>
 				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[TRUCK_STOP_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[REST_AREA_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[GAS_STATION_ID]]></ParameterName>
-				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
@@ -14140,15 +14125,6 @@ leave.]]></Text>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[pathToRouteDataCache]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[TRUCK_STOP_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[REST_AREA_ID]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[GAS_STATION_ID]]></ParameterName>
 				</Parameter>
 			</Parameters>			
 			<PresentationProperties>
@@ -14338,11 +14314,16 @@ public class JHighwayWrapper implements Serializable {
 import com.github.eRedekopp.jhighway.LocationAlongPath;
 import org.locationtech.jts.geom.Coordinate;
 
+
 /**
  * Wrapper to provide information from RoutePlanningData in a way
  * that is usable in Anylogic
  */	
 public class RouteDataWrapper implements Serializable {
+	
+	public static final int TRUCK_STOP_ID = 0;
+	public static final int REST_AREA_ID = 1;
+	public static final int GAS_STATION_ID = 2;
 	
 	private final RoutePlanningData routeData;
 		
@@ -14368,6 +14349,10 @@ public class RouteDataWrapper implements Serializable {
 					points[i+1].y, points[i+1].x
 			));
 		}
+		if (points.length == 1) curve.addSegment(new GISMarkupSegmentLine(
+			points[0].y, points[0].x,
+			points[0].y, points[0].x
+		));
 		curve.initialize();
 		return curve;
 	}
@@ -14378,7 +14363,7 @@ public class RouteDataWrapper implements Serializable {
 	
 	public double getMetersBetween(double fromLat, double fromLon, double toLat, double toLon) {
 		double distDegs = routeData.getDistanceBetween(fromLat, fromLon, toLat, toLon);
-		return routeData.degreesAlongPathToKms(distDegs);
+		return routeData.degreesAlongPathToKms(distDegs) * 1000;
 	}
 	
 	public List<LocationAlongPath> getLocationsWithinDistanceFrom(double lat, double lon, double distKms) {
@@ -14388,6 +14373,10 @@ public class RouteDataWrapper implements Serializable {
 	public LocationAlongPath getNextLocationAfterPoint(double lat, double lon) {
 		List<LocationAlongPath> locations = this.routeData.getLocationsAfterPoint(lat, lon);
 		return locations.isEmpty() ? null : locations.get(0);
+	}
+	
+	public LocationAlongPath getNextTruckStopAfterPoint(double lat, double lon) {
+		return this.routeData.getLocationsAfterPoint(lat, lon).parallelStream().filter(l -> l.type == TRUCK_STOP_ID).findFirst().orElse(null);
 	}
 	
 	public Point getLocationAtOffsetFrom(double lat, double lon, double distKms) {
@@ -14452,7 +14441,7 @@ public class JHighwayRouteProvider implements Serializable, IGISRouteProvider {
     public double getDistance​(double... latLonPoints) {
     	throw new RuntimeException("Not implemented");
     }
-    
+
     public Curve<GISMarkupSegment> getPathData​(
     		Point startPoint,
             Point endPoint,
@@ -14478,74 +14467,92 @@ public class JHighwayRouteProvider implements Serializable, IGISRouteProvider {
 		<Resource>
 			<Path><![CDATA[USA_Major_Cities.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[rest-areas.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[allstays-truckstop-data.xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/us-latest.osm.pbf]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/high-detail]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/high-detail/gh.lock]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/high-detail/nodes_ch_shortest_car]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/high-detail/names]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/high-detail/shortcuts_shortest_car]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/high-detail/location_index]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/high-detail/edges]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/high-detail/nodes]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/high-detail/shortcuts_fastest_car]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/high-detail/nodes_ch_fastest_car]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/high-detail/properties]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[routes/high-detail/geometry]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[jhighway-0.0.1.jar]]></Path>
 			<ReferencedFromUserCode>true</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 		<Resource>
 			<Path><![CDATA[GravityModelDistribution-1.0.1.jar]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+			<Location>FILE_SYSTEM</Location>
 		</Resource>
 	</ModelResources>
     <RequiredLibraryReference>
