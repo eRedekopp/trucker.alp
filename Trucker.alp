@@ -1530,6 +1530,27 @@ if (startImmediately) {
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1741728080435</Id>
+					<Name><![CDATA[disable78DayRule]]></Name>
+					<X>70</X><Y>-80</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<ParameterEditor>
+							<Id>1741728080433</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 			</Variables>
 			<Events>
 				<Event>
@@ -7437,7 +7458,10 @@ return maxHours - getHoursDrivenInLastNDays(numDays - 1);]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getHoursRemainingNDay(7, main.maxDrivingHours7Day);
+					<Body><![CDATA[if (main.disable78DayRule) 
+	return Double.POSITIVE_INFINITY;
+else 
+	return getHoursRemainingNDay(7, main.maxDrivingHours7Day);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -7463,7 +7487,10 @@ return maxHours - getHoursDrivenInLastNDays(numDays - 1);]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getHoursRemainingNDay(8, main.maxDrivingHours8Day);
+					<Body><![CDATA[if (main.disable78DayRule) 
+	return Double.POSITIVE_INFINITY;
+else 
+	return getHoursRemainingNDay(8, main.maxDrivingHours8Day);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -7861,6 +7888,13 @@ timeShortRested = timeOvernightRested;
 // We only run this flow chart if we're deciding whether to take a 
 // sleeper rest or a restart rest
 assert nextStop.getFirst() == LongRest;
+
+// Are 7/8 day rules disabled in this simulation?
+if (main.disable78DayRule) {
+	return SleeperRest;
+}
+
+// TODO fix this to match the updated flowchart
 
 // Am I anywhere except a truck stop?
 if (!(nextStop.getSecond() instanceof TruckStop)) {
@@ -13236,6 +13270,9 @@ leave.]]></Text>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[stdevWaitBeforeStart]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[disable78DayRule]]></ParameterName>
 				</Parameter>
 			</Parameters>
 			<PresentationProperties>
