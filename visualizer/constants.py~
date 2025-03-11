@@ -1,0 +1,41 @@
+# Constants and Enums
+
+from enum import StrEnum
+import numpy as np
+
+ROADSIDE_STOP_ID = 1
+
+NULL_TIME = -3.0
+
+class AnalysisType(StrEnum):
+    #PARKING_VIOLATION="pviolation"
+    #HOURS_VIOLATION="hviolation"
+    #HOME_TIME="home"
+    #DESTINATIONS="destinations"
+    ALLSTOPS="allstops"
+
+
+class ViolationType(StrEnum):
+    NONE="no violation"
+    HOURS="hours violation"
+    PARKING="parking violation"
+    DOUBLE="double violation"
+
+class LocationType(StrEnum):
+    TRUCK_STOP="truck stop"
+    GAS_STATION="gas station"
+    REST_AREA="rest area"
+    CITY="city"
+
+class RestType(StrEnum):
+    RESET="RestartRest"
+    SLEEPER="SleeperRest"
+    SHORT="ShortRest"
+    DETENTION="Detention"
+    REFUEL="Refuel"
+    HOME="Home"
+
+class DestinationType(StrEnum):
+    HOME="home"
+    SHIPPER="shipper"
+    RECVR="receiver"

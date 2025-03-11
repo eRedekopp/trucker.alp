@@ -1,0 +1,403 @@
+#
+
+from enum import StrEnum
+import argparse
+import os
+import numpy as np
+import pandas as pd
+import cartopy as cart
+import geoplot as gplt
+import geoplot.crs as gcrs
+import geopandas as gpd
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from matplotlib.animation import PillowWriter
+import mapclassify as mc
+
+PROGRAM_NAME = "Trucker Model Data Visualizer"
+PROGRAM_DESCRIPTION = (
+    "Generates maps and graphs showing the "
+    "results of a Trucker Model execution"
+)
+
+ROADSIDE_STOP_ID = 1
+
+
+class AnalysisType(StrEnum):
+    #PARKING_VIOLATION="pviolation"
+    #HOURS_VIOLATION="hviolation"
+    #HOME_TIME="home"
+    #DESTINATIONS="destinations"
+    ALLSTOPS="allstops"
+
+
+class StopType(StrEnum):
+    REGULAR="regular"
+    HOURS_VIOLATION="hours violation"
+    PARKING_VIOLATION="parking violation"
+    DOUBLE_VIOLATION="double violation"
+
+class LocationType(StrEnum):
+    TRUCK_STOP="truck stop"
+    GAS_STATION="gas station"
+    REST_AREA="rest area"
+    CITY="city"
+
+def load_results(agent_id, locations):
+    results_dir = f"{args.results_directory}/{agent_id}"
+    stop_driving = pd.read_csv(
+        f"{results_dir}/StopDrivingEvent.csv",
+        index_col="time"
+    )
+    hours_violation = pd.read_csv(
+        f"{results_dir}/HoursViolationEvent.csv",
+        index_col="time"
+    )
+    parking_violation = pd.read_csv(
+        f"{results_dir}/ParkingViolationEvent.csv",
+        index_col="time"
+    )
+
+    stop_driving = gpd.GeoDataFrame(
+        stop_driving,
+        geometry=gpd.points_from_xy(
+            stop_driving.lon,
+            stop_driving.lat
+        )
+    )
+
+    def get_loc(row):
+        locid = row["nextStopID"]
+        time = row.name
+        if (locid == 1):
+            return {
+                "lon": stop_driving.loc[time]["lon"],
+                "lat": stop_driving.loc[time]["lat"]
+            }
+        else:
+            return {
+                "lon": locations.loc[locid]["longitude"],
+                "lat": locations.loc[locid]["latitude"]
+            }
+    def get_lon(row):
+        return get_loc(row)["lon"]
+    def get_lat(row):
+        return get_loc(row)["lat"]
+
+    hours_violation["lon"] = hours_violation.apply(get_lon, axis=1)
+    hours_violation["lat"] = hours_violation.apply(get_lat, axis=1)
+    hours_violation = gpd.GeoDataFrame(
+        hours_violation,
+        geometry=gpd.points_from_xy(
+            hours_violation.lon,
+            hours_violation.lat
+        )
+    )
+    parking_violation = gpd.GeoDataFrame(
+        parking_violation,
+        geometry=gpd.points_from_xy(
+            parking_violation.lon,
+            parking_violation.lat
+        )
+    )
+    shared_idxs = hours_violation.index.intersection(parking_violation.index)
+    unique_hours_idxs = hours_violation.index.difference(shared_idxs)
+    unique_parking_idxs = parking_violation.index.difference(shared_idxs)
+
+    double_violation = hours_violation.loc[shared_idxs].copy()
+    hours_violation = hours_violation.loc[unique_hours_idxs].copy()
+    parking_violation = parking_violation.loc[unique_parking_idxs].copy()
+
+    def get_stop_type(row):
+        time = row.name
+        if time in shared_idxs:
+            return StopType.DOUBLE_VIOLATION
+        elif time in unique_hours_idxs:
+            return StopType.HOURS_VIOLATION
+        elif time in unique_parking_idxs:
+            return StopType.PARKING_VIOLATION
+        else:
+            return StopType.REGULAR
+
+    stop_driving["type"] = stop_driving.apply(get_stop_type)
+
+    return {
+        "stop_driving": stop_driving,
+        "hours_violation": hours_violation,
+        "parking_violation": parking_violation,
+        "double_violation": double_violation
+    }
+
+def load_locations():
+    cities = pd.read_csv(
+        f"{args.locations_directory}/USA_Major_Cities.csv",
+        index_col="id"
+    )
+    cities.rename(columns={"X": "longitude", "Y": "latitude"}, inplace=True)
+    cities = gpd.GeoDataFrame(
+        cities,
+        geometry=gpd.points_from_xy(
+            cities["latitude"],
+            cities["longitude"]
+        )
+    )
+    cities["type"] = LocationType.CITY
+    allstays = pd.read_csv(
+        f"{args.locations_directory}/allstays-truckstop-data.csv",
+        index_col="id"
+    )
+    allstays = gpd.GeoDataFrame(
+        allstays,
+        geometry=gpd.points_from_xy(
+            allstays.longitude,
+            allstays.latitude
+        )
+    )
+    truck_stops = allstays[allstays["parking"] > 1].copy()
+    truck_stops["type"] = LocationType.TRUCK_STOP
+    gas_stations = allstays[allstays["parking"] <= 1].copy()
+    gas_stations["type"] = LocationType.GAS_STATION
+
+    rest_areas = pd.read_csv(
+        f"{args.locations_directory}/rest-areas.csv",
+        index_col="id"
+    )
+    rest_areas["type"] = LocationType.REST_AREA
+    rest_areas = gpd.GeoDataFrame(
+        rest_areas,
+        geometry=gpd.points_from_xy(
+            rest_areas.longitude,
+            rest_areas.latitude
+        )
+    )
+
+    all_locations = gpd.GeoDataFrame(
+        pd.concat(
+            [cities, truck_stops, gas_stations, rest_areas],
+            verify_integrity=True,
+            sort=True
+        ),
+        crs=cities.crs
+    )
+    return all_locations
+
+def load_highways(path):
+    if path is None:
+        return None
+    else:
+        return gpd.read_file(
+            path,
+            engine="pyogrio",
+            layer="lines"
+        )
+
+
+class Visualizer():
+
+    CRS = gcrs.Mercator()
+
+    FIG_WIDTH_INCHES = 10
+    FIG_HEIGHT_INCHES = 10
+
+    TRAJECTORY_TAIL_LENGTH = 9
+
+    def __init__(self, all_results, locations, highways, output_dir):
+        self.all_results = all_results
+        self.locations = locations
+        self.highways = highways
+        self.output_dir = output_dir
+        self.usa = gpd.read_file(gplt.datasets.get_path('contiguous_usa'))
+
+    def setup(self):
+        os.makedirs(self.output_dir, exist_ok=True)
+
+    def draw_map_ax(self, fig):
+        # Draw Map
+        map_ax = fig.add_subplot(projection=self.CRS)
+        map_ax.set_axis_off()
+        gplt.polyplot(
+            self.usa,
+            extent=self.usa.total_bounds,
+            ax=map_ax
+        )
+        if self.highways is not None:
+            gplt.polyplot(
+                self.highways,
+                extent=self.usa.total_bounds,
+                ax=map_ax,
+                color="gray"
+            )
+
+        return map_ax
+
+    def make_text_ax(self, fig):
+        return fig.add_subplot()
+
+    def animate_single_trucker_path(
+            self,
+            agent_id,
+            start_frame=None,
+            stop_frame=None,
+            fps=5
+    ):
+        results = self.all_results[agent_id]
+        num_stops = len(results["stop_driving"])
+
+        if start_frame is None:
+            start_frame = 0
+        if stop_frame is None or stop_frame > num_stops:
+            stop_frame = num_stops
+
+        fig = plt.figure(
+            figsize=(self.FIG_WIDTH_INCHES, self.FIG_HEIGHT_INCHES),
+        )
+
+        plt.title(f"All Stops: Driver {agent_id}")
+        plt.tight_layout()
+
+        # Record Frames
+        writer = PillowWriter(fps=fps)
+        with writer.saving(
+                fig,
+                f"{self.output_dir}/Trucker_Trajectory_{agent_id}.gif",
+                200
+        ):
+            for frame_num in range(start_frame, stop_frame):
+                print(f"Rendering frame #{frame_num+1}")
+                self.capture_map_frame(
+                    frame_num,
+                    results,
+                    fig,
+                    writer
+                )
+
+
+    def capture_map_frame(
+            self,
+            stop_num,
+            results,
+            fig,
+            writer
+    ):
+
+        stoptime = results["stop_driving"].iloc[stop_num].name
+        numframes = 1
+
+        map_ax = self.draw_map_ax(fig)
+        content = [map_ax]
+
+        def draw_pointplot(data, color, scale=None, marker=None):
+            gplt.pointplot(
+                data,
+                ax=map_ax,
+                extent=self.usa.total_bounds,
+                color=color,
+                scale=scale if stop_num > 1 else None,
+                marker=marker
+            )
+
+        def draw_trajectory():
+            startidx = max(0, stop_num - self.TRAJECTORY_TAIL_LENGTH - 1)
+            stopidx = stop_num + 1
+            stops = results["stop_driving"].iloc[startidx:stopidx].copy()
+            stops["timesince"] = stops.index - stoptime
+            draw_pointplot(stops, "gray", "timesince")
+
+        def draw_viols(violtype, color, marker):
+            viols = results[violtype].loc[0:stoptime].copy()
+            viols["timesince"] = viols.index - stoptime
+            draw_pointplot(viols, color, marker=marker)
+
+        draw_trajectory()
+        draw_viols("parking_violation", "blue", "*")
+        draw_viols("hours_violation", "green", "*")
+        draw_viols("double_violation", "red", "x")
+
+
+        # Capture the frame(s)
+        for _ in range(numframes):
+            writer.grab_frame()
+
+        # Cleanup
+        for c in content:
+            c.remove()
+
+
+
+
+##################################### Main #####################################
+
+parser = argparse.ArgumentParser(
+    prog=PROGRAM_NAME,
+    description=PROGRAM_DESCRIPTION
+)
+parser.add_argument(
+    '-o',
+    '--output_directory',
+    help="The directory in which the results will be stored.",
+    default="./AnalysisResults",
+    required=False
+)
+parser.add_argument(
+    '-d',
+    '--results_directory',
+    help="The parent directory containing results",
+    default=".",
+    required=False
+)
+parser.add_argument(
+    '-i',
+    '--ids',
+    type=int,
+    nargs='+',
+    help="The IDs of the truckers whose results should be considered",
+    default=[1],
+    required=False
+)
+parser.add_argument(
+    '-l',
+    '--locations_directory',
+    help='The directory containing the data files for the locations',
+    default='.',
+    required=False
+)
+parser.add_argument(
+    '-a',
+    '--analyses',
+    type=AnalysisType,
+    nargs='+',
+    help='The names of the analyses to perform.',
+    choices=list(AnalysisType),
+    default=[AnalysisType.ALLSTOPS],
+    required=False
+)
+parser.add_argument(
+    '-s',
+    '--osm_path',
+    type=str,
+    help="The path to the .osm or .osm.pbf file containing highway data",
+    default=None,
+    required=False
+)
+
+args = parser.parse_args()
+
+
+if __name__ == "__main__":
+
+
+    locations = load_locations()
+    highways = load_highways(args.osm_path)
+    all_results = {
+        agent_id: load_results(agent_id, locations)
+        for agent_id in args.ids
+    }
+
+    viz = Visualizer(
+        all_results,
+        locations,
+        highways,
+        args.output_directory
+    )
+
+    viz.animate_single_trucker_path(args.ids[0], stop_frame=10)

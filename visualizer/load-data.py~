@@ -1,0 +1,56 @@
+def load_data(
+        results_dir,
+        locations_dir,
+
+):
+        cities = pd.read_csv(
+        f"{args.locations_directory}/USA_Major_Cities.csv",
+        index_col="id"
+    )
+    cities.rename(columns={"X": "longitude", "Y": "latitude"}, inplace=True)
+    cities = gpd.GeoDataFrame(
+        cities,
+        geometry=gpd.points_from_xy(
+            cities["latitude"],
+            cities["longitude"]
+        )
+    )
+    cities["type"] = LocationType.CITY
+    allstays = pd.read_csv(
+        f"{args.locations_directory}/allstays-truckstop-data.csv",
+        index_col="id"
+    )
+    allstays = gpd.GeoDataFrame(
+        allstays,
+        geometry=gpd.points_from_xy(
+            allstays.longitude,
+            allstays.latitude
+        )
+    )
+    truck_stops = allstays[allstays["parking"] > 1].copy()
+    truck_stops["type"] = LocationType.TRUCK_STOP
+    gas_stations = allstays[allstays["parking"] <= 1].copy()
+    gas_stations["type"] = LocationType.GAS_STATION
+
+    rest_areas = pd.read_csv(
+        f"{args.locations_directory}/rest-areas.csv",
+        index_col="id"
+    )
+    rest_areas["type"] = LocationType.REST_AREA
+    rest_areas = gpd.GeoDataFrame(
+        rest_areas,
+        geometry=gpd.points_from_xy(
+            rest_areas.longitude,
+            rest_areas.latitude
+        )
+    )
+
+    all_locations = gpd.GeoDataFrame(
+        pd.concat(
+            [cities, truck_stops, gas_stations, rest_areas],
+            verify_integrity=True,
+            sort=True
+        ),
+        crs=cities.crs
+    )
+    return all_locations

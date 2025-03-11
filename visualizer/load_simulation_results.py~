@@ -1,0 +1,60 @@
+#
+
+from utils import gdf_concat
+from load_agent_results import AgentResultsLoader
+from load_locations import load_all_locations, load_highways
+
+class SimulationResults():
+
+    def __init__(self, results_by_agent, all_locations, highways=None):
+        self.all_locations = all_locations
+        self.highways = highways
+        self.results_by_agent = results_by_agent
+        resultslist = results_by_agent.values()
+        self.park_viols = gdf_concat(
+            [r.parking_viol for r in resultslist]
+        )
+        self.hour_viols = gdf_concat(
+            [r.hours_viol for r in resultslist]
+        )
+        self.dbl_viols = gdf_concat(
+            [r.double_viol for r in resultslist]
+        )
+        self.combined_viols = gdf_concat(
+            [self.park_viols, self.hour_viols, self.dbl_viols]
+        )
+        self.num_park_viols = len(self.park_viols)
+        self.num_hour_viols = len(self.hour_viols)
+        self.num_dbl_viols = len(self.dbl_viols)
+        self.total_viols = (
+            self.num_park_viols + self.num_hour_viols + self.num_dbl_viols
+        )
+        self.total_stops = sum(
+            len(agent_results.stop_driving)
+            for agent_results in resultslist
+        )
+        self.total_starts = sum(
+            len(agent_results.start_driving)
+            for agent_results in resultslist
+        )
+        self.sim_start_time = min(r.start_sim_time for r in resultslist)
+        self.last_event_time = max([
+            *[max(r.stop_driving.index) for r in resultslist],
+            *[max(r.start_driving.index) for r in resultslist]
+        ])
+        self.sim_duration_hrs = self.last_event_time - self.sim_start_time
+        self.num_agents = len(results_by_agent)
+
+
+def load_results(agent_ids, results_parent_dir, locations_dir, osm_path):
+    all_locations = load_all_locations(locations_dir)
+    highways = load_highways(osm_path)
+    all_results = {
+        agent_id: AgentResultsLoader.load_agent_results(
+            agent_id,
+            results_parent_dir,
+            all_locations
+        )
+        for agent_id in agent_ids
+    }
+    return SimulationResults(all_results, all_locations, highways)

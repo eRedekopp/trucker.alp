@@ -1,0 +1,9 @@
+AnalysisResults
+ModelRun*
+*~
+*.jar
+cache
+database
+__pycache__
+*/**/__pycache__
+Trucker.original.alp
