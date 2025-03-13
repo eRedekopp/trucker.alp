@@ -1539,12 +1539,15 @@ if (startImmediately) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
+						<Type><![CDATA[boolean]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[false]]></Code>
+						</DefaultValue>
 						<ParameterEditor>
 							<Id>1741728080433</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
+							<EditorContolType>CHECK_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
 							<DelimeterType>NO_DELIMETER</DelimeterType>
@@ -6601,7 +6604,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661481609473</Id>
 					<Name><![CDATA[getDrivingHoursRemaining]]></Name>
-					<X>570</X><Y>-510</Y>
+					<X>560</X><Y>-540</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6614,7 +6617,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534014081</Id>
 					<Name><![CDATA[getTimeSince]]></Name>
-					<X>570</X><Y>-570</Y>
+					<X>990</X><Y>-90</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6631,7 +6634,7 @@ return time;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534094709</Id>
 					<Name><![CDATA[getHoursDrivenSinceRest]]></Name>
-					<X>570</X><Y>-309</Y>
+					<X>560</X><Y>-339</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6645,7 +6648,7 @@ return curTripHours + hoursDrivenSinceRest;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534329675</Id>
 					<Name><![CDATA[getGallonsConsumedSinceStart]]></Name>
-					<X>570</X><Y>-329</Y>
+					<X>560</X><Y>-359</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6658,7 +6661,7 @@ return curTripHours + hoursDrivenSinceRest;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661630020214</Id>
 					<Name><![CDATA[getHoursToFuelEmpty]]></Name>
-					<X>570</X><Y>-470</Y>
+					<X>560</X><Y>-500</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6673,17 +6676,14 @@ return curTripHours + hoursDrivenSinceRest;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664305823118</Id>
 					<Name><![CDATA[getMaximumHoursUntilNextStop]]></Name>
-					<X>570</X><Y>-429</Y>
+					<X>560</X><Y>-459</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[// Can be negative
 return List.of(
-	getDrivingHoursRemaining(),
-	getWorkingHoursRemaining(),
-	getHoursRemaining7Day(),
-	getHoursRemaining8Day(),
+	getMaximumHoursUntilNextLongRest(),
 	main.maxDrivingHoursBeforeShortBreak
 ).stream().min(Double::compare).get();
 
@@ -6694,7 +6694,7 @@ return List.of(
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664306643945</Id>
 					<Name><![CDATA[getMaximumMilesUntilNextStop]]></Name>
-					<X>570</X><Y>-409</Y>
+					<X>560</X><Y>-439</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6810,7 +6810,7 @@ logStartedNewTrip();
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664481001053</Id>
 					<Name><![CDATA[getMilesToDest]]></Name>
-					<X>570</X><Y>-389</Y>
+					<X>560</X><Y>-419</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6828,7 +6828,7 @@ logStartedNewTrip();
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664485629165</Id>
 					<Name><![CDATA[getGallonsInTank]]></Name>
-					<X>570</X><Y>-530</Y>
+					<X>560</X><Y>-560</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6879,8 +6879,7 @@ nextRestType = null;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[
-// If we're not sure where we're going next, figure it out first
+					<Body><![CDATA[// If we're not sure where we're going next, figure it out
 if (plannedStops.isEmpty()) {
 	selectNextStops();
 }
@@ -6945,7 +6944,7 @@ if (this.nextStop.getSecond() != null) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1669147567398</Id>
 					<Name><![CDATA[getMilesToNextStop]]></Name>
-					<X>570</X><Y>-369</Y>
+					<X>560</X><Y>-399</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -7295,7 +7294,7 @@ if (maxMiles <= 0 || milesToNextStop > maxMiles && milesToDest > maxMiles) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1670471043192</Id>
 					<Name><![CDATA[getHoursSinceRest]]></Name>
-					<X>570</X><Y>-349</Y>
+					<X>560</X><Y>-379</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7308,7 +7307,7 @@ if (maxMiles <= 0 || milesToNextStop > maxMiles && milesToDest > maxMiles) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1670515326022</Id>
 					<Name><![CDATA[getWorkingHoursRemaining]]></Name>
-					<X>570</X><Y>-490</Y>
+					<X>560</X><Y>-520</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7321,7 +7320,7 @@ if (maxMiles <= 0 || milesToNextStop > maxMiles && milesToDest > maxMiles) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1675376364319</Id>
 					<Name><![CDATA[getHoursSinceHome]]></Name>
-					<X>570</X><Y>-289</Y>
+					<X>560</X><Y>-319</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7334,7 +7333,7 @@ if (maxMiles <= 0 || milesToNextStop > maxMiles && milesToDest > maxMiles) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1675376871588</Id>
 					<Name><![CDATA[getTimeUntil]]></Name>
-					<X>570</X><Y>-550</Y>
+					<X>990</X><Y>-70</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7430,7 +7429,7 @@ if ( !( this.inState(AtHome) || this.inState(Uninitialized) ) ) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1685646011852</Id>
 					<Name><![CDATA[getHoursRemainingNDay]]></Name>
-					<X>570</X><Y>-248</Y>
+					<X>560</X><Y>-278</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7445,7 +7444,7 @@ if ( !( this.inState(AtHome) || this.inState(Uninitialized) ) ) {
 					</Parameter>
 					<Body><![CDATA[// Take the last N-1 days, leaving today as the Nth.
 // How many hours can we drive today while staying within
-//   N-day hour limit?
+// N-day hour limit?
 return maxHours - getHoursDrivenInLastNDays(numDays - 1);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -7453,7 +7452,7 @@ return maxHours - getHoursDrivenInLastNDays(numDays - 1);]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1685646220119</Id>
 					<Name><![CDATA[getHoursRemaining7Day]]></Name>
-					<X>570</X><Y>-209</Y>
+					<X>560</X><Y>-239</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7469,7 +7468,7 @@ else
 					<ReturnType><![CDATA[boolean]]></ReturnType>
 					<Id>1685735899497</Id>
 					<Name><![CDATA[isResting]]></Name>
-					<X>570</X><Y>-268</Y>
+					<X>560</X><Y>-298</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7482,7 +7481,7 @@ else
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1685738642450</Id>
 					<Name><![CDATA[getHoursRemaining8Day]]></Name>
-					<X>570</X><Y>-189</Y>
+					<X>560</X><Y>-219</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7496,55 +7495,9 @@ else
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1685745570626</Id>
-					<Name><![CDATA[getMaxDrivingHoursTomorrow]]></Name>
-					<X>570</X><Y>-149</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[double lastFiveDays = getHoursDrivenInLastNDays(5);
-double lastSixDays = getHoursDrivenInLastNDays(6);
-double today = getHoursDrivenSinceMidnight(); 
-
-double hrsRemaining7Day = main.maxDrivingHours7Day - lastFiveDays - today;
-double hrsRemaining8Day = main.maxDrivingHours8Day - lastSixDays - today;
-
-return Collections.min(List.of(
-	maxSevenDay,
-	maxEightDay,
-	main.drivingHoursPerDay
-));]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1685745635931</Id>
-					<Name><![CDATA[getMaxDrivingHoursDayAfterTomorrow]]></Name>
-					<X>570</X><Y>-129</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[double lastFourDays = getHoursDrivenInLastNDays(4);
-double lastFiveDays = getHoursDrivenInLastNDays(5);
-double today = getHoursDrivenSinceMidnight();
-double tomorrow = getMaxDrivingHoursTomorrow();
-double maxSevenDay = main.maxDrivingHours7Day - lastFourDays - today - tomorrow;
-double maxEightDay = main.maxDrivingHours8Day - lastFiveDays - today - tomorrow;
-
-return Collections.min(List.of(
-	maxSevenDay,
-	maxEightDay,
-	main.drivingHoursPerDay
-));]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1685745992197</Id>
 					<Name><![CDATA[getHoursDrivenInLastNDays]]></Name>
-					<X>570</X><Y>-229</Y>
+					<X>560</X><Y>-259</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7569,7 +7522,7 @@ return Collections.min(List.of(
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1685746313935</Id>
 					<Name><![CDATA[getHoursDrivenSinceMidnight]]></Name>
-					<X>570</X><Y>-169</Y>
+					<X>560</X><Y>-199</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7782,7 +7735,7 @@ else {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1692384107950</Id>
 					<Name><![CDATA[getMilesToFuelEmpty]]></Name>
-					<X>570</X><Y>-449</Y>
+					<X>560</X><Y>-479</Y>
 					<Label><X>10</X><Y>-1</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7889,32 +7842,30 @@ timeShortRested = timeOvernightRested;
 // sleeper rest or a restart rest
 assert nextStop.getFirst() == LongRest;
 
+
 // Are 7/8 day rules disabled in this simulation?
 if (main.disable78DayRule) {
 	return SleeperRest;
 }
-
-// TODO fix this to match the updated flowchart
 
 // Am I anywhere except a truck stop?
 if (!(nextStop.getSecond() instanceof TruckStop)) {
 	return SleeperRest;
 }
 
-// Assuming I stop right now, could I drive more than 3 hours tomorrow?
-double maxHoursTomorrow = getMaxDrivingHoursTomorrow();
-if (maxHoursTomorrow < 3) {
+// Assuming I stop now and rest for 10 hours, could I drive for more than 3 
+// hours after?
+if (getMaxDrivingHoursAfterSleep() < 3) {
 	return RestartRest;
 }
 
-// Assuming I stop right now and drive my max hours tomorrow, 
-// could I drive more than 3 hours the next day?
-double maxHoursDayAfterTomorrow = getMaxDrivingHoursDayAfterTomorrow();
-if (maxHoursDayAfterTomorrow < 3) {
+// Assuming I stop now, rest for 10 hours, drive my maximum hours, and rest 
+// another 10 hours; could I drive for more than 3 hours after?
+if (getMaxDrivingHoursAfterTwoSleeps() < 3) {
 	return RestartRest;
 }
 
-// We have plenty of hours left; just sleep and keep driving.
+// We have plenty of hours left. Just sleep and keep driving.
 return SleeperRest;
 ]]></Body>
 				</Function>
@@ -8344,7 +8295,7 @@ return null;]]></Body>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1726172562421</Id>
 					<Name><![CDATA[getMaximumHoursUntilNextLongRest]]></Name>
-					<X>570</X><Y>-110</Y>
+					<X>560</X><Y>-140</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8364,7 +8315,7 @@ return List.of(
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1726172656605</Id>
 					<Name><![CDATA[getMaximumMilesUntilNextLongRest]]></Name>
-					<X>570</X><Y>-90</Y>
+					<X>560</X><Y>-120</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8436,6 +8387,295 @@ return null;]]></Body>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1741729719383</Id>
+					<Name><![CDATA[getMaxDrivingHoursAfterSleep]]></Name>
+					<X>560</X><Y>-180</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[// Assuming I stop right now for a sleeper rest, how many hours 
+// could I drive after until I have to take another sleeper rest?
+
+double hrsSinceMidnight = getHoursSinceMidnight();
+double hrsUntilMidnight = 24.0 - getHoursSinceMidnight();
+double last5 = getHoursDrivenInLastNDays(5);
+double last6 = getHoursDrivenInLastNDays(6);
+double todaySoFar = getHoursDrivenSinceMidnight();
+double todayAfterSleep = getMaxDrivingHoursUntilMidnightAfterSleep();
+double today = todaySoFar + todayAfterSleep;
+
+double tomorrow7DayHrs = main.maxDrivingHours7Day - last5 - today;
+double tomorrow8DayHrs = main.maxDrivingHours8Day - last6 - today;
+	
+return List.of(
+	main.drivingHoursPerDay,
+	tomorrow7DayHrs,
+	tomorrow8DayHrs
+).stream().min(Double::compare).get();]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1741730495738</Id>
+					<Name><![CDATA[getHoursSinceMidnight]]></Name>
+					<X>990</X><Y>-170</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return getHoursSinceMidnight(time());]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1741730536686</Id>
+					<Name><![CDATA[getHoursUntilMidnight]]></Name>
+					<X>990</X><Y>-130</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[t]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Body><![CDATA[return 24.0 - getHoursSinceMidnight(t);]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Id>1741730544352</Id>
+					<Name><![CDATA[getDayNum]]></Name>
+					<X>990</X><Y>-190</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[t]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Body><![CDATA[return (int) (t / 24.0);]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1741732137792</Id>
+					<Name><![CDATA[getMaxDrivingHoursAfterTwoSleeps]]></Name>
+					<X>560</X><Y>-160</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[// Assuming I stop right now for a sleeper rest, drive my maximum
+// hours tomorrow, then stop for another sleeper, how many hours 
+// could I drive after until I have to take a third sleeper rest?
+
+// TODO clean up this implementation -- maybe generalize it for 
+//      any number of sleeps.
+
+// FIRST: Figure out our hours situation right now and what time
+// we expect to take our first two sleeps
+double last4 = getHoursDrivenInLastNDays(4);
+double last5 = getHoursDrivenInLastNDays(5);
+double last6 = getHoursDrivenInLastNDays(6);
+double todaySoFar = getHoursDrivenSinceMidnight();
+double todayAfterSleep = getMaxDrivingHoursUntilMidnightAfterSleep();
+double today = todaySoFar + todayAfterSleep;
+double maxHrsAfterFirstSleep = getMaxDrivingHoursAfterSleep();
+double hrsUntilMidnight = getHoursUntilMidnight();
+double hrsRemaining7Day = getHoursRemaining7Day();
+double hrsRemaining8Day = getHoursRemaining8Day();
+
+double timeAfterFirstSleep = time() + main.sleeperRestHours;
+double timeAtSecondSleep = timeAfterFirstSleep + maxHrsAfterFirstSleep;
+if (maxHrsAfterFirstSleep > main.maxHoursBeforeShortBreak) {
+	timeAtSecondSleep += main.shortRestHours;
+}
+double timeAfterSecondSleep = timeAtSecondSleep + main.sleeperRestHours;
+double hrsUntilMidnightAfterSecondSleep = getHoursUntilMidnight(timeAfterSecondSleep);
+
+
+// NEXT: Figure out what day it will be after our second sleep. 
+// Based on the real-world rest lengths, it's only possible for
+// that to be today, tomorrow, or the day after. We could possibly
+// generalize this function, but that's not worth it right now.
+
+
+int dayNow = getDayNum();
+int dayAfterFirstSleep = getDayNum(timeAfterFirstSleep);
+int dayAtSecondSleep = getDayNum(timeAtSecondSleep);
+int dayAfterSecondSleep = getDayNum(timeAfterSecondSleep);
+
+// It will still be the same day after our second sleep
+if (dayAfterSecondSleep == dayNow){
+	double hrs7DayAfterSecondRest = hrsRemaining7Day - todayAfterSleep;
+	double hrs8DayAfterSecondRest = hrsRemaining8Day - todayAfterSleep;
+	double hrs78DayAfterSecondRest = Math.min(
+		hrs7DayAfterSecondRest,
+		hrs8DayAfterSecondRest
+	);
+	
+	// We'll hit our 7- or 8- day limit before we get some more hours at midnight.
+	// For now, that means that we just return however many hours we can go
+	// before those hours run out.
+	// TODO In the future, we should perhaps think about "resting" a little differently
+	//      so that we can get around situations like this.
+	if (hrs78DayAfterSecondRest < hrsUntilMidnightAfterSecondSleep) {
+		return hrs78DayAfterSecondRest;
+	}
+	// Otherwise, assume that we drive constantly until midnight at least and
+	// keep going until we need to stop.
+	else {
+		today += hrsUntilMidnightAfterSecondSleep;
+		double maxHrsTomorrow7Day = main.maxDrivingHours7Day - today - last5;
+		double maxHrsTomorrow8Day = main.maxDrivingHours8Day - today - last6;
+		return List.of(
+			main.drivingHoursPerDay - hrsUntilMidnightAfterSecondSleep,
+			maxHrsTomorrow7Day,
+			maxHrsTomorrow8Day
+		).stream().min(Double::compare).get();
+	}
+}
+
+// It will be either tomorrow or the day after
+double maxHrsTomorrow7Day = main.maxDrivingHours7Day - today - last5;
+double maxHrsTomorrow8Day = main.maxDrivingHours8Day - today - last6;
+// Will we cross midnight during our second sleep? If not, figure out how many
+// hours we drove between midnight and starting our second sleep.
+double hrsTomorrowBeforeSecondSleep = 0;
+if (dayAtSecondSleep == dayAfterSecondSleep) {
+	hrsTomorrowBeforeSecondSleep = Math.min(
+		getHoursSinceMidnight(timeAtSecondSleep),
+		timeAtSecondSleep - timeAfterFirstSleep
+	);
+	if (hrsTomorrowBeforeSecondSleep > main.maxDrivingHoursBeforeShortBreak) {
+		hrsTomorrowBeforeSecondSleep -= main.shortRestHours;
+	}
+}
+double maxHrsAfterSecondSleep = List.of(
+	main.drivingHoursPerDay,
+	maxHrsTomorrow7Day - hrsTomorrowBeforeSecondSleep,
+	maxHrsTomorrow8Day - hrsTomorrowBeforeSecondSleep
+).stream().min(Double::compare).get();
+
+// It will be the day after tomorrow. Plug in our expected hours for today and tomorrow
+// and figure out the 7/8-day hour limits.
+if (dayAfterSecondSleep == dayNow + 2) {
+	double tomorrow = hrsTomorrowBeforeSecondSleep + maxHrsAfterSecondSleep;
+	double maxHrsDayAfterTomorrow7Day = main.maxDrivingHours7Day - today - tomorrow - last4;
+	double maxHrsDayAfterTomorrow8Day = main.maxDrivingHours8Day - today - tomorrow - last5;
+	return List.of(
+		main.drivingHoursPerDay,
+		maxHrsDayAfterTomorrow7Day,
+		maxHrsDayAfterTomorrow8Day
+	).stream().min(Double::compare).get();
+}
+// It will be tomorrow. Figure out how much we'll have driven before our second rest
+// and go from there.
+else if (dayAfterSecondSleep == dayNow + 1) {
+	// Will we cross midnight while we're driving after taking our second sleep?
+	// If so, we need to account for the 7/8 day limits for the day after tomorrow.
+	if (dayAtSecondSleep != dayAfterFirstSleep) {
+		// Will we take a short rest before midnight?
+		double hrsDrivenBeforeMidnightAfterSecondSleep = hrsUntilMidnight;
+		if (hrsUntilMidnight > main.maxDrivingHoursBeforeShortBreak) {
+			hrsDrivenBeforeMidnightAfterSecondSleep -= main.shortRestHours;
+		}
+		
+		double tomorrow = hrsTomorrowBeforeSecondSleep + hrsDrivenBeforeMidnightAfterSecondSleep;
+		double maxHrsDayAfterTomorrow7Day = main.maxDrivingHours7Day - today - tomorrow - last4;
+		double maxHrsDayAfterTomorrow8Day = main.maxDrivingHours8Day - today - tomorrow - last5;
+		return List.of(
+			maxHrsAfterSecondSleep,
+			maxHrsDayAfterTomorrow7Day + hrsDrivenBeforeMidnightAfterSecondSleep,
+			maxHrsDayAfterTomorrow8Day + hrsDrivenBeforeMidnightAfterSecondSleep
+		).stream().min(Double::compare).get();
+	}
+	else {
+		// 
+		return maxHrsAfterSecondSleep;
+	}
+}
+// If none of the above were true, something went wrong.
+else {
+	throw new RuntimeException(
+		"Day after second rest was at impossible time. Days from now :" 
+		+ (dayAfterSecondSleep - dayNow)
+	);
+}
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1741809170734</Id>
+					<Name><![CDATA[getMaxDrivingHoursUntilMidnightAfterSleep]]></Name>
+					<X>560</X><Y>-100</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[double hrsDrivenSinceMidnight = getHoursDrivenSinceMidnight();
+double hrsToMidnightAfterSleep = Math.max(
+	0, 
+	getHoursUntilMidnight() - main.sleeperRestHours
+);
+if (hrsToMidnightAfterSleep > main.maxHoursBeforeShortBreak) {
+	hrsToMidnightAfterSleep -= main.shortRestHours;
+}
+return List.of(
+	hrsToMidnightAfterSleep,
+	main.drivingHoursPerDay,
+	getHoursRemaining7Day() - hrsDrivenSinceMidnight,
+	getHoursRemaining8Day() - hrsDrivenSinceMidnight
+).stream().min(Double::compare).get();
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[int]]></ReturnType>
+					<Id>1741812336295</Id>
+					<Name><![CDATA[getDayNum]]></Name>
+					<X>990</X><Y>-210</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return getDayNum(time());]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1741812762860</Id>
+					<Name><![CDATA[getHoursSinceMidnight]]></Name>
+					<X>990</X><Y>-150</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[t]]></Name>
+						<Type><![CDATA[double]]></Type>
+					</Parameter>
+					<Body><![CDATA[return t % 24.0;]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1741812810104</Id>
+					<Name><![CDATA[getHoursUntilMidnight]]></Name>
+					<X>990</X><Y>-110</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[return getHoursUntilMidnight(time());]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -9225,6 +9465,28 @@ they deliver a load.]]></Text>
 						<Name>SansSerif</Name>
 						<Size>14</Size>
 						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1741812689208</Id>
+					<Name><![CDATA[modelTimeText]]></Name>
+					<ExcludeFromBuild>true</ExcludeFromBuild>
+					<X>980</X><Y>-250</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Model Time]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>1</Style>
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
@@ -14245,6 +14507,33 @@ public class EmptyStoryEvent extends StoryEvent implements Serializable {
 		this.fuelGallonsRemaining = fuelGallonsRemaining;
 		this.restType = restType;
     }
+	
+	public StopDrivingEvent(
+			double time, 
+			Location location, 
+			double drivingHoursUntilLongRest,
+			double drivingHoursUntilShortRest,
+			double workingHoursUntilLongRest,
+			double hoursRemaining7Day,
+			double hoursRemaining8Day,
+			double hoursDrivenSinceMidnight,
+			double fuelGallonsRemaining,
+			RestType restType			
+	) {
+		// TODO there must be a better way to do this.
+		this(
+			time, 
+			location,
+			(float) drivingHoursUntilLongRest,
+			(float) drivingHoursUntilShortRest,
+			(float) workingHoursUntilLongRest,
+			(float) hoursRemaining7Day,
+			(float) hoursRemaining8Day,
+			(float) hoursDrivenSinceMidnight,
+			(float) fuelGallonsRemaining,
+			restType
+		);
+	}
 	
 	public String getText() {
 		return String.format(
