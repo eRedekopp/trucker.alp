@@ -1673,7 +1673,7 @@ else return 0;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return average(truckers, Trucker::getAverageHoursDrivenPerDayThisPeriod);
+					<Body><![CDATA[return average(truckers, Trucker::getMeanHoursOnDutyPerDayThisPeriod);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -5413,7 +5413,7 @@ this.setRouteProvider(main.jhighwayRouteProvider);
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1675372981439</Id>
-					<Name><![CDATA[hoursDrivenSinceHomePerDay]]></Name>
+					<Name><![CDATA[hoursOnDutyPerDayThisPeriod]]></Name>
 					<X>330</X><Y>-610</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -5425,16 +5425,15 @@ this.setRouteProvider(main.jhighwayRouteProvider);
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA[// Every 24h, this map is updated to keep track
 // of the number of hours driven each day in the 
-// period. Data is indexed by the global time it
-// represents in HOURS.
-new HashMap<>();
-]]></Code>
+// period. Data is indexed by the time at midnight
+// on the given day in MODEL HOURS
+new HashMap<>();]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
 				<Variable Class="PlainVariable">
 					<Id>1685737490965</Id>
-					<Name><![CDATA[hoursDrivenSinceHome]]></Name>
+					<Name><![CDATA[hoursOnDutyThisPeriod]]></Name>
 					<X>330</X><Y>-630</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -5551,6 +5550,21 @@ new HashMap<>();
 						<Type><![CDATA[double]]></Type>        
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA[-1.0]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1742408891314</Id>
+					<Name><![CDATA[timeStartedFuelling]]></Name>
+					<X>330</X><Y>-570</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0.0]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -5854,7 +5868,7 @@ new HashMap<>();
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1661287737305" Target="1661475381131" Trigger="timeout">
 						<Action><![CDATA[startNewTrip();
-]]></Action>
+departFromDestination();]]></Action>
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[makeRandomDetentionTime()
 ]]></Code>
@@ -6616,7 +6630,7 @@ return time;
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534014081</Id>
-					<Name><![CDATA[getTimeSince]]></Name>
+					<Name><![CDATA[getHoursSince]]></Name>
 					<X>990</X><Y>-90</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -6639,7 +6653,7 @@ return time;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[double curTripHours = inState(Stationary) ? 0 : getTimeSince(timeStartedDriving);
+					<Body><![CDATA[double curTripHours = inState(Stationary) ? 0 : getHoursSince(timeStartedDriving);
 return curTripHours + hoursDrivenSinceRest;
 ]]></Body>
 				</Function>
@@ -6653,7 +6667,7 @@ return curTripHours + hoursDrivenSinceRest;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getTimeSince(timeStartedDriving) * main.averageMilesPerHour / main.averageMPG;
+					<Body><![CDATA[return getHoursSince(timeStartedDriving) * main.averageMilesPerHour / main.averageMPG;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -6707,7 +6721,7 @@ return List.of(
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664310672528</Id>
 					<Name><![CDATA[startDriving]]></Name>
-					<X>330</X><Y>-530</Y>
+					<X>330</X><Y>-490</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6723,7 +6737,7 @@ logStartedDriving();
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664310686495</Id>
 					<Name><![CDATA[stopDriving]]></Name>
-					<X>330</X><Y>-510</Y>
+					<X>330</X><Y>-470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6731,8 +6745,8 @@ logStartedDriving();
 					<Body><![CDATA[// make sure to do this before updating timeStarted/Stopped
 logStoppedDriving(getNextRestType());
 
-hoursDrivenSinceRest += getTimeSince(timeStartedDriving);
-hoursDrivenSinceHome += getTimeSince(timeStartedDriving);
+hoursDrivenSinceRest += getHoursSince(timeStartedDriving);
+hoursOnDutyThisPeriod += getHoursSince(timeStartedDriving);
 gallonsConsumed += getGallonsConsumedSinceStart();
 timeStoppedDriving = time();
 // necessary, or else getXHoursRemaining() functions are incorrect
@@ -6759,7 +6773,7 @@ if (
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664310976012</Id>
 					<Name><![CDATA[takeSleeperRest]]></Name>
-					<X>330</X><Y>-490</Y>
+					<X>330</X><Y>-450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6774,20 +6788,20 @@ timeShortRested = timeOvernightRested;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664311054208</Id>
 					<Name><![CDATA[refuel]]></Name>
-					<X>330</X><Y>-150</Y>
+					<X>330</X><Y>-110</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[gallonsConsumed = 0.0;
-]]></Body>
+timeStartedFuelling = time();]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1664312343029</Id>
 					<Name><![CDATA[startNewTripTo]]></Name>
-					<X>330</X><Y>-430</Y>
+					<X>330</X><Y>-390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6855,7 +6869,7 @@ return getRoadsideStopAtOffset(maxLegalKms);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1669144549805</Id>
 					<Name><![CDATA[clearNextTruckStop]]></Name>
-					<X>330</X><Y>-350</Y>
+					<X>330</X><Y>-310</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -6874,7 +6888,7 @@ nextRestType = null;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1669144893118</Id>
 					<Name><![CDATA[setNextTruckStop]]></Name>
-					<X>330</X><Y>-390</Y>
+					<X>330</X><Y>-350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -7031,11 +7045,11 @@ storyteller.addItem(
 		time(),
 		nextStop.getSecond() == null ? destination : nextStop.getSecond(),
 		getDrivingHoursRemaining(),
-		main.maxDrivingHoursBeforeShortBreak - getTimeSince(timeStartedDriving),
+		main.maxDrivingHoursBeforeShortBreak - getHoursSince(timeStartedDriving),
 		getWorkingHoursRemaining(),
 		getHoursRemaining7Day(),
 		getHoursRemaining8Day(),
-		getHoursDrivenSinceMidnight(),
+		getHoursOnDutySinceMidnight(),
 		getGallonsInTank(),
 		restType
 	)
@@ -7108,7 +7122,7 @@ storyteller.addItem(
 // sent back to the main stop selection subroutine
 if (nextStop.getFirst() == ShortRest) {
 	LocationAlongPath nextStop = currentRoute.getNextLocationAfterPoint(this.getLatitude(), this.getLongitude());
-	double hoursUntilMustRest = 8 - getTimeSince(timeShortRested);
+	double hoursUntilMustRest = 8 - getHoursSince(timeShortRested);
 	double hoursUntilNextStop = nextStop == null 
 			? Double.POSITIVE_INFINITY
 			: currentRoute.translateToKilometers(nextStop.pathOffset) * 1000 * main.milesPerMeter / main.averageMilesPerHour;
@@ -7205,7 +7219,7 @@ return hoursUnderMax < main.maxDriveTimeUndershootHours;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1670122514823</Id>
 					<Name><![CDATA[startNewDrivingPeriod]]></Name>
-					<X>330</X><Y>-330</Y>
+					<X>330</X><Y>-290</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7217,8 +7231,8 @@ timeStartedPeriod = time();
 timeOvernightRested = time();
 timeShortRested = time();
 hoursDrivenSinceRest = 0;
-hoursDrivenSinceHome = 0;
-hoursDrivenSinceHomePerDay.clear();
+hoursOnDutyThisPeriod = 0;
+hoursOnDutyPerDayThisPeriod.clear();
 isGoingHome = false;
 gallonsConsumed = 0;
 startNewTrip();
@@ -7229,7 +7243,7 @@ startNewTrip();
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1670123913785</Id>
 					<Name><![CDATA[startDrivingHome]]></Name>
-					<X>330</X><Y>-310</Y>
+					<X>330</X><Y>-270</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7245,7 +7259,7 @@ logStartedDrivingHome();
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1670124010408</Id>
 					<Name><![CDATA[startNewTrip]]></Name>
-					<X>330</X><Y>-410</Y>
+					<X>330</X><Y>-370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -7282,7 +7296,7 @@ if (nextStop != null) {
 }
 
 if (maxMiles <= 0 || milesToNextStop > maxMiles && milesToDest > maxMiles) {
-	restCreditHours = getTimeSince(timeStoppedDriving);
+	restCreditHours = getHoursSince(timeStoppedDriving);
 	plannedStops.add(new Pair<>(SleeperRest, getRoadsideStopAtOffset(0)));
 	if (nextStop != null) {
 		plannedStops.add(new Pair<>(ShortRest, main.getLocation(nextStop)));
@@ -7299,7 +7313,7 @@ if (maxMiles <= 0 || milesToNextStop > maxMiles && milesToDest > maxMiles) {
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getTimeSince(timeOvernightRested);
+					<Body><![CDATA[return getHoursSince(timeOvernightRested);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -7312,7 +7326,7 @@ if (maxMiles <= 0 || milesToNextStop > maxMiles && milesToDest > maxMiles) {
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return main.workingHoursPerDay - getTimeSince(timeOvernightRested);
+					<Body><![CDATA[return main.workingHoursPerDay - getHoursSince(timeOvernightRested);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -7325,14 +7339,13 @@ if (maxMiles <= 0 || milesToNextStop > maxMiles && milesToDest > maxMiles) {
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getTimeSince(timeStartedPeriod);
-]]></Body>
+					<Body><![CDATA[return getHoursSince(timeStartedPeriod);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1675376871588</Id>
-					<Name><![CDATA[getTimeUntil]]></Name>
+					<Name><![CDATA[getHoursUntil]]></Name>
 					<X>990</X><Y>-70</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -7342,7 +7355,7 @@ if (maxMiles <= 0 || milesToNextStop > maxMiles && milesToDest > maxMiles) {
 						<Name><![CDATA[then]]></Name>
 						<Type><![CDATA[double]]></Type>
 					</Parameter>
-					<Body><![CDATA[return -1 * getTimeSince(then);
+					<Body><![CDATA[return -1 * getHoursSince(then);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -7363,8 +7376,8 @@ if (maxMiles <= 0 || milesToNextStop > maxMiles && milesToDest > maxMiles) {
 // Do nothing if the sim hasn't started or the trucker
 // is at home resting.
 if ( !( this.inState(AtHome) || this.inState(Uninitialized) ) ) {
-	double totalHoursInLastDay = getHoursDrivenSinceMidnight();			
-	hoursDrivenSinceHomePerDay.put(dayNum, totalHoursInLastDay);
+	double totalHoursInLastDay = getHoursOnDutySinceMidnight();			
+	hoursOnDutyPerDayThisPeriod.put(dayNum, totalHoursInLastDay);
 	storyteller.addItem(
 		new StartNewDayEvent(
 			time(),
@@ -7380,31 +7393,29 @@ if ( !( this.inState(AtHome) || this.inState(Uninitialized) ) ) {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1675445022098</Id>
 					<Name><![CDATA[arriveAtHome]]></Name>
-					<X>330</X><Y>-290</Y>
+					<X>330</X><Y>-250</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[this.hoursDrivenSinceHomePerDay = new HashMap();
-]]></Body>
+					<Body><![CDATA[// Nothing to do here right now. Maybe in the future.]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1684435747182</Id>
-					<Name><![CDATA[getAverageHoursDrivenPerDayThisPeriod]]></Name>
+					<Name><![CDATA[getMeanHoursOnDutyPerDayThisPeriod]]></Name>
 					<X>890</X><Y>-840</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return hoursDrivenSinceHomePerDay
+					<Body><![CDATA[return hoursOnDutyPerDayThisPeriod
 		.values()
 		.stream()
 		.mapToDouble(Double::valueOf)
 		.average()
-		.orElse(0.0);
-]]></Body>
+		.orElse(0.0);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -7445,7 +7456,7 @@ if ( !( this.inState(AtHome) || this.inState(Uninitialized) ) ) {
 					<Body><![CDATA[// Take the last N-1 days, leaving today as the Nth.
 // How many hours can we drive today while staying within
 // N-day hour limit?
-return maxHours - getHoursDrivenInLastNDays(numDays - 1);]]></Body>
+return maxHours - getHoursOnDutyInLastNDays(numDays - 1);]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -7496,7 +7507,7 @@ else
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1685745992197</Id>
-					<Name><![CDATA[getHoursDrivenInLastNDays]]></Name>
+					<Name><![CDATA[getHoursOnDutyInLastNDays]]></Name>
 					<X>560</X><Y>-259</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -7506,12 +7517,12 @@ else
 						<Name><![CDATA[numDays]]></Name>
 						<Type><![CDATA[int]]></Type>
 					</Parameter>
-					<Body><![CDATA[return hoursDrivenSinceHomePerDay
+					<Body><![CDATA[return hoursOnDutyPerDayThisPeriod
 	.keySet()
 	.stream()
 	.sorted(Comparator.reverseOrder())
 	.limit(numDays)
-	.map(k -> hoursDrivenSinceHomePerDay.get(k))
+	.map(k -> hoursOnDutyPerDayThisPeriod.get(k))
 	.mapToDouble(Double::valueOf)
 	.sum();
 
@@ -7521,23 +7532,39 @@ else
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1685746313935</Id>
-					<Name><![CDATA[getHoursDrivenSinceMidnight]]></Name>
+					<Name><![CDATA[getHoursOnDutySinceMidnight]]></Name>
 					<X>560</X><Y>-199</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[double totalHoursRecorded = hoursDrivenSinceHomePerDay
-		.values()
-		.stream()
-		.reduce(0.0, Double::sum);
-double hoursRecordedInLastDay = 
-	hoursDrivenSinceHome - totalHoursRecorded;
-double hoursInCurrentTrip = 
-	inState(Driving) 
-		? getTimeSince(timeStartedDriving)
-		: 0;
-return hoursRecordedInLastDay + hoursInCurrentTrip;
+					<Body><![CDATA[// NOTE this should only be called at mightnight when we're logging our days.
+// There are implications if you call this elsewhere -- namely the logic
+// around the AtDestination hours
+
+double totalHoursRecorded = hoursOnDutyPerDayThisPeriod
+	.values()
+	.stream()
+	.reduce(0.0, Double::sum);
+double hoursRecordedInLastDay = hoursOnDutyThisPeriod - totalHoursRecorded;
+
+// If we're currently doing anything except resting, account for the
+// hours worked since we started doing that
+double hoursNotYetRecorded = 0.0;
+if (inState(Driving)) {
+	hoursNotYetRecorded = getHoursSince(timeStartedDriving);
+}
+else if (inState(Refuelling)) {
+	hoursNotYetRecorded = getHoursSince(timeStartedFuelling);
+}
+else if (inState(AtDestination)) {
+	// TODO this is imperfect, since these hours might end up
+	// actually getting credited toward the driver's next rest. 
+	// This isn't a huge deal but is worth thinking about in the
+	// future.
+	hoursNotYetRecorded = getHoursSince(timeStoppedDriving);
+}
+return hoursRecordedInLastDay + hoursNotYetRecorded;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -7545,7 +7572,7 @@ return hoursRecordedInLastDay + hoursInCurrentTrip;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1692381488359</Id>
 					<Name><![CDATA[selectNextStops]]></Name>
-					<X>330</X><Y>-270</Y>
+					<X>330</X><Y>-230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7815,7 +7842,7 @@ else {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1697816353569</Id>
 					<Name><![CDATA[takeResetRest]]></Name>
-					<X>330</X><Y>-470</Y>
+					<X>330</X><Y>-430</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7830,7 +7857,7 @@ timeShortRested = timeOvernightRested;
 					<ReturnType><![CDATA[RestType]]></ReturnType>
 					<Id>1697819764014</Id>
 					<Name><![CDATA[chooseRestType]]></Name>
-					<X>330</X><Y>-250</Y>
+					<X>330</X><Y>-210</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7874,7 +7901,7 @@ return SleeperRest;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1697853980092</Id>
 					<Name><![CDATA[selectNextDestination]]></Name>
-					<X>330</X><Y>-170</Y>
+					<X>330</X><Y>-130</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7930,7 +7957,7 @@ else {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1698432924234</Id>
 					<Name><![CDATA[setHomeCity]]></Name>
-					<X>330</X><Y>-210</Y>
+					<X>330</X><Y>-170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7946,7 +7973,7 @@ home = initCity;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1699032705969</Id>
 					<Name><![CDATA[addShortRest]]></Name>
-					<X>330</X><Y>-190</Y>
+					<X>330</X><Y>-150</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8020,7 +8047,7 @@ return newStop;
 					<ReturnType><![CDATA[RestType]]></ReturnType>
 					<Id>1699041255971</Id>
 					<Name><![CDATA[getNextRestType]]></Name>
-					<X>330</X><Y>-230</Y>
+					<X>330</X><Y>-190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8041,7 +8068,7 @@ return nextRestType;
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1699061785752</Id>
 					<Name><![CDATA[takeShortRest]]></Name>
-					<X>330</X><Y>-450</Y>
+					<X>330</X><Y>-410</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8086,7 +8113,7 @@ else
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1701985871166</Id>
 					<Name><![CDATA[startDrivingTo]]></Name>
-					<X>330</X><Y>-370</Y>
+					<X>330</X><Y>-330</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8267,7 +8294,7 @@ return null;]]></Body>
 					<Body><![CDATA[this.storyteller.addItem(
 	new StartDrivingHomeEvent(
 		time(),
-		getTimeSince(timeStartedPeriod)
+		getHoursSince(timeStartedPeriod)
 	)
 );
 ]]></Body>
@@ -8403,9 +8430,9 @@ return null;]]></Body>
 
 double hrsSinceMidnight = getHoursSinceMidnight();
 double hrsUntilMidnight = 24.0 - getHoursSinceMidnight();
-double last5 = getHoursDrivenInLastNDays(5);
-double last6 = getHoursDrivenInLastNDays(6);
-double todaySoFar = getHoursDrivenSinceMidnight();
+double last5 = getHoursOnDutyInLastNDays(5);
+double last6 = getHoursOnDutyInLastNDays(6);
+double todaySoFar = getHoursOnDutySinceMidnight();
 double todayAfterSleep = getMaxDrivingHoursUntilMidnightAfterSleep();
 double today = todaySoFar + todayAfterSleep;
 
@@ -8481,10 +8508,10 @@ return List.of(
 
 // FIRST: Figure out our hours situation right now and what time
 // we expect to take our first two sleeps
-double last4 = getHoursDrivenInLastNDays(4);
-double last5 = getHoursDrivenInLastNDays(5);
-double last6 = getHoursDrivenInLastNDays(6);
-double todaySoFar = getHoursDrivenSinceMidnight();
+double last4 = getHoursOnDutyInLastNDays(4);
+double last5 = getHoursOnDutyInLastNDays(5);
+double last6 = getHoursOnDutyInLastNDays(6);
+double todaySoFar = getHoursOnDutySinceMidnight();
 double todayAfterSleep = getMaxDrivingHoursUntilMidnightAfterSleep();
 double today = todaySoFar + todayAfterSleep;
 double maxHrsAfterFirstSleep = getMaxDrivingHoursAfterSleep();
@@ -8621,7 +8648,7 @@ else {
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[double hrsDrivenSinceMidnight = getHoursDrivenSinceMidnight();
+					<Body><![CDATA[double hrsOnDutySinceMidnight = getHoursOnDutySinceMidnight();
 double hrsToMidnightAfterSleep = Math.max(
 	0, 
 	getHoursUntilMidnight() - main.sleeperRestHours
@@ -8632,8 +8659,8 @@ if (hrsToMidnightAfterSleep > main.maxHoursBeforeShortBreak) {
 return List.of(
 	hrsToMidnightAfterSleep,
 	main.drivingHoursPerDay,
-	getHoursRemaining7Day() - hrsDrivenSinceMidnight,
-	getHoursRemaining8Day() - hrsDrivenSinceMidnight
+	getHoursRemaining7Day() - hrsOnDutySinceMidnight,
+	getHoursRemaining8Day() - hrsOnDutySinceMidnight
 ).stream().min(Double::compare).get();
 ]]></Body>
 				</Function>
@@ -8676,6 +8703,36 @@ return List.of(
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[return getHoursUntilMidnight(time());]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1742408114164</Id>
+					<Name><![CDATA[departFromDestination]]></Name>
+					<X>330</X><Y>-90</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[// This function assumes that it gets called after we've
+// already set rest credit hours, if applicable. (e.g., in
+// `startNewTrip`)
+
+hoursOnDutyThisPeriod += getHoursSince(timeStoppedDriving) - restCreditHours;
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1742408922800</Id>
+					<Name><![CDATA[departFromRefuelling]]></Name>
+					<X>330</X><Y>-70</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[hoursOnDutyThisPeriod += getHoursSince(timeStartedFuelling);
+]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -8833,7 +8890,7 @@ return List.of(
 					<Id>1664311287075</Id>
 					<Name><![CDATA[text5]]></Name>
 					<ExcludeFromBuild>true</ExcludeFromBuild>
-					<X>320</X><Y>-560</Y>
+					<X>320</X><Y>-520</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
@@ -14480,7 +14537,7 @@ public class EmptyStoryEvent extends StoryEvent implements Serializable {
 	public final float workingHoursUntilLongRest;
 	public final float hoursRemaining7Day;
 	public final float hoursRemaining8Day;
-	public final float hoursDrivenSinceMidnight;
+	public final float hoursOnDutySinceMidnight;
 	public final float fuelGallonsRemaining;
 	public final RestType restType;
 	
@@ -14492,7 +14549,7 @@ public class EmptyStoryEvent extends StoryEvent implements Serializable {
 			float workingHoursUntilLongRest,
 			float hoursRemaining7Day,
 			float hoursRemaining8Day,
-			float hoursDrivenSinceMidnight,
+			float hoursOnDutySinceMidnight,
 			float fuelGallonsRemaining,
 			RestType restType
 	) {
@@ -14503,7 +14560,7 @@ public class EmptyStoryEvent extends StoryEvent implements Serializable {
 		this.workingHoursUntilLongRest = workingHoursUntilLongRest;
 		this.hoursRemaining7Day = hoursRemaining7Day;
 		this.hoursRemaining8Day = hoursRemaining8Day;
-		this.hoursDrivenSinceMidnight = hoursDrivenSinceMidnight;
+		this.hoursOnDutySinceMidnight = hoursOnDutySinceMidnight;
 		this.fuelGallonsRemaining = fuelGallonsRemaining;
 		this.restType = restType;
     }
@@ -14557,7 +14614,7 @@ public class EmptyStoryEvent extends StoryEvent implements Serializable {
     			"workingHoursUntilLongRest",
     			"hoursRemaining7Day",
     			"hoursRemaining8Day",
-    			"hoursDrivenSinceMidnight",
+    			"hoursOnDutySinceMidnight",
     			"fuelGallons",
     			"restType"
     	};
@@ -14573,7 +14630,7 @@ public class EmptyStoryEvent extends StoryEvent implements Serializable {
     			StopDrivingEvent.trimPrecision(workingHoursUntilLongRest),
     			StopDrivingEvent.trimPrecision(hoursRemaining7Day),
     			StopDrivingEvent.trimPrecision(hoursRemaining8Day),
-    			StopDrivingEvent.trimPrecision(hoursDrivenSinceMidnight),
+    			StopDrivingEvent.trimPrecision(hoursOnDutySinceMidnight),
     			StopDrivingEvent.trimPrecision(fuelGallonsRemaining),
     			restType.toString()
     	};
