@@ -5863,7 +5863,7 @@ departFromDestination();]]></Action>
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
 						</Timeout>
-						<Condition><![CDATA[getNextRestType() == SleeperRest
+						<Condition><![CDATA[nextRestType == SleeperRest
 ]]></Condition>
 						<Rate Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
@@ -6016,8 +6016,7 @@ this.homeRestHours = makeRandomWaitBeforeStarting();
 					</Points>
 					<IconOffset>10.0</IconOffset>
 					<Properties Source="1669936332199" Target="1661481820640" Trigger="message">
-						<Action><![CDATA[inquiryAccepted();
-]]></Action>
+						<Action><![CDATA[inquiryAccepted();]]></Action>
 						<Timeout Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
@@ -6260,7 +6259,7 @@ arriveAtHome();
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
 						</Timeout>
-						<Condition><![CDATA[getNextRestType() == RestartRest
+						<Condition><![CDATA[nextRestType == RestartRest
 ]]></Condition>
 						<Rate Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
@@ -6446,7 +6445,7 @@ arriveAtHome();
 							<Code><![CDATA[1]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
 						</Timeout>
-						<Condition><![CDATA[getNextRestType() == ShortRest
+						<Condition><![CDATA[nextRestType == ShortRest
 ]]></Condition>
 						<Rate Class="CodeUnitValue">
 							<Code><![CDATA[1]]></Code>
@@ -6635,7 +6634,8 @@ logStartedDriving();
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[// make sure to do this before updating timeStarted/Stopped
-logStoppedDriving(getNextRestType());
+setNextRestType();
+logStoppedDriving(nextRestType);
 
 hoursDrivenSinceRest += getHoursSince(timeStartedDriving);
 hoursOnDutyThisPeriod += getHoursSince(timeStartedDriving);
@@ -7954,25 +7954,21 @@ return newStop;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[RestType]]></ReturnType>
 					<Id>1699041255971</Id>
-					<Name><![CDATA[getNextRestType]]></Name>
+					<Name><![CDATA[setNextRestType]]></Name>
 					<X>330</X><Y>-190</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[if (nextRestType == null) {
-	if (nextStop.getFirst() != LongRest) {
-		nextRestType = nextStop.getFirst();
-	}
-	else {
-		nextRestType = chooseRestType();
-	}
+					<Body><![CDATA[if (nextStop.getFirst() != LongRest) {
+	nextRestType = nextStop.getFirst();
 }
-return nextRestType;
-]]></Body>
+else {
+	nextRestType = chooseRestType();
+}]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
