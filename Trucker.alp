@@ -1426,6 +1426,30 @@ if (startImmediately) {
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1743201159613</Id>
+					<Name><![CDATA[preferredMinDailyHours]]></Name>
+					<X>390</X><Y>-360</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[double]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[3.0]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1743201159611</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 			</Variables>
 			<Events>
 				<Event>
@@ -2914,7 +2938,7 @@ startButton.setEnabled(false);
 					<Id>1692391242134</Id>
 					<Name><![CDATA[text2]]></Name>
 					<ExcludeFromBuild>true</ExcludeFromBuild>
-					<X>380</X><Y>-375</Y>
+					<X>380</X><Y>-390</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7724,13 +7748,13 @@ if (!(nextStop.getSecond() instanceof TruckStop)) {
 
 // Assuming I stop now and rest for 10 hours, could I drive for more than 3 
 // hours after?
-if (getMaxDrivingHoursAfterSleep() < 3) {
+if (getMaxDrivingHoursAfterSleep() < main.preferredMinDailyHours) {
 	return RestartRest;
 }
 
 // Assuming I stop now, rest for 10 hours, drive my maximum hours, and rest 
 // another 10 hours; could I drive for more than 3 hours after?
-if (getMaxDrivingHoursAfterTwoSleeps() < 3) {
+if (getMaxDrivingHoursAfterTwoSleeps() < main.preferredMinDailyHours) {
 	return RestartRest;
 }
 
@@ -13448,6 +13472,9 @@ leave.]]></Text>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[refuelTimeHours]]></ParameterName>
+				</Parameter>
+				<Parameter>
+					<ParameterName><![CDATA[preferredMinDailyHours]]></ParameterName>
 				</Parameter>
 			</Parameters>
 			<PresentationProperties>
