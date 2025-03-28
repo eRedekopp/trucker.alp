@@ -159,7 +159,6 @@ setupJHighway();
 filterUnreachableLocations();
 setupCitiesQuadtree();
 setupGravityModel();
-initializeTrucks();
 mapViewArea.navigateTo();
 
 if (startImmediately) {
@@ -387,7 +386,7 @@ if (startImmediately) {
 				<Variable Class="Parameter">
 					<Id>1661477256157</Id>
 					<Name><![CDATA[numOfDrivers]]></Name>
-					<X>70</X><Y>-220</Y>
+					<X>70</X><Y>-240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -411,9 +410,9 @@ if (startImmediately) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1661619317050</Id>
-					<Name><![CDATA[averageMPG]]></Name>
+					<Name><![CDATA[driverMPG]]></Name>
 					<Unit>Mile/Gallon</Unit> 
-					<X>70</X><Y>-260</Y>
+					<X>390</X><Y>-300</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -439,7 +438,7 @@ if (startImmediately) {
 					<Id>1661619317053</Id>
 					<Name><![CDATA[fuelCapacityGals]]></Name>
 					<Unit>Gallon</Unit> 
-					<X>70</X><Y>-240</Y>
+					<X>70</X><Y>-260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -464,7 +463,7 @@ if (startImmediately) {
 				<Variable Class="Parameter">
 					<Id>1661619317056</Id>
 					<Name><![CDATA[drivingHoursPerDay]]></Name>
-					<X>70</X><Y>-380</Y>
+					<X>70</X><Y>-430</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -488,7 +487,7 @@ if (startImmediately) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1661619317059</Id>
-					<Name><![CDATA[averageMilesPerHour]]></Name>
+					<Name><![CDATA[driverMilesPerHour]]></Name>
 					<X>390</X><Y>-180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -514,7 +513,7 @@ if (startImmediately) {
 				<Variable Class="Parameter">
 					<Id>1661635877807</Id>
 					<Name><![CDATA[sleeperRestHours]]></Name>
-					<X>70</X><Y>-340</Y>
+					<X>70</X><Y>-390</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -539,7 +538,7 @@ if (startImmediately) {
 				<Variable Class="Parameter">
 					<Id>1669071240757</Id>
 					<Name><![CDATA[allowUnsafeStops]]></Name>
-					<X>70</X><Y>-200</Y>
+					<X>70</X><Y>-220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -613,7 +612,7 @@ if (startImmediately) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1670123245691</Id>
-					<Name><![CDATA[averageHoursBetweenPeriods]]></Name>
+					<Name><![CDATA[meanHomeRestHours]]></Name>
 					<X>390</X><Y>-200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -639,7 +638,7 @@ if (startImmediately) {
 				<Variable Class="Parameter">
 					<Id>1670181607586</Id>
 					<Name><![CDATA[doTrucksReturnHome]]></Name>
-					<X>70</X><Y>-140</Y>
+					<X>390</X><Y>-280</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -663,8 +662,8 @@ if (startImmediately) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1670515094608</Id>
-					<Name><![CDATA[maxDrivingHoursBeforeShortBreak]]></Name>
-					<X>70</X><Y>-420</Y>
+					<Name><![CDATA[maxDrivingHoursBeforeShortRest]]></Name>
+					<X>70</X><Y>-450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -688,8 +687,8 @@ if (startImmediately) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1670515304134</Id>
-					<Name><![CDATA[workingHoursPerDay]]></Name>
-					<X>70</X><Y>-440</Y>
+					<Name><![CDATA[dutyHoursPerDay]]></Name>
+					<X>70</X><Y>-470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -713,8 +712,8 @@ if (startImmediately) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1670515700501</Id>
-					<Name><![CDATA[maxDrivingHours8Day]]></Name>
-					<X>70</X><Y>-460</Y>
+					<Name><![CDATA[maxDutyHours8Day]]></Name>
+					<X>70</X><Y>-490</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -738,8 +737,8 @@ if (startImmediately) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1670515709892</Id>
-					<Name><![CDATA[maxDrivingHours7Day]]></Name>
-					<X>70</X><Y>-480</Y>
+					<Name><![CDATA[maxDutyHours7Day]]></Name>
+					<X>70</X><Y>-510</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -788,7 +787,7 @@ if (startImmediately) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1684445754454</Id>
-					<Name><![CDATA[stdevHoursBetweenPeriods]]></Name>
+					<Name><![CDATA[stdevHomeRestHours]]></Name>
 					<X>390</X><Y>-240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -812,33 +811,8 @@ if (startImmediately) {
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1684445943509</Id>
-					<Name><![CDATA[minHoursBetweenPeriods]]></Name>
-					<X>70</X><Y>-400</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[34.0
-]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1684445943507</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
 					<Id>1684446170126</Id>
-					<Name><![CDATA[maxHoursBetweenPeriods]]></Name>
+					<Name><![CDATA[maxHomeRestHours]]></Name>
 					<X>390</X><Y>-220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -854,31 +828,6 @@ if (startImmediately) {
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1684446170124</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1685043493074</Id>
-					<Name><![CDATA[maxHoursBeforeShortBreak]]></Name>
-					<X>70</X><Y>-500</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[8.0
-]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1685043493072</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -914,7 +863,7 @@ if (startImmediately) {
 				<Variable Class="Parameter">
 					<Id>1685645862296</Id>
 					<Name><![CDATA[maxMilesToShipper]]></Name>
-					<X>70</X><Y>-160</Y>
+					<X>70</X><Y>-180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -939,7 +888,7 @@ if (startImmediately) {
 				<Variable Class="Parameter">
 					<Id>1685730254438</Id>
 					<Name><![CDATA[probShipperIsInSameCityAsReceiver]]></Name>
-					<X>70</X><Y>-180</Y>
+					<X>70</X><Y>-200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -963,8 +912,8 @@ if (startImmediately) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1685740404708</Id>
-					<Name><![CDATA[resetRestHours]]></Name>
-					<X>70</X><Y>-360</Y>
+					<Name><![CDATA[restartRestHours]]></Name>
+					<X>70</X><Y>-410</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -974,7 +923,7 @@ if (startImmediately) {
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[minHoursBetweenPeriods
+							<Code><![CDATA[34.0
 ]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
@@ -988,14 +937,14 @@ if (startImmediately) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1692380614362</Id>
-					<Name><![CDATA[meanOtherRestAreaParking]]></Name>
-					<X>1120</X><Y>-400</Y>
+					<Name><![CDATA[otherRestAreaParking]]></Name>
+					<X>1110</X><Y>-450</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
+						<Type><![CDATA[int]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
@@ -1012,90 +961,15 @@ if (startImmediately) {
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1692380632828</Id>
-					<Name><![CDATA[stdevOtherRestAreaParking]]></Name>
-					<X>1120</X><Y>-380</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[10
-]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1692380632826</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1692380689896</Id>
-					<Name><![CDATA[maxRestAreaParking]]></Name>
-					<X>1120</X><Y>-340</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[150
-]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1692380689894</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
-					<Id>1692380702508</Id>
-					<Name><![CDATA[minRestAreaParking]]></Name>
-					<X>1120</X><Y>-360</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[5
-]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1692380702506</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
 					<Id>1692390449230</Id>
-					<Name><![CDATA[meanServicePlazaParking]]></Name>
-					<X>1120</X><Y>-440</Y>
+					<Name><![CDATA[servicePlazaParking]]></Name>
+					<X>1110</X><Y>-470</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
+						<Type><![CDATA[int]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
@@ -1112,40 +986,15 @@ if (startImmediately) {
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1692390449249</Id>
-					<Name><![CDATA[stdevServicePlazaParking]]></Name>
-					<X>1120</X><Y>-420</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[20
-]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1692390449247</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
 					<Id>1692390486212</Id>
-					<Name><![CDATA[meanWelcomeCenterParking]]></Name>
-					<X>1120</X><Y>-480</Y>
+					<Name><![CDATA[welcomeCenterParking]]></Name>
+					<X>1110</X><Y>-490</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
+						<Type><![CDATA[int]]></Type>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
@@ -1162,34 +1011,9 @@ if (startImmediately) {
 					</Properties>                 
 				</Variable>
 				<Variable Class="Parameter">
-					<Id>1692390486227</Id>
-					<Name><![CDATA[stdevWelcomeCenterParking]]></Name>
-					<X>1120</X><Y>-460</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
-						<Type><![CDATA[double]]></Type>
-						<UnitType><![CDATA[NONE]]></UnitType>
-						<SdArray>false</SdArray>
-						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[25
-]]></Code>
-						</DefaultValue>
-						<ParameterEditor>
-							<Id>1692390486225</Id>
-							<EditorContolType>TEXT_BOX</EditorContolType>
-							<MinSliderValue><![CDATA[0]]></MinSliderValue>
-							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
-							<DelimeterType>NO_DELIMETER</DelimeterType>
-						</ParameterEditor>
-					</Properties>                 
-				</Variable>
-				<Variable Class="Parameter">
 					<Id>1692391646752</Id>
 					<Name><![CDATA[experimentRegionName]]></Name>
-					<X>70</X><Y>-120</Y>
+					<X>70</X><Y>-160</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1263,7 +1087,7 @@ if (startImmediately) {
 				<Variable Class="Parameter">
 					<Id>1699041704967</Id>
 					<Name><![CDATA[shortRestHours]]></Name>
-					<X>70</X><Y>-320</Y>
+					<X>70</X><Y>-370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1337,7 +1161,7 @@ if (startImmediately) {
 				<Variable Class="Parameter">
 					<Id>1706031898149</Id>
 					<Name><![CDATA[gravityModelTau]]></Name>
-					<X>70</X><Y>-100</Y>
+					<X>70</X><Y>-140</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1484,7 +1308,7 @@ if (startImmediately) {
 				</Variable>
 				<Variable Class="Parameter">
 					<Id>1726195701937</Id>
-					<Name><![CDATA[averageWaitBeforeStart]]></Name>
+					<Name><![CDATA[meanWaitBeforeStart]]></Name>
 					<X>390</X><Y>-86</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -1533,7 +1357,7 @@ if (startImmediately) {
 				<Variable Class="Parameter">
 					<Id>1741728080435</Id>
 					<Name><![CDATA[disable78DayRule]]></Name>
-					<X>70</X><Y>-80</Y>
+					<X>70</X><Y>-120</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1715,8 +1539,8 @@ return this.cities.findFirst(c -> c.getId() == l.id);
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[int]]></ReturnType>
 					<Id>1692390314742</Id>
-					<Name><![CDATA[getRandomRestAreaParking]]></Name>
-					<X>1120</X><Y>-320</Y>
+					<Name><![CDATA[getRestAreaParking]]></Name>
+					<X>1110</X><Y>-430</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1725,28 +1549,16 @@ return this.cities.findFirst(c -> c.getId() == l.id);
 						<Name><![CDATA[name]]></Name>
 						<Type><![CDATA[String]]></Type>
 					</Parameter>
-					<Body><![CDATA[double mean, stdev;
-name = name.toLowerCase();
+					<Body><![CDATA[name = name.toLowerCase();
 if (name.contains("welcome center")) {
-	mean = meanWelcomeCenterParking;
-	stdev = stdevWelcomeCenterParking;
+	return welcomeCenterParking;
 }
 else if (name.contains("service plaza")) {
-	mean = meanServicePlazaParking;
-	stdev = stdevServicePlazaParking;
+	return servicePlazaParking;
 }
 else {
-	mean = meanOtherRestAreaParking;
-	stdev = stdevOtherRestAreaParking;
-}
-
-return (int) normal(
-	minRestAreaParking,
-	maxRestAreaParking, 
-	mean, 
-	stdev
-);
- ]]></Body>
+	return otherRestAreaParking;
+}]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -1858,22 +1670,9 @@ map.fitBounds(minLat, minLon, maxLat, maxLon);]]></Body>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
-					<Id>1698432847064</Id>
-					<Name><![CDATA[initializeTrucks]]></Name>
-					<X>1120</X><Y>-220</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[truckers.forEach(Trucker::setHomeCity);
-]]></Body>
-				</Function>
-				<Function AccessType="default" StaticFunction="false">
-					<ReturnModificator>VOID</ReturnModificator>
-					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1701974459350</Id>
 					<Name><![CDATA[setupJHighway]]></Name>
-					<X>1120</X><Y>-200</Y>
+					<X>1120</X><Y>-220</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1899,7 +1698,7 @@ restAreas.forEach(r -> this.jhighwayRouter.addLocation(
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1701987859583</Id>
 					<Name><![CDATA[setupGravityModel]]></Name>
-					<X>1120</X><Y>-180</Y>
+					<X>1120</X><Y>-200</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2075,7 +1874,7 @@ else {
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1703345046740</Id>
 					<Name><![CDATA[setupCitiesQuadtree]]></Name>
-					<X>1120</X><Y>-160</Y>
+					<X>1120</X><Y>-180</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2142,7 +1941,7 @@ traceln("Writing trucker data to " + dataParentDirectory);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1725511127389</Id>
 					<Name><![CDATA[startSimulation]]></Name>
-					<X>1120</X><Y>-140</Y>
+					<X>1120</X><Y>-160</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2155,7 +1954,7 @@ traceln("Writing trucker data to " + dataParentDirectory);
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1726119180061</Id>
 					<Name><![CDATA[filterUnreachableLocations]]></Name>
-					<X>1120</X><Y>-120</Y>
+					<X>1120</X><Y>-140</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3067,7 +2866,7 @@ startButton.setEnabled(false);
 					<Id>1692391242134</Id>
 					<Name><![CDATA[text2]]></Name>
 					<ExcludeFromBuild>true</ExcludeFromBuild>
-					<X>380</X><Y>-300</Y>
+					<X>380</X><Y>-340</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3177,7 +2976,7 @@ startButton.setEnabled(false);
 					<Id>1692391894599</Id>
 					<Name><![CDATA[text7]]></Name>
 					<ExcludeFromBuild>true</ExcludeFromBuild>
-					<X>1100</X><Y>-520</Y>
+					<X>1100</X><Y>-530</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -3187,7 +2986,7 @@ startButton.setEnabled(false);
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-16777216</Color>
-					<Text><![CDATA[Rest Area Randomization]]></Text>
+					<Text><![CDATA[Rest Area Initialization]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>16</Size>
@@ -5157,9 +4956,7 @@ import java.util.stream.Stream;
 import com.github.eRedekopp.jhighway.LocationAlongPath;
 import com.github.eRedekopp.GravityModelDistribution.Body2D;
 ]]></Import>
-			<StartupCode><![CDATA[main.add_storytellers(this);
-this.setRouteProvider(main.jhighwayRouteProvider);
-]]></StartupCode>
+			<StartupCode><![CDATA[initialize();]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1661287355914</Id>
@@ -5182,7 +4979,7 @@ this.setRouteProvider(main.jhighwayRouteProvider);
 				<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
 				<RotateAnimationVertically>false</RotateAnimationVertically>
 				<VelocityCode Class="CodeUnitValue">
-					<Code><![CDATA[main.averageMilesPerHour
+					<Code><![CDATA[main.driverMilesPerHour
 ]]></Code>
 					<Unit Class="SpeedUnits"><![CDATA[MPH]]></Unit>
 				</VelocityCode>
@@ -5791,7 +5588,7 @@ new HashMap<>();]]></Code>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties Width="110" Height="30">
-						<EntryAction><![CDATA[takeResetRest();
+						<EntryAction><![CDATA[takeRestartRest();
 ]]></EntryAction>
 						<FillColor/>
 					</Properties>
@@ -6519,7 +6316,7 @@ nextStop.getSecond() instanceof TruckStop
 					<IconOffset>20.0</IconOffset>
 					<Properties Source="1692806984298" Target="1692807231216" Trigger="timeout">
 						<Timeout Class="CodeUnitValue">
-							<Code><![CDATA[main.resetRestHours
+							<Code><![CDATA[main.restartRestHours
 ]]></Code>
 							<Unit Class="TimeUnits"><![CDATA[HOUR]]></Unit>
 						</Timeout>
@@ -6661,14 +6458,13 @@ return curTripHours + hoursDrivenSinceRest;
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1661534329675</Id>
-					<Name><![CDATA[getGallonsConsumedSinceStart]]></Name>
+					<Name><![CDATA[getGallonsConsumedSinceStartedDriving]]></Name>
 					<X>560</X><Y>-359</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getHoursSince(timeStartedDriving) * main.averageMilesPerHour / main.averageMPG;
-]]></Body>
+					<Body><![CDATA[return getHoursSince(timeStartedDriving) * main.driverMilesPerHour / main.driverMPG;]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -6680,7 +6476,7 @@ return curTripHours + hoursDrivenSinceRest;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getMilesToFuelEmpty() / main.averageMilesPerHour;
+					<Body><![CDATA[return getMilesToFuelEmpty() / main.driverMilesPerHour;
 
 
 ]]></Body>
@@ -6698,7 +6494,7 @@ return curTripHours + hoursDrivenSinceRest;
 					<Body><![CDATA[// Can be negative
 return List.of(
 	getMaximumHoursUntilNextLongRest(),
-	main.maxDrivingHoursBeforeShortBreak
+	main.maxDrivingHoursBeforeShortRest
 ).stream().min(Double::compare).get();
 
 ]]></Body>
@@ -6713,7 +6509,7 @@ return List.of(
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>false</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getMaximumHoursUntilNextStop() * main.averageMilesPerHour;
+					<Body><![CDATA[return getMaximumHoursUntilNextStop() * main.driverMilesPerHour;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -6747,7 +6543,7 @@ logStoppedDriving(getNextRestType());
 
 hoursDrivenSinceRest += getHoursSince(timeStartedDriving);
 hoursOnDutyThisPeriod += getHoursSince(timeStartedDriving);
-gallonsConsumed += getGallonsConsumedSinceStart();
+gallonsConsumed += getGallonsConsumedSinceStartedDriving();
 timeStoppedDriving = time();
 // necessary, or else getXHoursRemaining() functions are incorrect
 timeStartedDriving = time();
@@ -6756,6 +6552,7 @@ timeStartedDriving = time();
 // parked at a receiver), then we don't need to log any violations
 if (restCreditHours > 0) return;
 
+// Log violations, if any occurred
 double hoursRemaining = getMaximumHoursUntilNextStop();
 if (hoursRemaining < 0) {
 	logHoursViolation(-1 * hoursRemaining);
@@ -6923,10 +6720,10 @@ if (plannedStops.get(0).getSecond() != null) {
 		throw e;
 	}
 	double milesToNextStop = metersToNextStop * main.milesPerMeter;
-	hoursToNextStop = milesToNextStop / main.averageMilesPerHour;
+	hoursToNextStop = milesToNextStop / main.driverMilesPerHour;
 }
 else {
-	hoursToNextStop = getMilesToDest() / main.averageMilesPerHour;
+	hoursToNextStop = getMilesToDest() / main.driverMilesPerHour;
 }
 
 if (hoursToNextStop > 8) {
@@ -7045,7 +6842,7 @@ storyteller.addItem(
 		time(),
 		nextStop.getSecond() == null ? destination : nextStop.getSecond(),
 		getDrivingHoursRemaining(),
-		main.maxDrivingHoursBeforeShortBreak - getHoursSince(timeStartedDriving),
+		main.maxDrivingHoursBeforeShortRest - getHoursSince(timeStartedDriving),
 		getWorkingHoursRemaining(),
 		getHoursRemaining7Day(),
 		getHoursRemaining8Day(),
@@ -7125,7 +6922,7 @@ if (nextStop.getFirst() == ShortRest) {
 	double hoursUntilMustRest = 8 - getHoursSince(timeShortRested);
 	double hoursUntilNextStop = nextStop == null 
 			? Double.POSITIVE_INFINITY
-			: currentRoute.translateToKilometers(nextStop.pathOffset) * 1000 * main.milesPerMeter / main.averageMilesPerHour;
+			: currentRoute.translateToKilometers(nextStop.pathOffset) * 1000 * main.milesPerMeter / main.driverMilesPerHour;
 	if (hoursUntilNextStop > hoursUntilMustRest) {
 		plannedStops.add(
 				0,
@@ -7209,7 +7006,7 @@ else {
 	this.getLatitude(), this.getLongitude(),
 	stop.Latitude, stop.Longitude
 );
-double timeToStop = (metersToStop * main.milesPerMeter) / main.averageMilesPerHour;
+double timeToStop = (metersToStop * main.milesPerMeter) / main.driverMilesPerHour;
 double hoursUnderMax = getMaximumHoursUntilNextLongRest() - timeToStop;
 return hoursUnderMax < main.maxDriveTimeUndershootHours;
 ]]></Body>
@@ -7326,7 +7123,7 @@ if (maxMiles <= 0 || milesToNextStop > maxMiles && milesToDest > maxMiles) {
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return main.workingHoursPerDay - getHoursSince(timeOvernightRested);
+					<Body><![CDATA[return main.dutyHoursPerDay - getHoursSince(timeOvernightRested);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -7428,10 +7225,10 @@ if ( !( this.inState(AtHome) || this.inState(Uninitialized) ) ) {
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[return normal(
-	main.minHoursBetweenPeriods, 
-	main.maxHoursBetweenPeriods, 
-	main.averageHoursBetweenPeriods, 
-	main.stdevHoursBetweenPeriods
+	main.restartRestHours, 
+	main.maxHomeRestHours, 
+	main.meanHomeRestHours, 
+	main.stdevHomeRestHours
 );
 ]]></Body>
 				</Function>
@@ -7471,7 +7268,7 @@ return maxHours - getHoursOnDutyInLastNDays(numDays - 1);]]></Body>
 					<Body><![CDATA[if (main.disable78DayRule) 
 	return Double.POSITIVE_INFINITY;
 else 
-	return getHoursRemainingNDay(7, main.maxDrivingHours7Day);
+	return getHoursRemainingNDay(7, main.maxDutyHours7Day);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -7500,7 +7297,7 @@ else
 					<Body><![CDATA[if (main.disable78DayRule) 
 	return Double.POSITIVE_INFINITY;
 else 
-	return getHoursRemainingNDay(8, main.maxDrivingHours8Day);
+	return getHoursRemainingNDay(8, main.maxDutyHours8Day);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -7594,7 +7391,7 @@ List<LocationAlongPath> locationsAlongRoute = currentRoute.getLocationsWithinDis
 		this.getLongitude(), 
 		(
 			maxMilesBeforeLongRest 
-			+ (main.maxDriveTimeOvershootHours * main.averageMilesPerHour)
+			+ (main.maxDriveTimeOvershootHours * main.driverMilesPerHour)
 		) / main.milesPerMeter / 1000
 );
 
@@ -7635,7 +7432,7 @@ if (farthestReachableTS != null) {
 			farthestReachableTS.Latitude, 
 			farthestReachableTS.Longitude
 	) * main.milesPerMeter;
-	double maxUndershootMiles = main.maxDriveTimeUndershootHours * main.averageMilesPerHour;
+	double maxUndershootMiles = main.maxDriveTimeUndershootHours * main.driverMilesPerHour;
  	if (milesToFarthestReachableTS > getMaximumMilesUntilNextLongRest() - maxUndershootMiles) {
  		// Do I have enough fuel to make it?
  		if (milesToFarthestReachableTS < milesToEmpty) {
@@ -7721,7 +7518,7 @@ if (nearestNotReachable != null) {
 		}
 		// Is the nearest illegal stop close enough for me to break my hours to reach it?
 		double milesOverrun = milesToNNR - maxMilesBeforeLongRest;
-		if (milesOverrun < main.averageMilesPerHour * main.maxDriveTimeOvershootHours) {
+		if (milesOverrun < main.driverMilesPerHour * main.maxDriveTimeOvershootHours) {
 			// Go to the illegal stop
 			plannedStops.add(new Pair<>(LongRest, nearestNotReachable));
 			return;
@@ -7767,7 +7564,7 @@ else {
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[return getGallonsInTank() * main.averageMPG;
+					<Body><![CDATA[return getGallonsInTank() * main.driverMPG;
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -7841,14 +7638,14 @@ else {
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1697816353569</Id>
-					<Name><![CDATA[takeResetRest]]></Name>
+					<Name><![CDATA[takeRestartRest]]></Name>
 					<X>330</X><Y>-430</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[hoursDrivenSinceRest = 0.0;
-timeOvernightRested = time() + main.resetRestHours;
+timeOvernightRested = time() + main.restartRestHours;
 timeShortRested = timeOvernightRested;
 ]]></Body>
 				</Function>
@@ -7927,7 +7724,7 @@ if (inState(Loaded)) {
 		 	newCity = main.getRandomCityGravityWeighted(this.getLatitude(), this.getLongitude(), List.of(destination));
 			i++;
 		}
-		if (i > 1) traceln("Took " + i + " attempts.");
+		if (i > 1) traceln("Took " + i + " attempts to select a city.");
 		startNewTripTo(newCity);
 		return;
 	}
@@ -7956,16 +7753,18 @@ else {
 					<ReturnModificator>VOID</ReturnModificator>
 					<ReturnType><![CDATA[double]]></ReturnType>
 					<Id>1698432924234</Id>
-					<Name><![CDATA[setHomeCity]]></Name>
+					<Name><![CDATA[initialize]]></Name>
 					<X>330</X><Y>-170</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[// Only call this during initialziation
-City initCity = main.getRandomCityUnconditional();
+					<Body><![CDATA[City initCity = main.getRandomCityUnconditional();
 jumpTo(initCity.Latitude, initCity.Longitude);
 home = initCity;
+
+main.add_storytellers(this);
+this.setRouteProvider(main.jhighwayRouteProvider);
 ]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -7978,10 +7777,10 @@ home = initCity;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[// TODO reformat in terms of main.maxHoursBeforeShortBreak
+					<Body><![CDATA[// TODO generalize it in terms of main.maxHoursBeforeShortBreak
 
-double kms8 = 8 * main.averageMilesPerHour / main.milesPerMeter / 1000;
-double kms3 = 3 * main.averageMilesPerHour / main.milesPerMeter / 1000;
+double kms8 = 8 * main.driverMilesPerHour / main.milesPerMeter / 1000;
+double kms3 = 3 * main.driverMilesPerHour / main.milesPerMeter / 1000;
 // Get the first location that is >3 and <8 hours away
 Point point3HoursAway = currentRoute.getLocationAtOffsetFrom(
 		this.getLatitude(),
@@ -8348,7 +8147,7 @@ return List.of(
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[// Can be negative
-return getMaximumHoursUntilNextLongRest() * main.averageMilesPerHour;
+return getMaximumHoursUntilNextLongRest() * main.driverMilesPerHour;
 
 ]]></Body>
 				</Function>
@@ -8399,7 +8198,7 @@ return null;]]></Body>
 					<Body><![CDATA[return normal(
 	main.minWaitBeforeStart, 
 	main.maxWaitBeforeStart, 
-	main.averageWaitBeforeStart, 
+	main.meanWaitBeforeStart, 
 	main.stdevWaitBeforeStart
 );
 ]]></Body>
@@ -8436,8 +8235,8 @@ double todaySoFar = getHoursOnDutySinceMidnight();
 double todayAfterSleep = getMaxDrivingHoursUntilMidnightAfterSleep();
 double today = todaySoFar + todayAfterSleep;
 
-double tomorrow7DayHrs = main.maxDrivingHours7Day - last5 - today;
-double tomorrow8DayHrs = main.maxDrivingHours8Day - last6 - today;
+double tomorrow7DayHrs = main.maxDutyHours7Day - last5 - today;
+double tomorrow8DayHrs = main.maxDutyHours8Day - last6 - today;
 	
 return List.of(
 	main.drivingHoursPerDay,
@@ -8521,7 +8320,7 @@ double hrsRemaining8Day = getHoursRemaining8Day();
 
 double timeAfterFirstSleep = time() + main.sleeperRestHours;
 double timeAtSecondSleep = timeAfterFirstSleep + maxHrsAfterFirstSleep;
-if (maxHrsAfterFirstSleep > main.maxHoursBeforeShortBreak) {
+if (maxHrsAfterFirstSleep > main.maxDrivingHoursBeforeShortRest) {
 	timeAtSecondSleep += main.shortRestHours;
 }
 double timeAfterSecondSleep = timeAtSecondSleep + main.sleeperRestHours;
@@ -8560,8 +8359,8 @@ if (dayAfterSecondSleep == dayNow){
 	// keep going until we need to stop.
 	else {
 		today += hrsUntilMidnightAfterSecondSleep;
-		double maxHrsTomorrow7Day = main.maxDrivingHours7Day - today - last5;
-		double maxHrsTomorrow8Day = main.maxDrivingHours8Day - today - last6;
+		double maxHrsTomorrow7Day = main.maxDutyHours7Day - today - last5;
+		double maxHrsTomorrow8Day = main.maxDutyHours8Day - today - last6;
 		return List.of(
 			main.drivingHoursPerDay - hrsUntilMidnightAfterSecondSleep,
 			maxHrsTomorrow7Day,
@@ -8571,8 +8370,8 @@ if (dayAfterSecondSleep == dayNow){
 }
 
 // It will be either tomorrow or the day after
-double maxHrsTomorrow7Day = main.maxDrivingHours7Day - today - last5;
-double maxHrsTomorrow8Day = main.maxDrivingHours8Day - today - last6;
+double maxHrsTomorrow7Day = main.maxDutyHours7Day - today - last5;
+double maxHrsTomorrow8Day = main.maxDutyHours8Day - today - last6;
 // Will we cross midnight during our second sleep? If not, figure out how many
 // hours we drove between midnight and starting our second sleep.
 double hrsTomorrowBeforeSecondSleep = 0;
@@ -8581,7 +8380,7 @@ if (dayAtSecondSleep == dayAfterSecondSleep) {
 		getHoursSinceMidnight(timeAtSecondSleep),
 		timeAtSecondSleep - timeAfterFirstSleep
 	);
-	if (hrsTomorrowBeforeSecondSleep > main.maxDrivingHoursBeforeShortBreak) {
+	if (hrsTomorrowBeforeSecondSleep > main.maxDrivingHoursBeforeShortRest) {
 		hrsTomorrowBeforeSecondSleep -= main.shortRestHours;
 	}
 }
@@ -8595,8 +8394,8 @@ double maxHrsAfterSecondSleep = List.of(
 // and figure out the 7/8-day hour limits.
 if (dayAfterSecondSleep == dayNow + 2) {
 	double tomorrow = hrsTomorrowBeforeSecondSleep + maxHrsAfterSecondSleep;
-	double maxHrsDayAfterTomorrow7Day = main.maxDrivingHours7Day - today - tomorrow - last4;
-	double maxHrsDayAfterTomorrow8Day = main.maxDrivingHours8Day - today - tomorrow - last5;
+	double maxHrsDayAfterTomorrow7Day = main.maxDutyHours7Day - today - tomorrow - last4;
+	double maxHrsDayAfterTomorrow8Day = main.maxDutyHours8Day - today - tomorrow - last5;
 	return List.of(
 		main.drivingHoursPerDay,
 		maxHrsDayAfterTomorrow7Day,
@@ -8611,13 +8410,13 @@ else if (dayAfterSecondSleep == dayNow + 1) {
 	if (dayAtSecondSleep != dayAfterFirstSleep) {
 		// Will we take a short rest before midnight?
 		double hrsDrivenBeforeMidnightAfterSecondSleep = hrsUntilMidnight;
-		if (hrsUntilMidnight > main.maxDrivingHoursBeforeShortBreak) {
+		if (hrsUntilMidnight > main.maxDrivingHoursBeforeShortRest) {
 			hrsDrivenBeforeMidnightAfterSecondSleep -= main.shortRestHours;
 		}
 		
 		double tomorrow = hrsTomorrowBeforeSecondSleep + hrsDrivenBeforeMidnightAfterSecondSleep;
-		double maxHrsDayAfterTomorrow7Day = main.maxDrivingHours7Day - today - tomorrow - last4;
-		double maxHrsDayAfterTomorrow8Day = main.maxDrivingHours8Day - today - tomorrow - last5;
+		double maxHrsDayAfterTomorrow7Day = main.maxDutyHours7Day - today - tomorrow - last4;
+		double maxHrsDayAfterTomorrow8Day = main.maxDutyHours8Day - today - tomorrow - last5;
 		return List.of(
 			maxHrsAfterSecondSleep,
 			maxHrsDayAfterTomorrow7Day + hrsDrivenBeforeMidnightAfterSecondSleep,
@@ -8653,7 +8452,7 @@ double hrsToMidnightAfterSleep = Math.max(
 	0, 
 	getHoursUntilMidnight() - main.sleeperRestHours
 );
-if (hrsToMidnightAfterSleep > main.maxHoursBeforeShortBreak) {
+if (hrsToMidnightAfterSleep > main.maxDrivingHoursBeforeShortRest) {
 	hrsToMidnightAfterSleep -= main.shortRestHours;
 }
 return List.of(
@@ -8718,8 +8517,7 @@ return List.of(
 // already set rest credit hours, if applicable. (e.g., in
 // `startNewTrip`)
 
-hoursOnDutyThisPeriod += getHoursSince(timeStoppedDriving) - restCreditHours;
-]]></Body>
+hoursOnDutyThisPeriod += getHoursSince(timeStoppedDriving) - restCreditHours;]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>VOID</ReturnModificator>
@@ -8731,8 +8529,7 @@ hoursOnDutyThisPeriod += getHoursSince(timeStoppedDriving) - restCreditHours;
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[hoursOnDutyThisPeriod += getHoursSince(timeStartedFuelling);
-]]></Body>
+					<Body><![CDATA[hoursOnDutyThisPeriod += getHoursSince(timeStartedFuelling);]]></Body>
 				</Function>
 			</Functions>
 			<AgentLinks>
@@ -11812,7 +11609,7 @@ if (numTrucksIncoming < 0) {
 // what type of rest area it is (derived from the name).
 // We have to do this here instead of at init time because it
 // depends on other parameters (i.e. the name)
-set_Capacity(main.getRandomRestAreaParking(Name));
+set_Capacity(main.getRestAreaParking(Name));
 numSpotsAvailable = Capacity;
 ]]></StartupCode>
 			<Generic>false</Generic>
@@ -13453,7 +13250,7 @@ leave.]]></Text>
 					<ParameterName><![CDATA[numOfDrivers]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[averageMPG]]></ParameterName>
+					<ParameterName><![CDATA[driverMPG]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[fuelCapacityGals]]></ParameterName>
@@ -13462,7 +13259,7 @@ leave.]]></Text>
 					<ParameterName><![CDATA[drivingHoursPerDay]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[averageMilesPerHour]]></ParameterName>
+					<ParameterName><![CDATA[driverMilesPerHour]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[sleeperRestHours]]></ParameterName>
@@ -13477,37 +13274,31 @@ leave.]]></Text>
 					<ParameterName><![CDATA[maxDriveTimeOvershootHours]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[averageHoursBetweenPeriods]]></ParameterName>
+					<ParameterName><![CDATA[meanHomeRestHours]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[doTrucksReturnHome]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[maxDrivingHoursBeforeShortBreak]]></ParameterName>
+					<ParameterName><![CDATA[maxDrivingHoursBeforeShortRest]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[workingHoursPerDay]]></ParameterName>
+					<ParameterName><![CDATA[dutyHoursPerDay]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[maxDrivingHours8Day]]></ParameterName>
+					<ParameterName><![CDATA[maxDutyHours8Day]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[maxDrivingHours7Day]]></ParameterName>
+					<ParameterName><![CDATA[maxDutyHours7Day]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[targetDaysInDrivingPeriod]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[stdevHoursBetweenPeriods]]></ParameterName>
+					<ParameterName><![CDATA[stdevHomeRestHours]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[minHoursBetweenPeriods]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[maxHoursBetweenPeriods]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[maxHoursBeforeShortBreak]]></ParameterName>
+					<ParameterName><![CDATA[maxHomeRestHours]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[milesPerMeter]]></ParameterName>
@@ -13519,31 +13310,16 @@ leave.]]></Text>
 					<ParameterName><![CDATA[probShipperIsInSameCityAsReceiver]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[resetRestHours]]></ParameterName>
+					<ParameterName><![CDATA[restartRestHours]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[meanOtherRestAreaParking]]></ParameterName>
+					<ParameterName><![CDATA[otherRestAreaParking]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[stdevOtherRestAreaParking]]></ParameterName>
+					<ParameterName><![CDATA[servicePlazaParking]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[maxRestAreaParking]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[minRestAreaParking]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[meanServicePlazaParking]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[stdevServicePlazaParking]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[meanWelcomeCenterParking]]></ParameterName>
-				</Parameter>
-				<Parameter>
-					<ParameterName><![CDATA[stdevWelcomeCenterParking]]></ParameterName>
+					<ParameterName><![CDATA[welcomeCenterParking]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[experimentRegionName]]></ParameterName>
@@ -13585,7 +13361,7 @@ leave.]]></Text>
 					<ParameterName><![CDATA[maxWaitBeforeStart]]></ParameterName>
 				</Parameter>
 				<Parameter>
-					<ParameterName><![CDATA[averageWaitBeforeStart]]></ParameterName>
+					<ParameterName><![CDATA[meanWaitBeforeStart]]></ParameterName>
 				</Parameter>
 				<Parameter>
 					<ParameterName><![CDATA[stdevWaitBeforeStart]]></ParameterName>
@@ -14296,48 +14072,6 @@ public class EmptyStoryEvent extends StoryEvent implements Serializable {
     		location.Name,
     		location.Latitude,
     		location.Longitude
-    	);
-    }
-    
-    public String[] getEventCsvHeaders() {
-    	return new String[]{
-    			"locationID"
-    	};
-    }
-    
-    public String[] getEventCsvRowData() {
-    	return new String[]{
-    			Integer.toString(location.ID)
-    	};
-    }
-
-	/**
-	 * This number is here for model snapshot storing purpose<br>
-	 * It needs to be changed when this class gets changed
-	 */ 
-	private static final long serialVersionUID = 1L;
-
-}]]></Text>
-		</JavaClass>
-		<!--   =========   Java Class   ========  -->
-		<JavaClass>
-			<Id>1725424628262</Id>
-			<Name><![CDATA[ShortRestEvent]]></Name>
-			<Text><![CDATA[public class ShortRestEvent extends StoryEvent implements Serializable {
-
-	public final StoppableLocation location;
-	
-    public ShortRestEvent(double time, StoppableLocation location) {
-    	super(time, EventSeverity.INFO);
-    	this.location = location;
-    }
-    
-    public String getText() {
-    	return String.format(
-    		"Taking a short rest at %s (%.4f, %.4f).",
-    		this.location.Name,
-    		this.location.Latitude,
-    		this.location.Longitude
     	);
     }
     
