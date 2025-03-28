@@ -1,7 +1,6 @@
 AnalysisResults
 ModelRun*
 *~
-*.jar
 cache
 database
 __pycache__
